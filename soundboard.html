@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>发布会音效板 · 余承东名场面语音</title>
+<title>发布会名场面 · B站合集</title>
 <style>
   :root {
     --accent: #cf0a2c;
@@ -11,37 +11,40 @@
     --gold: #d4a843;
     --green: #2ecc71;
     --purple: #9b59b6;
+    --pink: #fb7299;
     --radius: 20px;
   }
   [data-theme="dark"] {
     --bg: #0a0a12;
     --bg-grad-1: rgba(207,10,44,0.14);
     --bg-grad-2: rgba(100,70,210,0.10);
-    --bg-grad-3: rgba(212,168,67,0.07);
+    --bg-grad-3: rgba(251,114,153,0.08);
     --glass: rgba(255,255,255,0.045);
     --glass-hover: rgba(255,255,255,0.075);
     --glass-strong: rgba(14,14,24,0.72);
     --border: rgba(255,255,255,0.09);
-    --border-hover: rgba(207,10,44,0.55);
+    --border-hover: rgba(251,114,153,0.55);
     --text: #ececf4;
     --text-dim: #8a8aa4;
     --shadow: 0 6px 28px rgba(0,0,0,0.4);
     --rim: rgba(255,255,255,0.12);
+    --card-overlay: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.85) 100%);
   }
   [data-theme="light"] {
     --bg: #e8ecf2;
     --bg-grad-1: rgba(207,10,44,0.07);
     --bg-grad-2: rgba(90,80,200,0.05);
-    --bg-grad-3: rgba(212,168,67,0.05);
+    --bg-grad-3: rgba(251,114,153,0.05);
     --glass: rgba(255,255,255,0.5);
     --glass-hover: rgba(255,255,255,0.7);
     --glass-strong: rgba(255,255,255,0.78);
     --border: rgba(0,0,0,0.08);
-    --border-hover: rgba(207,10,44,0.35);
+    --border-hover: rgba(251,114,153,0.4);
     --text: #181828;
     --text-dim: #606078;
     --shadow: 0 6px 26px rgba(0,0,0,0.08);
     --rim: rgba(255,255,255,0.65);
+    --card-overlay: linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.7) 100%);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -58,20 +61,13 @@
     transition: background 0.4s ease, color 0.4s ease;
     overflow-x: hidden;
   }
-  .glass {
-    background: var(--glass);
-    -webkit-backdrop-filter: blur(14px) saturate(180%);
-    backdrop-filter: blur(14px) saturate(180%);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow), inset 0 1px 0 var(--rim);
-  }
   .hero { text-align: center; padding: 70px 20px 30px; }
-  .hero h1 { font-size: clamp(1.8rem, 6vw, 3.2rem); font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; }
-  .hero h1 .highlight { background: linear-gradient(135deg, var(--accent), #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .hero .subtitle { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 20px; }
   .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; transition: text-shadow 0.3s; }
   .back-link:hover { text-shadow: 0 0 16px rgba(212,168,67,0.5); }
+  .hero h1 { font-size: clamp(1.8rem, 6vw, 3.2rem); font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; }
+  .hero h1 .highlight { background: linear-gradient(135deg, var(--pink), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero .subtitle { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 8px; }
+  .hero .hint { font-size: 0.82rem; color: var(--pink); font-weight: 600; }
   .theme-toggle {
     position: fixed; top: 20px; right: 20px; width: 48px; height: 48px; border-radius: 50%;
     background: var(--glass-strong); -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
@@ -80,229 +76,141 @@
     transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.28s, box-shadow 0.28s;
     box-shadow: var(--shadow), inset 0 1px 0 var(--rim);
   }
-  .theme-toggle:hover { transform: scale(1.12) rotate(15deg); border-color: var(--accent); box-shadow: 0 0 0 2px var(--border-hover), 0 8px 28px var(--accent-glow); }
-  .container { max-width: 900px; margin: 0 auto; padding: 10px 20px 80px; }
-  .controls { padding: 20px 24px; margin-bottom: 24px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .control-group { display: flex; align-items: center; gap: 8px; }
-  .control-group label { font-size: 0.82rem; color: var(--text-dim); font-weight: 600; white-space: nowrap; }
-  .control-group input[type="range"] { width: 100px; accent-color: var(--accent); }
-  .control-group .val { font-size: 0.82rem; color: var(--accent); font-weight: 700; min-width: 28px; }
-  .stop-btn {
-    padding: 8px 20px; border-radius: 12px; border: 1px solid var(--border);
-    background: var(--glass); color: var(--text); font-size: 0.85rem; font-weight: 700;
-    cursor: pointer; transition: all 0.25s; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-    display: flex; align-items: center; gap: 6px; margin-left: auto;
+  .theme-toggle:hover { transform: scale(1.12) rotate(15deg); border-color: var(--pink); box-shadow: 0 0 0 2px var(--border-hover), 0 8px 28px rgba(251,114,153,0.3); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 10px 20px 80px; }
+  .video-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .video-card {
+    position: relative; border-radius: 18px; overflow: hidden;
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow), inset 0 1px 0 var(--rim);
+    cursor: pointer; text-decoration: none; color: inherit;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.28s, box-shadow 0.28s;
+    display: block;
   }
-  .stop-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-2px); }
-  .sound-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
-  .sound-btn {
-    padding: 20px 16px; border-radius: 16px; border: 1px solid var(--border);
-    background: var(--glass); cursor: pointer; text-align: center;
-    transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
-    -webkit-backdrop-filter: blur(10px) saturate(170%); backdrop-filter: blur(10px) saturate(170%);
-    position: relative; overflow: hidden;
+  .video-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--border-hover);
+    box-shadow: 0 0 0 2px var(--border-hover), 0 16px 48px rgba(251,114,153,0.25), inset 0 1px 0 var(--rim);
   }
-  .sound-btn:hover {
-    transform: translateY(-4px) scale(1.04);
-    border-color: var(--accent);
-    box-shadow: 0 0 0 2px var(--border-hover), 0 10px 32px var(--accent-glow);
+  .video-card:active { transform: translateY(-2px) scale(1.005); }
+  .video-thumb {
+    position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden;
+    background: #1a1a2e;
   }
-  .sound-btn:active { transform: translateY(-1px) scale(1.01); }
-  .sound-btn.playing {
-    background: var(--accent); border-color: var(--accent); color: #fff;
-    box-shadow: 0 0 0 3px var(--accent-glow), 0 8px 28px var(--accent-glow);
-    animation: pulse 0.8s ease-in-out infinite;
+  .video-thumb img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  @keyframes pulse {
-    0%, 100% { box-shadow: 0 0 0 3px var(--accent-glow), 0 8px 28px var(--accent-glow); }
-    50% { box-shadow: 0 0 0 6px rgba(207,10,44,0.15), 0 8px 28px var(--accent-glow); }
+  .video-card:hover .video-thumb img { transform: scale(1.08); }
+  .video-thumb::after {
+    content: ''; position: absolute; inset: 0;
+    background: var(--card-overlay);
+    pointer-events: none;
   }
-  .sound-btn .emoji { font-size: 1.8rem; margin-bottom: 8px; display: block; }
-  .sound-btn .label { font-size: 0.85rem; font-weight: 700; line-height: 1.4; color: var(--text); }
-  .sound-btn.playing .label { color: #fff; }
-  .sound-btn .cat { font-size: 0.68rem; color: var(--text-dim); margin-top: 4px; opacity: 0.7; }
-  .sound-btn.playing .cat { color: rgba(255,255,255,0.8); }
-  .section-label { font-size: 0.85rem; font-weight: 800; color: var(--text-dim); margin: 28px 0 14px; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+  .play-overlay {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(251,114,153,0.9);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; color: #fff;
+    box-shadow: 0 4px 20px rgba(251,114,153,0.5);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s;
+    z-index: 2;
+  }
+  .video-card:hover .play-overlay { transform: translate(-50%, -50%) scale(1.15); background: var(--pink); }
+  .play-overlay::before { content: '▶'; margin-left: 3px; }
+  .video-badge {
+    position: absolute; top: 10px; left: 10px;
+    padding: 3px 10px; border-radius: 8px;
+    background: rgba(0,0,0,0.6);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    color: #fff; font-size: 0.7rem; font-weight: 700;
+    z-index: 2; display: flex; align-items: center; gap: 4px;
+  }
+  .video-views {
+    position: absolute; bottom: 10px; right: 10px;
+    padding: 3px 10px; border-radius: 8px;
+    background: rgba(0,0,0,0.6);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    color: #fff; font-size: 0.72rem; font-weight: 600;
+    z-index: 2; display: flex; align-items: center; gap: 4px;
+  }
+  .video-info { padding: 14px 16px 16px; }
+  .video-title {
+    font-size: 0.92rem; font-weight: 700; line-height: 1.5;
+    color: var(--text); margin-bottom: 8px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    min-height: 2.8em;
+  }
+  .video-meta { display: flex; align-items: center; justify-content: space-between; }
+  .video-source { font-size: 0.75rem; color: var(--text-dim); display: flex; align-items: center; gap: 4px; }
+  .video-source .bilibili-logo { color: var(--pink); font-weight: 800; font-size: 0.8rem; }
+  .video-arrow { font-size: 0.9rem; color: var(--pink); transition: transform 0.3s; }
+  .video-card:hover .video-arrow { transform: translateX(4px); }
+  .section-label { font-size: 0.85rem; font-weight: 800; color: var(--text-dim); margin: 28px 0 16px; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
   .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
   #monetCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
   footer { text-align: center; padding: 30px 20px 60px; color: var(--text-dim); font-size: 0.82rem; }
   footer a { color: var(--gold); text-decoration: none; font-weight: 600; }
-  .now-playing {
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
-    background: var(--glass-strong); -webkit-backdrop-filter: blur(16px) saturate(180%); backdrop-filter: blur(16px) saturate(180%);
-    border: 1px solid var(--border-hover); border-radius: 16px; padding: 12px 24px;
-    z-index: 150; display: flex; align-items: center; gap: 10px;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  }
-  .now-playing.show { transform: translateX(-50%) translateY(0); }
-  .now-playing .np-emoji { font-size: 1.3rem; animation: bounce 0.6s ease-in-out infinite; }
-  @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
-  .now-playing .np-text { font-size: 0.88rem; font-weight: 700; color: var(--text); }
   @media (max-width: 600px) {
     .hero { padding: 50px 16px 20px; }
-    .sound-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .sound-btn { padding: 16px 12px; }
-    .sound-btn .emoji { font-size: 1.5rem; }
-    .sound-btn .label { font-size: 0.78rem; }
+    .video-grid { grid-template-columns: 1fr; gap: 14px; }
     .theme-toggle { top: 14px; right: 14px; width: 42px; height: 42px; }
-    .controls { padding: 16px; }
   }
 </style>
 </head>
 <body data-theme="dark">
 <canvas id="monetCanvas"></canvas>
 <button class="theme-toggle" id="themeToggle" title="切换主题">🌙</button>
-<div class="now-playing" id="nowPlaying">
-  <span class="np-emoji">🔊</span>
-  <span class="np-text" id="npText">正在播放…</span>
-</div>
 <div class="hero">
   <a href="index.html" class="back-link">← 返回语录主页</a>
-  <h1>🔊 发布会<span class="highlight">音效板</span></h1>
-  <p class="subtitle">点击按钮，AI 朗读余承东名场面 · 纯整活 · 建议开音量</p>
+  <h1>📺 发布会<span class="highlight">名场面</span></h1>
+  <p class="subtitle">余承东经典发言 B 站合集 · 原声原画面</p>
+  <p class="hint">点击卡片跳转 B 站观看完整视频 →</p>
 </div>
 <div class="container">
-  <div class="controls glass">
-    <div class="control-group">
-      <label>语速</label>
-      <input type="range" id="rateSlider" min="0.5" max="1.5" step="0.1" value="0.9">
-      <span class="val" id="rateVal">0.9</span>
-    </div>
-    <div class="control-group">
-      <label>音调</label>
-      <input type="range" id="pitchSlider" min="0.5" max="1.5" step="0.1" value="0.8">
-      <span class="val" id="pitchVal">0.8</span>
-    </div>
-    <button class="stop-btn" id="stopBtn">⏹ 停止</button>
-  </div>
-  <div class="section-label">🔥 经典名场面</div>
-  <div class="sound-grid" id="gridClassic"></div>
-  <div class="section-label">🚗 汽车 / 问界</div>
-  <div class="sound-grid" id="gridCar"></div>
-  <div class="section-label">🧠 鸿蒙 / 技术</div>
-  <div class="sound-grid" id="gridTech"></div>
-  <div class="section-label">😂 梗 / 二创</div>
-  <div class="sound-grid" id="gridMeme"></div>
+  <div class="section-label">🔥 高能名场面</div>
+  <div class="video-grid" id="videoGrid"></div>
 </div>
 <footer>
-  <p>纯整活工具 · 语音由浏览器 TTS 合成 · <a href="index.html">返回语录主页</a> · <a href="generator.html">去生成器 →</a></p>
+  <p>视频版权归原作者及 B 站所有 · 本页仅做导航整理</p>
+  <p style="margin-top:6px;"><a href="index.html">返回语录主页</a> · <a href="generator.html">去生成器 →</a></p>
 </footer>
 <script>
-const SOUNDS = {
-  classic: [
-    { emoji:"🏆", text:"遥遥领先", cat:"发布会高频" },
-    { emoji:"💪", text:"强得飞起", cat:"2024新品" },
-    { emoji:"🎯", text:"稳了", cat:"P20发布会" },
-    { emoji:"🌍", text:"我们要做世界第一", cat:"终端业务" },
-    { emoji:"🥇", text:"三年做到全球第二，四到五年做到全球第一", cat:"2016目标" },
-    { emoji:"😤", text:"除了胜利，我们已经无路可走", cat:"制裁时期" },
-    { emoji:"🛡️", text:"没有伤痕累累，哪来皮糙肉厚，英雄自古多磨难", cat:"内部讲话" },
-    { emoji:"🙏", text:"我一直做客服，是个内心谦卑的人", cat:"蓝皮书论坛" }
-  ],
-  car: [
-    { emoji:"🚙", text:"1000万以内最好的SUV来了", cat:"问界M9" },
-    { emoji:"👑", text:"科技车皇", cat:"问界M9" },
-    { emoji:"💪", text:"陆地上最强悍的SUV", cat:"问界M9" },
-    { emoji:"💰", text:"我们的车有一个很大的缺点，就是价格太便宜了", cat:"网络流传" },
-    { emoji:"😴", text:"我坐迈巴赫根本没法睡觉", cat:"享界S9" },
-    { emoji:"🛡️", text:"安全就是最大的豪华", cat:"鸿蒙智行" },
-    { emoji:"🏎️", text:"现在中国真正的高端车的王者，目前看还是问界", cat:"2025演讲" },
-    { emoji:"🤯", text:"短短的一个月卖了8万台，我简直疯掉了", cat:"问界M8" },
-    { emoji:"📱", text:"为什么很多人还用手机支架，我也搞不明白", cat:"手机支架名场面" },
-    { emoji:"🧭", text:"后来我明白了，是因为车导航性能不行", cat:"手机支架名场面" }
-  ],
-  tech: [
-    { emoji:"🚀", text:"捅破天的技术", cat:"Mate50卫星" },
-    { emoji:"💎", text:"昆仑玻璃，业界最坚固的玻璃，比竞品坚固十倍", cat:"Mate50" },
-    { emoji:"🦾", text:"玄武架构，钢铁之躯，钢筋铁骨", cat:"Mate60" },
-    { emoji:"🧠", text:"鸿蒙的智能驾驶不是第一阵营，而是第一名", cat:"2025演讲" },
-    { emoji:"📱", text:"鸿蒙不是安卓套壳，是面向未来的分布式操作系统", cat:"鸿蒙发布" },
-    { emoji:"☯️", text:"一生万物，万物归一", cat:"鸿蒙Slogan" },
-    { emoji:"🔩", text:"卡脖子的问题，我们一定要解决，也一定能解决", cat:"自研芯片" },
-    { emoji:"📡", text:"星闪技术，比蓝牙更快、更低时延", cat:"NearLink" },
-    { emoji:"🌐", text:"纯血鸿蒙，告别安卓，我们要做自己的生态", cat:"鸿蒙NEXT" },
-    { emoji:"🔗", text:"向上捅破天，向下扎到根", cat:"技术战略" }
-  ],
-  meme: [
-    { emoji:"🗣️", text:"这个这个", cat:"标志性口癖" },
-    { emoji:"😱", text:"啊啊啊啊", cat:"被观众打断" },
-    { emoji:"👄", text:"余大嘴", cat:"网友昵称" },
-    { emoji:"📖", text:"华为圣经", cat:"语录尊称" },
-    { emoji:"🚗", text:"华为不造车，我们帮车企造好车", cat:"反转梗" },
-    { emoji:"🏭", text:"鸿蒙智行，四界齐发，问界、智界、享界、尊界", cat:"四界" },
-    { emoji:"🎤", text:"Amazing! Incredible! Fantastic!", cat:"余式英语" },
-    { emoji:"🏆", text:"业界首发，全球首创，没有之一", cat:"发布会话术" },
-    { emoji:"🌌", text:"史上最强，宇宙第一", cat:"夸张演绎" },
-    { emoji:"⚔️", text:"吊打苹果，秒杀三星", cat:"对比宣传" },
-    { emoji:"🎁", text:"先锋计划，突然上架", cat:"Mate60Pro" },
-    { emoji:"💬", text:"方向的选择往往比勤奋更重要", cat:"管理金句" }
-  ]
-};
-let currentPlaying = null;
-function renderGrid(category, containerId) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = SOUNDS[category].map((s, i) => `
-    <div class="sound-btn" data-cat="${category}" data-idx="${i}">
-      <span class="emoji">${s.emoji}</span>
-      <div class="label">${s.text}</div>
-      <div class="cat">${s.cat}</div>
+const VIDEOS = [
+  { bvid:"BV1gs63YoEYU", title:"【短的鬼畜】《鸿蒙强得飞起APT.》原唱余承东、合唱何刚", cover:"http://i1.hdslb.com/bfs/archive/e7cb0a501e39918dfa9dfe80c6a39860cd904242.jpg", views:"72.0万", badge:"👻 鬼畜", category:"鬼畜" },
+  { bvid:"BV1WZ396pEF3", title:"【补档】余承东发布会现场-余音绕梁（别举报我了）", cover:"http://i0.hdslb.com/bfs/archive/ee5e7f2bd26401fbeecd54a671434d8aac9b0328.jpg", views:"17.0万", badge:"🦗 竹知了", category:"名场面" },
+  { bvid:"BV1JpKpztEA9", title:"【余承东 短视频】余总逛展会 看到自己的鬼畜视频", cover:"http://i1.hdslb.com/bfs/archive/903c04c2e28403e2c8ffcf7e0e3899aebceb8196.jpg", views:"11.5万", badge:"😂 名场面", category:"名场面" },
+  { bvid:"BV1Jf29BvEvg", title:"余大嘴：把奔驰，宝马，奥迪一把给他全部干掉", cover:"http://i0.hdslb.com/bfs/archive/687f2132505f8471716a84a9a935b35381430ae3.jpg", views:"5.9万", badge:"🚗 汽车", category:"汽车" },
+  { bvid:"BV1V4pWzaEWC", title:"余承东发布会暗讽绿化带战神，再现经典名场面", cover:"http://i1.hdslb.com/bfs/archive/3f1e17182a2956c95990b98925ee7f52b0476351.jpg", views:"1.5万", badge:"🌿 绿化带", category:"名场面" },
+  { bvid:"BV1Qj411C7FP", title:"央视力挺华为，余承东遥遥领先！名场面，高能混剪", cover:"http://i2.hdslb.com/bfs/archive/6b6725e515c8a7f13b7634a973abfc97e23839e4.jpg", views:"6293", badge:"🎬 混剪", category:"混剪" },
+  { bvid:"BV1jHG26ZEhX", title:"[余承东]4K[鸿蒙智行问界M9系列新品发布会]", cover:"http://i1.hdslb.com/bfs/archive/0026514ca99032af407edd3dd692fad3d1bfb08e.jpg", views:"6023", badge:"🎤 发布会", category:"发布会" },
+  { bvid:"BV1AJGD61EFv", title:"【华为 余承东】全新一代问界M9上市发布会【人工流畅简切】", cover:"http://i2.hdslb.com/bfs/archive/09a4a20f597bdaf54b29b15141e363d855ea8195.jpg", views:"2900", badge:"🎤 发布会", category:"发布会" },
+  { bvid:"BV1UF411k7si", title:"\"遥遥领先\"这个梗，到底是怎么来的？", cover:"http://i0.hdslb.com/bfs/archive/b962baa3b4b1c111f3522df322dd3a5efb1c261d.jpg", views:"551", badge:"📖 科普", category:"科普" }
+];
+const grid = document.getElementById('videoGrid');
+grid.innerHTML = VIDEOS.map(v => `
+  <a class="video-card" href="https://www.bilibili.com/video/${v.bvid}/" target="_blank" rel="noopener noreferrer" data-bvid="${v.bvid}">
+    <div class="video-thumb">
+      <img src="${v.cover}" alt="${v.title}" loading="lazy" onerror="this.style.background='linear-gradient(135deg,#cf0a2c,#fb7299)';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 9%22><rect fill=%22%231a1a2e%22 width=%2216%22 height=%229%22/><text x=%228%22 y=%225.5%22 text-anchor=%22middle%22 fill=%22%23fb7299%22 font-size=%223%22>📺</text></svg>'">
+      <div class="play-overlay"></div>
+      <span class="video-badge">${v.badge}</span>
+      <span class="video-views">▶ ${v.views}</span>
     </div>
-  `).join('');
-  container.querySelectorAll('.sound-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const cat = btn.dataset.cat;
-      const idx = parseInt(btn.dataset.idx);
-      const sound = SOUNDS[cat][idx];
-      playSound(sound, btn);
-      spawnMonet(e.clientX, e.clientY, btn, 16);
-    });
-  });
-}
-renderGrid('classic', 'gridClassic');
-renderGrid('car', 'gridCar');
-renderGrid('tech', 'gridTech');
-renderGrid('meme', 'gridMeme');
-function playSound(sound, btn) {
-  if (!('speechSynthesis' in window)) {
-    alert('你的浏览器不支持语音合成，请换 Chrome/Edge/Safari 试试');
-    return;
-  }
-  speechSynthesis.cancel();
-  document.querySelectorAll('.sound-btn.playing').forEach(b => b.classList.remove('playing'));
-  const u = new SpeechSynthesisUtterance(sound.text);
-  u.lang = 'zh-CN';
-  u.rate = parseFloat(document.getElementById('rateSlider').value);
-  u.pitch = parseFloat(document.getElementById('pitchSlider').value);
-  u.onstart = () => {
-    btn.classList.add('playing');
-    currentPlaying = btn;
-    document.getElementById('npText').textContent = sound.emoji + ' ' + sound.text;
-    document.getElementById('nowPlaying').classList.add('show');
-  };
-  u.onend = () => {
-    btn.classList.remove('playing');
-    currentPlaying = null;
-    document.getElementById('nowPlaying').classList.remove('show');
-  };
-  u.onerror = () => {
-    btn.classList.remove('playing');
-    currentPlaying = null;
-    document.getElementById('nowPlaying').classList.remove('show');
-  };
-  speechSynthesis.speak(u);
-}
-document.getElementById('stopBtn').addEventListener('click', (e) => {
-  speechSynthesis.cancel();
-  document.querySelectorAll('.sound-btn.playing').forEach(b => b.classList.remove('playing'));
-  document.getElementById('nowPlaying').classList.remove('show');
-  spawnMonet(e.clientX, e.clientY, e.currentTarget, 10);
-});
-document.getElementById('rateSlider').addEventListener('input', (e) => {
-  document.getElementById('rateVal').textContent = e.target.value;
-});
-document.getElementById('pitchSlider').addEventListener('input', (e) => {
-  document.getElementById('pitchVal').textContent = e.target.value;
+    <div class="video-info">
+      <div class="video-title">${v.title}</div>
+      <div class="video-meta">
+        <span class="video-source"><span class="bilibili-logo">bilibili</span> · ${v.category}</span>
+        <span class="video-arrow">→</span>
+      </div>
+    </div>
+  </a>
+`).join('');
+document.querySelectorAll('.video-card').forEach(card => {
+  card.addEventListener('click', (e) => { spawnMonet(e.clientX, e.clientY, card, 18); });
 });
 const themeToggle = document.getElementById('themeToggle');
 const themes = ['auto', 'dark', 'light'];
@@ -323,6 +231,9 @@ try { savedTheme = localStorage.getItem('ycd-theme') || 'auto'; } catch(e) {}
 currentThemeIdx = themes.indexOf(savedTheme);
 if (currentThemeIdx < 0) currentThemeIdx = 0;
 applyTheme(themes[currentThemeIdx]);
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (themes[currentThemeIdx] === 'auto') applyTheme('auto');
+});
 themeToggle.addEventListener('click', (e) => {
   currentThemeIdx = (currentThemeIdx + 1) % themes.length;
   applyTheme(themes[currentThemeIdx]);
@@ -338,12 +249,16 @@ resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min){h=s=0;}else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break;}h/=6;}return[h*360,s,l];}
 function hslToRgb(h,s,l){h/=360;let r,g,b;if(s===0){r=g=b=l;}else{const hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;};const q=l<0.5?l*(1+s):l+s-l*s;const p=2*l-q;r=hue2rgb(p,q,h+1/3);g=hue2rgb(p,q,h);b=hue2rgb(p,q,h-1/3);}return[Math.round(r*255),Math.round(g*255),Math.round(b*255)];}
-function monetPalette(el){const styles=window.getComputedStyle(el);const baseColors=[];const extract=(str)=>{if(!str||str==='transparent'||str==='rgba(0, 0, 0, 0)')return;const m=str.match(/\d+(\.\d+)?/g);if(m&&m.length>=3){const r=parseInt(m[0]),g=parseInt(m[1]),b=parseInt(m[2]);if(r+g+b>30)baseColors.push([r,g,b]);}};extract(styles.backgroundColor);extract(styles.borderColor);extract(styles.color);if(baseColors.length===0)baseColors.push([207,10,44],[212,168,67]);const palette=[];baseColors.forEach(([r,g,b])=>{const[h,s,l]=rgbToHsl(r,g,b);palette.push(hslToRgb(h,Math.min(s+0.15,1),Math.min(l+0.12,0.9)));palette.push(hslToRgb((h+28)%360,s,Math.min(l+0.18,0.92)));palette.push(hslToRgb((h+332)%360,s,Math.min(l+0.12,0.88)));palette.push(hslToRgb((h+180)%360,Math.max(s-0.15,0.25),Math.min(l+0.25,0.85)));palette.push(hslToRgb(h,s*0.4,Math.min(l+0.35,0.96)));});palette.push([255,210,90],[255,175,70],[255,140,100]);return palette;}
+function monetPalette(el){const styles=window.getComputedStyle(el);const baseColors=[];const extract=(str)=>{if(!str||str==='transparent'||str==='rgba(0, 0, 0, 0)')return;const m=str.match(/\d+(\.\d+)?/g);if(m&&m.length>=3){const r=parseInt(m[0]),g=parseInt(m[1]),b=parseInt(m[2]);if(r+g+b>30)baseColors.push([r,g,b]);}};extract(styles.backgroundColor);extract(styles.borderColor);extract(styles.color);if(baseColors.length===0)baseColors.push([251,114,153],[207,10,44]);const palette=[];baseColors.forEach(([r,g,b])=>{const[h,s,l]=rgbToHsl(r,g,b);palette.push(hslToRgb(h,Math.min(s+0.15,1),Math.min(l+0.12,0.9)));palette.push(hslToRgb((h+28)%360,s,Math.min(l+0.18,0.92)));palette.push(hslToRgb((h+332)%360,s,Math.min(l+0.12,0.88)));palette.push(hslToRgb((h+180)%360,Math.max(s-0.15,0.25),Math.min(l+0.25,0.85)));palette.push(hslToRgb(h,s*0.4,Math.min(l+0.35,0.96)));});palette.push([255,210,90],[255,175,70],[255,140,100]);return palette;}
 class MonetParticle{constructor(x,y,palette){this.x=x+(Math.random()-0.5)*12;this.y=y+(Math.random()-0.5)*12;const angle=Math.random()*Math.PI*2;const speed=1.5+Math.random()*5;this.vx=Math.cos(angle)*speed;this.vy=Math.sin(angle)*speed-1.5;this.life=1;this.decay=0.012+Math.random()*0.018;this.size=2+Math.random()*4;this.rotation=Math.random()*Math.PI*2;this.rotSpeed=(Math.random()-0.5)*0.12;const c=palette[Math.floor(Math.random()*palette.length)];const[h,s,l]=rgbToHsl(c[0],c[1],c[2]);const final=hslToRgb((h+(Math.random()-0.5)*24+360)%360,Math.min(Math.max(s+(Math.random()-0.5)*0.25,0.25),1),Math.min(Math.max(l+(Math.random()-0.5)*0.18,0.25),0.95));this.r=final[0];this.g=final[1];this.b=final[2];this.gravity=0.06;this.friction=0.965;}
 update(){this.vx*=this.friction;this.vy*=this.friction;this.vy+=this.gravity;this.x+=this.vx;this.y+=this.vy;this.life-=this.decay;this.size*=0.985;this.rotation+=this.rotSpeed;}
 draw(ctx){const alpha=Math.max(this.life,0);const s=Math.max(this.size,0.6);ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.rotation);ctx.globalAlpha=alpha*0.3;ctx.fillStyle='rgb('+this.r+','+this.g+','+this.b+')';ctx.fillRect(-s*1.6,-s*1.6,s*3.2,s*3.2);ctx.globalAlpha=alpha;ctx.fillRect(-s/2,-s/2,s,s);ctx.restore();}}
 function spawnMonet(x,y,el,count){const palette=monetPalette(el);for(let i=0;i<count;i++){particles.push(new MonetParticle(x,y,palette));}if(particles.length>150)particles=particles.slice(-150);if(!animId)animate();}
 function animate(){ctx.clearRect(0,0,canvas.width/dpr,canvas.height/dpr);particles=particles.filter(p=>p.life>0);for(let i=0;i<particles.length;i++){particles[i].update();particles[i].draw(ctx);}ctx.globalAlpha=1;if(particles.length>0){animId=requestAnimationFrame(animate);}else{animId=null;}}
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && animId) { cancelAnimationFrame(animId); animId = null; }
+  else if (!document.hidden && particles.length > 0 && !animId) { animate(); }
+});
 </script>
 </body>
 </html>
