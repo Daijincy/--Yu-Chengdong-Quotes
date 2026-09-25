@@ -13,6 +13,7 @@
     --yellow: #f1c40f;
     --orange: #e67e22;
     --purple: #9b59b6;
+    --pink: #fb7299;
     --radius: 20px;
     --radius-sm: 12px;
   }
@@ -20,7 +21,7 @@
     --bg: #0a0a12;
     --bg-grad-1: rgba(207,10,44,0.14);
     --bg-grad-2: rgba(100,70,210,0.10);
-    --bg-grad-3: rgba(212,168,67,0.07);
+    --bg-grad-3: rgba(251,114,153,0.07);
     --glass: rgba(255,255,255,0.045);
     --glass-hover: rgba(255,255,255,0.075);
     --glass-strong: rgba(14,14,24,0.72);
@@ -37,7 +38,7 @@
     --bg: #e8ecf2;
     --bg-grad-1: rgba(207,10,44,0.07);
     --bg-grad-2: rgba(90,80,200,0.05);
-    --bg-grad-3: rgba(212,168,67,0.05);
+    --bg-grad-3: rgba(251,114,153,0.05);
     --glass: rgba(255,255,255,0.5);
     --glass-hover: rgba(255,255,255,0.7);
     --glass-strong: rgba(255,255,255,0.78);
@@ -287,7 +288,7 @@
     display: flex; flex-direction: column;
   }
   .quote-num {
-    position: absolute; top: 14px; right: 48px;
+    position: absolute; top: 14px; left: 18px;
     font-size: 2.2rem; font-weight: 900; color: var(--text-faint); line-height: 1;
   }
   .card-actions { position: absolute; top: 14px; right: 14px; display: flex; gap: 6px; z-index: 3; }
@@ -427,7 +428,7 @@
     <div class="fab-grid-item full" id="carNavBtn"><span class="emoji">🚙</span> 鸿蒙座驾车谱 →</div>
     <div class="fab-grid-item full" id="zhuzhiliaoNavBtn"><span class="emoji">🦗</span> 竹知了（余承东同款）→</div>
     <div class="fab-grid-item full" id="generatorNavBtn"><span class="emoji">🤖</span> 余式语录生成器 →</div>
-    <div class="fab-grid-item full" id="soundboardNavBtn"><span class="emoji">🔊</span> 发布会音效板 →</div>
+    <div class="fab-grid-item full" id="soundboardNavBtn"><span class="emoji">📺</span> 发布会名场面 →</div>
   </div>
 </div>
 <button class="fab-main" id="fabMain">☰</button>
@@ -496,7 +497,7 @@
     <a class="car-link" href="cars.html">🚙 鸿蒙智慧座驾车谱 →</a> &nbsp;|&nbsp;
     <a class="car-link" href="https://yangh9.github.io/zhuzhiliao/" target="_blank" style="color:var(--accent);">🦗 竹知了 →</a> &nbsp;|&nbsp;
     <a class="car-link" href="generator.html" style="color:var(--purple);">🤖 语录生成器 →</a> &nbsp;|&nbsp;
-    <a class="car-link" href="soundboard.html" style="color:var(--green);">🔊 音效板 →</a>
+    <a class="car-link" href="soundboard.html" style="color:var(--pink);">📺 发布会名场面 →</a>
   </p>
 </footer>
 <script>
@@ -563,7 +564,7 @@ const QUOTES = [
   {num:"60",text:"超光变 XMAGE 影像，手机摄影的天花板。",tags:["2022—2024","Mate 系列 / P 系列发布会"],cred:"media",source:"",note:"华为与徕卡合作结束后推出自有影像品牌 XMAGE，余承东多次强调其超越徕卡时期的表现。",video:"XMAGE 影像 天花板"},
   {num:"61",text:"鸿蒙不是安卓套壳，是面向未来的分布式操作系统。",tags:["2021","鸿蒙操作系统发布会 / 后续采访"],cred:"verified",source:"出处：华为鸿蒙发布会及多家媒体采访",note:"这一表态在技术圈引发长期争议，\"鸿蒙是不是安卓套壳\"成为年度话题。",video:"鸿蒙 不是安卓套壳 分布式"},
   {num:"62",text:"一生万物，万物归一。",tags:["2021","鸿蒙操作系统发布会"],cred:"verified",source:"出处：华为鸿蒙操作系统发布会",note:"鸿蒙发布时的核心 Slogan，描述分布式架构\"一个系统适配所有设备\"的理念。",video:"鸿蒙 一生万物 万物归一"},
-  {num:"63",text:"万物互联，鸿蒙开启。",tags:["2021","鸿蒙操作系统发布会"],cred:"verified",source:"出处：华为鸿蒙操作系统发布会",note:"",video:"鸿蒙 万物互联"},
+  {num:"63",text:"万物互联，鸿蒙开启。",tags:["2021","鸿蒙操作系统发布会"],cred:"verified",source:"",note:"",video:"鸿蒙 万物互联"},
   {num:"64",text:"纯血鸿蒙，告别安卓，我们要做自己的生态。",tags:["2024—2025","鸿蒙 NEXT 相关发布 / 演讲"],cred:"media",source:"",note:"鸿蒙 NEXT 不再兼容安卓应用，被网友称为\"纯血鸿蒙\"，余承东多次强调生态独立的重要性。",video:"纯血鸿蒙 告别安卓"},
   {num:"65",text:"华为不造车，我们帮车企造好车。",tags:["2021","华为智能汽车解决方案发布会"],cred:"verified",source:"出处：华为智能汽车解决方案 BU 发布会",note:"后来华为与赛力斯、奇瑞、北汽、江淮合作推出\"四界\"，\"不造车\"的边界成为持续讨论话题。",video:"华为不造车 帮车企造好车"},
   {num:"66",text:"鸿蒙智行，四界齐发，问界、智界、享界、尊界。",tags:["2024—2025","鸿蒙智行相关发布 / 演讲"],cred:"verified",source:"",note:"华为汽车业务从\"华为智选\"升级为\"鸿蒙智行\"，形成四个合作品牌矩阵。",video:"鸿蒙智行 四界齐发"},
