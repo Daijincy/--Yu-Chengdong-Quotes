@@ -81,7 +81,6 @@
                 background 0.28s ease;
     will-change: transform;
   }
-  /* hover：边框放大发光 + 轻微上浮放大 */
   .glass:hover {
     transform: translateY(-4px) scale(1.02);
     border-color: var(--border-hover);
@@ -250,6 +249,23 @@
 
   /* ===== 粒子 Canvas ===== */
   #monetCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+
+  /* ===== 语录飘字 ===== */
+  @keyframes float-up {
+    0% { opacity: 1; transform: translateY(0) scale(0.75); }
+    15% { opacity: 1; transform: translateY(-10px) scale(1.12); }
+    100% { opacity: 0; transform: translateY(-120px) scale(1.35); }
+  }
+  .float-text {
+    position: fixed;
+    font-weight: 900;
+    pointer-events: none;
+    animation: float-up 1.25s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    z-index: 9998;
+    white-space: nowrap;
+    text-shadow: 0 0 16px currentColor;
+    letter-spacing: 1px;
+  }
 
   /* ===== 回到顶部 ===== */
   .back-top {
@@ -524,8 +540,8 @@
 
 <footer>
   <p>非官方开源整理 · 内容按可信度分级 · 没有找到可靠原始出处 ≠ 一定没说过</p>
-  <p style="margin-top:8px;">点击 <span class="yaoyao" id="yaoyaoBtn">遥遥领先</span> 有惊喜 · 点击任意卡片或 📋 可复制语录</p>
-  <p style="margin-top:6px;font-size:0.78rem;">右下角 ☰ 展开分类面板 · 右上角 🌙/☀️ 切换深浅色 · 点击任意控件触发莫奈取色粒子</p>
+  <p style="margin-top:8px;">点击 <span class="yaoyao" id="yaoyaoBtn">遥遥领先</span> 有惊喜 · 点击任意卡片飘语录 · 📋 可复制</p>
+  <p style="margin-top:6px;font-size:0.78rem;">右下角 ☰ 展开分类面板 · 右上角 🌙/☀️ 切换深浅色 · 点击按钮触发方形粒子</p>
 </footer>
 
 <script>
@@ -640,7 +656,39 @@ function fallbackCopy(text, cb) {
   document.execCommand('copy'); document.body.removeChild(ta); cb();
 }
 
-// ===== 莫奈取色粒子系统（Canvas） =====
+// ===== 语录飘字（卡片/遥遥领先专用，不与粒子共存） =====
+const floatPhrases = [
+  '遥遥领先！', '强得飞起！', '捅破天的技术！', '1000万以内最好！',
+  '科技车皇！', '第一名！', '内心谦卑！', '这个这个！',
+  '啊啊啊啊！', '余大嘴！', '稳了！', '业界首发！',
+  '全球首创！', '没有之一！', '史上最强！', '宇宙第一！',
+  '吊打苹果！', '秒杀三星！', '华为圣经！', '纯血鸿蒙！',
+  '不造车！', '价格太便宜了！', '我坐迈巴赫没法睡觉！',
+  '手机支架！', '备胎转正！', '昆仑玻璃！', '玄武架构！',
+  '一生万物！', '万物归一！', '四界齐发！', '先锋计划！',
+  '卡脖子！', '除了胜利无路可走！', '英雄自古多磨难！',
+  'Amazing!', 'Incredible!', 'Fantastic!', 'Beautiful!',
+  '余式英语！', '遥遥领先于同行！'
+];
+const floatColors = ['#cf0a2c', '#d4a843', '#ff6b6b', '#ffd700', '#e67e22', '#ff8c42', '#ff4757'];
+
+function spawnFloatText(x, y, count) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'float-text';
+      el.textContent = floatPhrases[Math.floor(Math.random() * floatPhrases.length)];
+      el.style.left = (x + (Math.random() - 0.5) * 220) + 'px';
+      el.style.top = (y - 12 + (Math.random() - 0.5) * 36) + 'px';
+      el.style.fontSize = (0.82 + Math.random() * 0.55) + 'rem';
+      el.style.color = floatColors[Math.floor(Math.random() * floatColors.length)];
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1300);
+    }, i * 65);
+  }
+}
+
+// ===== 莫奈取色方形粒子（按钮/控件专用） =====
 const canvas = document.getElementById('monetCanvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
@@ -657,7 +705,6 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
-// 颜色转换工具
 function rgbToHsl(r, g, b) {
   r /= 255; g /= 255; b /= 255;
   const max = Math.max(r, g, b), min = Math.min(r, g, b);
@@ -697,7 +744,6 @@ function hslToRgb(h, s, l) {
   return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
 
-// 莫奈取色：从元素提取颜色 → 生成印象派调色板（主色+类似色+互补色+暖光点缀）
 function monetPalette(el) {
   const styles = window.getComputedStyle(el);
   const baseColors = [];
@@ -706,25 +752,23 @@ function monetPalette(el) {
     const m = str.match(/\d+(\.\d+)?/g);
     if (m && m.length >= 3) {
       const r = parseInt(m[0]), g = parseInt(m[1]), b = parseInt(m[2]);
-      if (r + g + b > 30) baseColors.push([r, g, b]); // 跳过近黑
+      if (r + g + b > 30) baseColors.push([r, g, b]);
     }
   };
   extract(styles.backgroundColor);
   extract(styles.borderColor);
   extract(styles.color);
-
   if (baseColors.length === 0) baseColors.push([207, 10, 44], [212, 168, 67]);
 
   const palette = [];
   baseColors.forEach(([r, g, b]) => {
     const [h, s, l] = rgbToHsl(r, g, b);
-    palette.push(hslToRgb(h, Math.min(s + 0.15, 1), Math.min(l + 0.12, 0.9)));       // 主色提亮
-    palette.push(hslToRgb((h + 28) % 360, s, Math.min(l + 0.18, 0.92)));               // 类似色 +
-    palette.push(hslToRgb((h + 332) % 360, s, Math.min(l + 0.12, 0.88)));              // 类似色 -
-    palette.push(hslToRgb((h + 180) % 360, Math.max(s - 0.15, 0.25), Math.min(l + 0.25, 0.85))); // 互补色
-    palette.push(hslToRgb(h, s * 0.4, Math.min(l + 0.35, 0.96)));                      // 高明度淡色
+    palette.push(hslToRgb(h, Math.min(s + 0.15, 1), Math.min(l + 0.12, 0.9)));
+    palette.push(hslToRgb((h + 28) % 360, s, Math.min(l + 0.18, 0.92)));
+    palette.push(hslToRgb((h + 332) % 360, s, Math.min(l + 0.12, 0.88)));
+    palette.push(hslToRgb((h + 180) % 360, Math.max(s - 0.15, 0.25), Math.min(l + 0.25, 0.85)));
+    palette.push(hslToRgb(h, s * 0.4, Math.min(l + 0.35, 0.96)));
   });
-  // 莫奈画中常见的暖光点缀（金黄/橙）
   palette.push([255, 210, 90], [255, 175, 70], [255, 140, 100]);
   return palette;
 }
@@ -739,8 +783,9 @@ class MonetParticle {
     this.vy = Math.sin(angle) * speed - 1.5;
     this.life = 1;
     this.decay = 0.012 + Math.random() * 0.018;
-    this.size = 1.5 + Math.random() * 3.5;
-    // 从调色板选色 + 莫奈式微偏移
+    this.size = 2 + Math.random() * 4;
+    this.rotation = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.12;
     const c = palette[Math.floor(Math.random() * palette.length)];
     const [h, s, l] = rgbToHsl(c[0], c[1], c[2]);
     const final = hslToRgb(
@@ -760,19 +805,22 @@ class MonetParticle {
     this.y += this.vy;
     this.life -= this.decay;
     this.size *= 0.985;
+    this.rotation += this.rotSpeed;
   }
   draw(ctx) {
     const alpha = Math.max(this.life, 0);
-    // 柔光粒子：先画大光晕再画实心点，模拟印象派笔触
-    ctx.globalAlpha = alpha * 0.35;
+    const s = Math.max(this.size, 0.6);
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation);
+    // 方形光晕
+    ctx.globalAlpha = alpha * 0.3;
     ctx.fillStyle = `rgb(${this.r},${this.g},${this.b})`;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size * 2.2, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.fillRect(-s * 1.6, -s * 1.6, s * 3.2, s * 3.2);
+    // 实心方块
     ctx.globalAlpha = alpha;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, Math.max(this.size, 0.4), 0, Math.PI * 2);
-    ctx.fill();
+    ctx.fillRect(-s / 2, -s / 2, s, s);
+    ctx.restore();
   }
 }
 
@@ -781,7 +829,7 @@ function spawnMonet(x, y, el, count) {
   for (let i = 0; i < count; i++) {
     particles.push(new MonetParticle(x, y, palette));
   }
-  if (particles.length > 300) particles = particles.slice(-300); // 上限防爆炸
+  if (particles.length > 150) particles = particles.slice(-150);
   if (!animId) animate();
 }
 
@@ -800,7 +848,6 @@ function animate() {
   }
 }
 
-// 页面隐藏时暂停动画
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && animId) {
     cancelAnimationFrame(animId);
@@ -810,20 +857,19 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-// ===== 点击事件绑定 =====
+// ===== 点击事件：卡片→飘字，按钮→方形粒子（不共存） =====
 document.getElementById('yaoyaoBtn').addEventListener('click', (e) => {
   e.stopPropagation();
-  spawnMonet(e.clientX, e.clientY, e.currentTarget, 24);
+  spawnFloatText(e.clientX, e.clientY, 6);
 });
 
 document.querySelectorAll('.quote-card').forEach(card => {
   card.addEventListener('click', (e) => {
     if (e.target.classList.contains('copy-btn')) return;
-    spawnMonet(e.clientX, e.clientY, card, 14);
+    spawnFloatText(e.clientX, e.clientY, 3);
   });
 });
 
-// 统计卡片也触发粒子
 document.querySelectorAll('.stat-item').forEach(item => {
   item.addEventListener('click', (e) => spawnMonet(e.clientX, e.clientY, item, 12));
 });
