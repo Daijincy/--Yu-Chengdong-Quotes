@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>余式梗图生成器</title>
+<style>
+  :root {
+    --accent: #cf0a2c;
+    --accent-glow: rgba(207, 10, 44, 0.35);
+    --gold: #d4a843;
+    --radius: 20px;
+  }
+  [data-theme="dark"] {
+    --bg: #0a0a12;
+    --bg-grad-1: rgba(207,10,44,0.14);
+    --bg-grad-2: rgba(100,70,210,0.10);
+    --bg-grad-3: rgba(251,114,153,0.07);
+    --glass: rgba(255,255,255,0.045);
+    --glass-hover: rgba(255,255,255,0.075);
+    --glass-strong: rgba(14,14,24,0.72);
+    --border: rgba(255,255,255,0.09);
+    --border-hover: rgba(207,10,44,0.55);
+    --text: #ececf4;
+    --text-dim: #8a8aa4;
+    --text-faint: rgba(255,255,255,0.06);
+    --shadow: 0 6px 28px rgba(0,0,0,0.4);
+    --rim: rgba(255,255,255,0.12);
+  }
+  [data-theme="light"] {
+    --bg: #e8ecf2;
+    --bg-grad-1: rgba(207,10,44,0.07);
+    --bg-grad-2: rgba(90,80,200,0.05);
+    --bg-grad-3: rgba(251,114,153,0.05);
+    --glass: rgba(255,255,255,0.5);
+    --glass-hover: rgba(255,255,255,0.7);
+    --glass-strong: rgba(255,255,255,0.78);
+    --border: rgba(0,0,0,0.08);
+    --border-hover: rgba(207,10,44,0.35);
+    --text: #181828;
+    --text-dim: #606078;
+    --text-faint: rgba(0,0,0,0.05);
+    --shadow: 0 6px 26px rgba(0,0,0,0.08);
+    --rim: rgba(255,255,255,0.65);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background:
+      radial-gradient(ellipse 600px 480px at 12% 8%, var(--bg-grad-1), transparent 60%),
+      radial-gradient(ellipse 520px 560px at 88% 15%, var(--bg-grad-3), transparent 55%),
+      radial-gradient(ellipse 680px 500px at 50% 85%, var(--bg-grad-2), transparent 60%),
+      var(--bg);
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+  .glass {
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow), inset 0 1px 0 var(--rim);
+    transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.28s, box-shadow 0.28s;
+  }
+  .glass:hover { transform: translateY(-2px); border-color: var(--border-hover); }
+  .hero { text-align: center; padding: 60px 20px 30px; }
+  .hero h1 { font-size: clamp(1.8rem, 6vw, 3rem); font-weight: 900; letter-spacing: 2px; margin-bottom: 8px; }
+  .hero h1 .highlight { background: linear-gradient(135deg, var(--accent), #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero .subtitle { font-size: 0.9rem; color: var(--text-dim); }
+  .theme-toggle {
+    position: fixed; top: 20px; right: 20px; width: 48px; height: 48px; border-radius: 50%;
+    background: var(--glass-strong); -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid var(--border); color: var(--text); font-size: 1.2rem; cursor: pointer; z-index: 200;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.28s;
+    box-shadow: var(--shadow), inset 0 1px 0 var(--rim);
+  }
+  .theme-toggle:hover { transform: scale(1.12) rotate(15deg); border-color: var(--accent); }
+  .back-btn {
+    position: fixed; top: 20px; left: 20px; height: 48px; padding: 0 20px; border-radius: 24px;
+    background: var(--glass-strong); -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid var(--border); color: var(--text); font-size: 0.9rem; font-weight: 600; cursor: pointer; z-index: 200;
+    display: flex; align-items: center; gap: 6px;
+    transition: transform 0.3s, border-color 0.28s, color 0.28s;
+    box-shadow: var(--shadow), inset 0 1px 0 var(--rim);
+  }
+  .back-btn:hover { transform: translateX(-3px); border-color: var(--accent); color: var(--accent); }
+  .main { max-width: 1100px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 800px) { .main { grid-template-columns: 1fr; } }
+  .panel { padding: 24px; }
+  .panel h2 { font-size: 1.1rem; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--text-dim); margin-bottom: 6px; letter-spacing: 1px; }
+  .form-group textarea, .form-group input[type="text"] {
+    width: 100%; padding: 12px 16px; background: var(--glass-strong);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    border: 1px solid var(--border); border-radius: 12px; color: var(--text);
+    font-size: 0.95rem; font-family: inherit; outline: none; resize: vertical;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .form-group textarea:focus, .form-group input[type="text"]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .form-group textarea { min-height: 100px; }
+  .template-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .template-item {
+    padding: 14px 10px; border-radius: 12px; border: 2px solid var(--border);
+    cursor: pointer; text-align: center; font-size: 0.8rem; font-weight: 600;
+    transition: all 0.25s; background: var(--glass);
+  }
+  .template-item:hover { transform: translateY(-2px); }
+  .template-item.active { border-color: var(--accent); background: rgba(207,10,44,0.12); color: var(--accent); box-shadow: 0 0 0 2px var(--accent-glow); }
+  .template-item .tpl-emoji { font-size: 1.4rem; display: block; margin-bottom: 4px; }
+  .row { display: flex; gap: 12px; }
+  .row .form-group { flex: 1; }
+  .slider-row { display: flex; align-items: center; gap: 12px; }
+  .slider-row input[type="range"] { flex: 1; accent-color: var(--accent); }
+  .slider-row .slider-val { font-size: 0.85rem; font-weight: 700; color: var(--accent); min-width: 40px; text-align: right; }
+  .preview-wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .canvas-container {
+    width: 100%; max-width: 420px; aspect-ratio: 4/5; border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border); box-shadow: var(--shadow);
+    position: relative;
+  }
+  .canvas-container canvas { width: 100%; height: 100%; display: block; }
+  .export-btn {
+    padding: 14px 40px; border-radius: 16px; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--accent), #ff6b6b); color: #fff;
+    font-size: 1rem; font-weight: 800; letter-spacing: 1px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s;
+    box-shadow: 0 4px 20px var(--accent-glow);
+  }
+  .export-btn:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 32px var(--accent-glow); }
+  .export-btn:active { transform: translateY(0) scale(0.98); }
+  .tips { font-size: 0.78rem; color: var(--text-dim); text-align: center; margin-top: 4px; }
+  @keyframes float-up {
+    0% { opacity: 1; transform: translateY(0) scale(0.75); }
+    15% { opacity: 1; transform: translateY(-10px) scale(1.12); }
+    100% { opacity: 0; transform: translateY(-120px) scale(1.35); }
+  }
+  .float-text {
+    position: fixed; font-weight: 900; pointer-events: none;
+    animation: float-up 1.25s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    z-index: 9998; white-space: nowrap; text-shadow: 0 0 16px currentColor; letter-spacing: 1px;
+  }
+  footer { text-align: center; padding: 40px 20px; color: var(--text-dim); font-size: 0.82rem; }
+  footer a { color: var(--gold); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body data-theme="dark">
+<button class="back-btn" onclick="location.href='index.html'">← 返回语录</button>
+<button class="theme-toggle" id="themeToggle">🌙</button>
+<div class="hero">
+  <h1>余式<span class="highlight">梗图生成器</span></h1>
+  <p class="subtitle">输入任意文字，一键生成余承东发布会风格梗图 · 长按保存</p>
+</div>
+<div class="main">
+  <div class="panel glass">
+    <h2>⚙️ 控制面板</h2>
+    <div class="form-group">
+      <label>梗图文字（支持多行）</label>
+      <textarea id="memeText" placeholder="输入你想生成的文字，例如：遥遥领先！&#10;1000万以内最好的SUV">遥遥领先！</textarea>
+    </div>
+    <div class="form-group">
+      <label>选择模板</label>
+      <div class="template-grid" id="templateGrid">
+        <div class="template-item active" data-tpl="redgold"><span class="tpl-emoji">🔴</span>红金发布会</div>
+        <div class="template-item" data-tpl="darkglass"><span class="tpl-emoji">🌑</span>深色毛玻璃</div>
+        <div class="template-item" data-tpl="lightmin"><span class="tpl-emoji">⚪</span>浅色简约</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <label>编号（留空自动）</label>
+        <input type="text" id="memeNum" placeholder="#001" maxlength="6">
+      </div>
+      <div class="form-group">
+        <label>副标题</label>
+        <input type="text" id="memeSub" placeholder="余承东名场面" maxlength="20">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>字体大小</label>
+      <div class="slider-row">
+        <input type="range" id="fontSize" min="40" max="100" value="68">
+        <span class="slider-val" id="fontSizeVal">68</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>水印文字</label>
+      <input type="text" id="memeWatermark" value="余承东名场面语录" maxlength="30">
+    </div>
+  </div>
+  <div class="panel glass">
+    <h2>🖼️ 实时预览</h2>
+    <div class="preview-wrap">
+      <div class="canvas-container">
+        <canvas id="previewCanvas" width="1080" height="1350"></canvas>
+      </div>
+      <button class="export-btn" id="exportBtn">📥 导出高清图片</button>
+      <p class="tips">导出尺寸 1080×1350 · 适合朋友圈 / 微信群 / 微博</p>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>余式梗图生成器 · 纯前端 Canvas 绘制 · 数据不上传</p>
+  <p style="margin-top:6px;"><a href="index.html">← 返回语录首页</a></p>
+</footer>
+<script>
+const floatPhrases = ['遥遥领先！','强得飞起！','捅破天的技术！','1000万以内最好！','科技车皇！','第一名！','内心谦卑！','这个这个！','啊啊啊啊！','余大嘴！','稳了！','业界首发！','全球首创！','没有之一！','史上最强！','宇宙第一！','吊打苹果！','秒杀三星！','华为圣经！','纯血鸿蒙！','不造车！','价格太便宜了！','我坐迈巴赫没法睡觉！','手机支架！','备胎转正！','昆仑玻璃！','玄武架构！','一生万物！','万物归一！','四界齐发！','先锋计划！','卡脖子！','除了胜利无路可走！','英雄自古多磨难！','Amazing!','Incredible!','Fantastic!','余式英语！','遥遥领先于同行！','鸿蒙智驾第一名！','乾崑智驾！','问界M9！','享界S9！','尊界S800！','Mate 60 Pro！','麒麟9000S！','鸿蒙NEXT！','星闪NearLink！','盘古大模型！','十面抗摔！','天通卫星！','华为不造车帮车企造好车！','余总！','大嘴！','余式发布会！','华为圣经新约！','遥遥领先于制裁！','科技自立自强！','国产替代！','中国芯！','华为芯！','研发投入千亿！','工程师红利！','天才少年！','昇腾！','鲲鹏！','欧拉！','HMS Core！','方舟编译器！','超级终端！','多屏协同！','全屋智能！','智慧屏！','FreeBuds！','MatePad！','MateBook！','华为云！','VMALL！','HDC！','开发者大会！','全联接大会！','华为体验店！','华为旗舰店！','客户服务中心！','华为服务！','华为会员！','华为云空间！','华为钱包！','华为支付！','数字人民币！','花瓣地图！','Petal！','华为搜索！','华为浏览器！','应用市场！','华为HMS！','EROFS！','华为高斯！','华为香农！','达芬奇架构！','HiAI！','ModelArts！','XMAGE影像！','超光变！','保时捷设计！','折叠屏！','DXO第一！','流畅度超越iOS！','鸿蒙超越安卓！','鸿蒙不是安卓套壳！','万物互联鸿蒙开启！','问界新M7！','问界M8！','智界R7！','享界S9 Max！','尊界S800 Ultra！','鸿蒙智行！','华为汽车！','高阶智驾！','城市NCA！','高速NCA！','代客泊车！','智能泊车！','AR-HUD！','激光雷达！','毫米波雷达！','800V高压！','碳化硅！','空气悬架！','CDC减震！','后轮转向！','魔毯悬架！','零重力座椅！','冰箱彩电大沙发！','5C超充！','续航1000km！','百公里加速3秒！','百万级底盘！','安全就是最大的豪华！','就算油门当刹车想撞都难！','1400km全程无接管！','其他车企智驾一打瞌睡就撞！','鸿蒙智驾不是第一阵营而是第一名！','持续保持扩大领先优势！','产品比他还好质量好体验好性能好！','卖不过他的零头！','这个时代没办法！','车厂看不上我们看不起我们！','感谢张兴海董事长！','高端车的王者还是问界！','50万元第一名是M9！','一个月卖8万台我简直疯掉了！','在享界S9上睡觉特别享受！','机械素质远远超越迈巴赫劳斯莱斯！','最高端的就是我们和江淮打造的尊界！','只有领先比较多的时候才会说！','做到遥遥领先非常不容易！','方向选择比勤奋更重要！','为什么很多人还用手机支架我也搞不明白！','车导航性能不行！','没有资源仅能承担四家！','不是不想卖而是成本能力不足！','我一直做客服是个内心谦卑的人！','没有伤痕累累哪来皮糙肉厚！','除了胜利我们已经无路可走！','向上捅破天向下扎到根！','我们的5G是假的吗！','备胎芯片一夜转正！','麒麟芯片自研性能业界领先！','卡脖子一定要解决也一定能解决！','昆仑玻璃业界最坚固比竞品坚固十倍！','玄武架构钢铁之躯钢筋铁骨！','超光变XMAGE影像手机摄影天花板！','一生万物万物归一！','万物互联鸿蒙开启！','纯血鸿蒙告别安卓做自己的生态！','华为不造车帮车企造好车！','鸿蒙智行四界齐发问界智界享界尊界！','星闪技术比蓝牙更快更低时延！','卫星通话向上捅破天别人没有的我们有！','华为全屋智能把家变成超级终端！','鸿蒙目标不是替代安卓而是超越安卓！','稳了！','不做低端产品华为品牌要做高端！','iPhone现在是我们的学生！','流畅度超越iOS我们做到了！','DXO第一拿了很多次已经习惯了！','保时捷设计业界最高端没有之一！','折叠屏华为业界最好没有之一！','别人做的都是跟随我们做的是引领！','品牌溢价靠技术一点点堆出来！','这一生就干一件事把华为终端做好！'];
+const floatColors = ['#cf0a2c','#d4a843','#ff6b6b','#ffd700','#e67e22','#ff8c42','#ff4757','#9b59b6','#fb7299','#2ecc71','#3498db'];
+function spawnFloatText(x, y, count) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'float-text';
+      el.textContent = floatPhrases[Math.floor(Math.random() * floatPhrases.length)];
+      el.style.left = (x + (Math.random() - 0.5) * 220) + 'px';
+      el.style.top = (y - 12 + (Math.random() - 0.5) * 36) + 'px';
+      el.style.fontSize = (0.82 + Math.random() * 0.55) + 'rem';
+      el.style.color = floatColors[Math.floor(Math.random() * floatColors.length)];
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1300);
+    }, i * 65);
+  }
+}
+
+const canvas = document.getElementById('previewCanvas');
+const ctx = canvas.getContext('2d');
+const W = 1080, H = 1350;
+
+const templates = {
+  redgold: {
+    bg: (ctx) => {
+      const g = ctx.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, '#1a0508');
+      g.addColorStop(0.5, '#2d0a10');
+      g.addColorStop(1, '#1a0508');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      const rg = ctx.createRadialGradient(W/2, H*0.3, 50, W/2, H*0.3, 600);
+      rg.addColorStop(0, 'rgba(207,10,44,0.25)');
+      rg.addColorStop(1, 'transparent');
+      ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+    },
+    border: '#d4a843',
+    numColor: '#d4a843',
+    textColor: '#ffffff',
+    subColor: '#d4a843',
+    waterColor: 'rgba(212,168,67,0.5)',
+    lineColor: 'rgba(212,168,67,0.4)'
+  },
+  darkglass: {
+    bg: (ctx) => {
+      const g = ctx.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, '#0f0f1a');
+      g.addColorStop(0.5, '#1a1a2e');
+      g.addColorStop(1, '#0f0f1a');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      const rg1 = ctx.createRadialGradient(W*0.2, H*0.2, 50, W*0.2, H*0.2, 500);
+      rg1.addColorStop(0, 'rgba(207,10,44,0.18)'); rg1.addColorStop(1, 'transparent');
+      ctx.fillStyle = rg1; ctx.fillRect(0, 0, W, H);
+      const rg2 = ctx.createRadialGradient(W*0.8, H*0.7, 50, W*0.8, H*0.7, 500);
+      rg2.addColorStop(0, 'rgba(155,89,182,0.15)'); rg2.addColorStop(1, 'transparent');
+      ctx.fillStyle = rg2; ctx.fillRect(0, 0, W, H);
+    },
+    border: 'rgba(255,255,255,0.15)',
+    numColor: 'rgba(255,255,255,0.12)',
+    textColor: '#ececf4',
+    subColor: '#8a8aa4',
+    waterColor: 'rgba(255,255,255,0.25)',
+    lineColor: 'rgba(255,255,255,0.1)'
+  },
+  lightmin: {
+    bg: (ctx) => {
+      const g = ctx.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, '#f5f5f7');
+      g.addColorStop(0.5, '#ebebef');
+      g.addColorStop(1, '#f5f5f7');
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      const rg = ctx.createRadialGradient(W/2, H*0.4, 50, W/2, H*0.4, 600);
+      rg.addColorStop(0, 'rgba(207,10,44,0.06)'); rg.addColorStop(1, 'transparent');
+      ctx.fillStyle = rg; ctx.fillRect(0, 0, W, H);
+    },
+    border: 'rgba(0,0,0,0.08)',
+    numColor: 'rgba(0,0,0,0.06)',
+    textColor: '#181828',
+    subColor: '#606078',
+    waterColor: 'rgba(0,0,0,0.2)',
+    lineColor: 'rgba(0,0,0,0.08)'
+  }
+};
+
+let currentTpl = 'redgold';
+let autoNum = 1;
+
+function wrapText(ctx, text, maxWidth) {
+  const lines = [];
+  const paragraphs = text.split('\n');
+  for (const para of paragraphs) {
+    if (para === '') { lines.push(''); continue; }
+    let line = '';
+    for (const char of para) {
+      const test = line + char;
+      if (ctx.measureText(test).width > maxWidth && line !== '') {
+        lines.push(line);
+        line = char;
+      } else {
+        line = test;
+      }
+    }
+    if (line) lines.push(line);
+  }
+  return lines;
+}
+
+function drawMeme() {
+  const tpl = templates[currentTpl];
+  const text = document.getElementById('memeText').value || '遥遥领先！';
+  let num = document.getElementById('memeNum').value.trim();
+  if (!num) { num = '#' + String(autoNum).padStart(3, '0'); }
+  else if (!num.startsWith('#')) { num = '#' + num; }
+  const sub = document.getElementById('memeSub').value.trim() || '余承东名场面';
+  const fontSize = parseInt(document.getElementById('fontSize').value);
+  const watermark = document.getElementById('memeWatermark').value.trim() || '余承东名场面语录';
+
+  ctx.clearRect(0, 0, W, H);
+  tpl.bg(ctx);
+
+  ctx.save();
+  ctx.strokeStyle = tpl.border;
+  ctx.lineWidth = 4;
+  ctx.strokeRect(30, 30, W - 60, H - 60);
+  ctx.strokeStyle = tpl.lineColor;
+  ctx.lineWidth = 1;
+  ctx.strokeRect(44, 44, W - 88, H - 88);
+  ctx.restore();
+
+  ctx.save();
+  ctx.font = `900 ${fontSize * 2.2}px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif`;
+  ctx.fillStyle = tpl.numColor;
+  ctx.textAlign = 'left';
+  ctx.fillText(num, 80, 180);
+  ctx.restore();
+
+  ctx.save();
+  ctx.font = `600 36px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif`;
+  ctx.fillStyle = tpl.subColor;
+  ctx.textAlign = 'right';
+  ctx.fillText(sub, W - 80, 160);
+  ctx.restore();
+
+  ctx.save();
+  ctx.strokeStyle = tpl.lineColor;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(80, 220);
+  ctx.lineTo(W - 80, 220);
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.save();
+  ctx.font = `900 ${fontSize}px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif`;
+  ctx.fillStyle = tpl.textColor;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  const maxWidth = W - 200;
+  const lines = wrapText(ctx, text, maxWidth);
+  const lineHeight = fontSize * 1.4;
+  const totalHeight = lines.length * lineHeight;
+  const startY = H / 2 - totalHeight / 2 + lineHeight / 2;
+  lines.forEach((line, i) => {
+    ctx.fillText(line, W / 2, startY + i * lineHeight);
+  });
+  ctx.restore();
+
+  ctx.save();
+  ctx.strokeStyle = tpl.lineColor;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(80, H - 180);
+  ctx.lineTo(W - 80, H - 180);
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.save();
+  ctx.font = `500 32px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif`;
+  ctx.fillStyle = tpl.waterColor;
+  ctx.textAlign = 'center';
+  ctx.fillText(watermark, W / 2, H - 120);
+  ctx.font = `400 24px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif`;
+  ctx.fillText('daijincy.github.io/--Yu-Chengdong-Quotes', W / 2, H - 80);
+  ctx.restore();
+}
+
+document.getElementById('memeText').addEventListener('input', drawMeme);
+document.getElementById('memeNum').addEventListener('input', drawMeme);
+document.getElementById('memeSub').addEventListener('input', drawMeme);
+document.getElementById('memeWatermark').addEventListener('input', drawMeme);
+document.getElementById('fontSize').addEventListener('input', (e) => {
+  document.getElementById('fontSizeVal').textContent = e.target.value;
+  drawMeme();
+});
+
+document.getElementById('templateGrid').addEventListener('click', (e) => {
+  const item = e.target.closest('.template-item');
+  if (!item) return;
+  document.querySelectorAll('.template-item').forEach(t => t.classList.remove('active'));
+  item.classList.add('active');
+  currentTpl = item.dataset.tpl;
+  spawnFloatText(e.clientX, e.clientY, 1);
+  drawMeme();
+});
+
+document.getElementById('exportBtn').addEventListener('click', (e) => {
+  spawnFloatText(e.clientX, e.clientY, 2);
+  const link = document.createElement('a');
+  const num = document.getElementById('memeNum').value.trim() || ('#' + String(autoNum).padStart(3, '0'));
+  link.download = `余式梗图_${num.replace('#','')}_${Date.now()}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+  autoNum++;
+});
+
+const themeToggle = document.getElementById('themeToggle');
+const themes = ['auto', 'dark', 'light'];
+const themeIcons = { auto: '🔮', dark: '🌙', light: '☀️' };
+let currentThemeIdx = 0;
+function applyTheme(theme) {
+  if (theme === 'auto') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  } else {
+    document.body.setAttribute('data-theme', theme);
+  }
+  themeToggle.textContent = themeIcons[theme];
+  try { localStorage.setItem('ycd-theme', theme); } catch(e) {}
+}
+let savedTheme = 'auto';
+try { savedTheme = localStorage.getItem('ycd-theme') || 'auto'; } catch(e) {}
+currentThemeIdx = themes.indexOf(savedTheme);
+if (currentThemeIdx < 0) currentThemeIdx = 0;
+applyTheme(themes[currentThemeIdx]);
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+  if (themes[currentThemeIdx] === 'auto') applyTheme('auto');
+});
+themeToggle.addEventListener('click', (e) => {
+  currentThemeIdx = (currentThemeIdx + 1) % themes.length;
+  applyTheme(themes[currentThemeIdx]);
+  spawnFloatText(e.clientX, e.clientY, 1);
+});
+
+document.querySelector('.back-btn').addEventListener('click', (e) => {
+  spawnFloatText(e.clientX, e.clientY, 1);
+});
+
+drawMeme();
+</script>
+</body>
+</html>
