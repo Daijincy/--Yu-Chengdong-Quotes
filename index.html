@@ -294,7 +294,7 @@
     <div class="fab-grid-item" data-target="sec9"><span class="emoji">🧭</span> 管理 / 金句</div>
     <div class="fab-grid-item full" data-target="sec10"><span class="emoji">😂</span> 网络梗 / 二创</div>
     <div class="fab-grid-item full" id="carNavBtn"><span class="emoji">🚙</span> 鸿蒙座驾车谱 →</div>
-    <div class="fab-grid-item full" id="lawNavBtn"><span class="emoji">⚖️</span> 华为系列法条（纯整活）→</div>
+    <div class="fab-grid-item full" id="zhuzhiliaoNavBtn"><span class="emoji">🦗</span> 竹知了（余承东同款）→</div>
   </div>
 </div>
 <button class="fab-main" id="fabMain">☰</button>
@@ -493,7 +493,7 @@
   <p>非官方开源整理 · 内容按可信度分级 · 没有找到可靠原始出处 ≠ 一定没说过</p>
   <p style="margin-top:8px;">点击 <span class="yaoyao" id="yaoyaoBtn">遥遥领先</span> 有惊喜 · 点击任意卡片飘语录 · 📋 可复制</p>
   <p style="margin-top:6px;font-size:0.78rem;">右下角 ☰ 展开分类面板 · 右上角 🌙/☀️ 切换深浅色 · 点击按钮触发方形粒子</p>
-  <p style="margin-top:10px;"><a class="car-link" href="cars.html">🚙 鸿蒙智慧座驾车谱 →</a> &nbsp;|&nbsp; <a class="car-link" href="laws.html" style="color:var(--accent);">⚖️ 华为系列法条（纯整活）→</a></p>
+  <p style="margin-top:10px;"><a class="car-link" href="cars.html">🚙 鸿蒙智慧座驾车谱 →</a> &nbsp;|&nbsp; <a class="car-link" href="https://yangh9.github.io/zhuzhiliao/" target="_blank" style="color:var(--accent);">🦗 竹知了（余承东同款）→</a></p>
 </footer>
 <script>
 const themeToggle = document.getElementById('themeToggle');
@@ -538,7 +538,7 @@ fabPanel.querySelectorAll('.fab-grid-item').forEach(item => {
   item.addEventListener('click', (e) => {
     spawnMonet(e.clientX, e.clientY, e.currentTarget, 14);
     if (item.id === 'carNavBtn') { window.location.href = 'cars.html'; return; }
-    if (item.id === 'lawNavBtn') { window.location.href = 'laws.html'; return; }
+    if (item.id === 'zhuzhiliaoNavBtn') { window.open('https://yangh9.github.io/zhuzhiliao/', '_blank'); return; }
     const target = item.dataset.target;
     if (target === 'top') { window.scrollTo({ top: 0, behavior: 'smooth' }); }
     else { document.getElementById(target).scrollIntoView({ behavior: 'smooth' }); }
