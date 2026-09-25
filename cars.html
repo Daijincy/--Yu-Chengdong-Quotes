@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鸿蒙智慧座驾车谱</title>
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg2: #12121a;
+  --text: #e8e8ed;
+  --text2: #9a9aa8;
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(255,255,255,0.08);
+  --accent: #cf0a2c;
+  --accent2: #d4a843;
+  --card-hover: rgba(207,10,44,0.15);
+}
+[data-theme="light"] {
+  --bg: #f0f0f5;
+  --bg2: #e4e4ec;
+  --text: #1a1a24;
+  --text2: #5a5a6a;
+  --glass: rgba(255,255,255,0.55);
+  --glass-border: rgba(0,0,0,0.08);
+  --accent: #cf0a2c;
+  --accent2: #b8860b;
+  --card-hover: rgba(207,10,44,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.4s, color 0.4s;
+}
+.bg-orbs { position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden; }
+.orb { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.35; animation:float 20s ease-in-out infinite; }
+.orb1 { width:400px; height:400px; background:#cf0a2c; top:-100px; left:-100px; }
+.orb2 { width:350px; height:350px; background:#d4a843; bottom:-80px; right:-80px; animation-delay:-7s; }
+.orb3 { width:300px; height:300px; background:#4a90d9; top:40%; left:60%; animation-delay:-14s; opacity:0.2; }
+@keyframes float {
+  0%,100% { transform:translate(0,0) scale(1); }
+  33% { transform:translate(40px,-30px) scale(1.1); }
+  66% { transform:translate(-30px,20px) scale(0.95); }
+}
+#particleCanvas { position:fixed; inset:0; z-index:1; pointer-events:none; }
+.container { position:relative; z-index:2; max-width:1200px; margin:0 auto; padding:24px 16px 80px; }
+.topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:28px; flex-wrap:wrap; gap:12px; }
+.topbar h1 { font-size:clamp(22px,4vw,32px); font-weight:800; letter-spacing:1px; }
+.topbar h1 span { color:var(--accent); }
+.topbar-actions { display:flex; gap:10px; }
+.btn {
+  padding:10px 18px; border-radius:12px; border:1px solid var(--glass-border);
+  background:var(--glass); backdrop-filter:blur(14px) saturate(180%);
+  -webkit-backdrop-filter:blur(14px) saturate(180%);
+  color:var(--text); font-size:14px; font-weight:600; cursor:pointer;
+  transition:all 0.25s; text-decoration:none; display:inline-flex; align-items:center; gap:6px;
+}
+.btn:hover { transform:translateY(-2px) scale(1.03); border-color:var(--accent); box-shadow:0 0 16px var(--card-hover); }
+.btn:active { transform:scale(0.97); }
+.stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:14px; margin-bottom:28px; }
+.stat-card {
+  padding:18px 16px; border-radius:16px; background:var(--glass);
+  border:1px solid var(--glass-border); backdrop-filter:blur(14px) saturate(180%);
+  -webkit-backdrop-filter:blur(14px) saturate(180%); text-align:center; transition:all 0.25s;
+}
+.stat-card:hover { transform:translateY(-3px); border-color:var(--accent); box-shadow:0 4px 20px var(--card-hover); }
+.stat-num { font-size:28px; font-weight:800; color:var(--accent); }
+.stat-label { font-size:12px; color:var(--text2); margin-top:4px; }
+.tab-bar { display:flex; gap:8px; margin-bottom:24px; }
+.tab {
+  padding:10px 22px; border-radius:12px; border:1px solid var(--glass-border);
+  background:var(--glass); backdrop-filter:blur(14px); color:var(--text2);
+  font-size:14px; font-weight:600; cursor:pointer; transition:all 0.25s;
+}
+.tab.active { background:var(--accent); color:#fff; border-color:var(--accent); box-shadow:0 0 20px rgba(207,10,44,0.3); }
+.tab:hover:not(.active) { color:var(--text); border-color:var(--accent); }
+.group-section { margin-bottom:32px; }
+.group-title {
+  font-size:18px; font-weight:700; margin-bottom:14px; padding-left:12px;
+  border-left:3px solid var(--accent); display:flex; align-items:center; gap:8px;
+}
+.group-title .count { font-size:13px; color:var(--text2); font-weight:400; }
+.car-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+.car-card {
+  border-radius:16px; overflow:hidden; background:var(--glass);
+  border:1px solid var(--glass-border); backdrop-filter:blur(14px) saturate(180%);
+  -webkit-backdrop-filter:blur(14px) saturate(180%);
+  cursor:pointer; transition:all 0.3s; text-decoration:none; color:inherit; display:block;
+}
+.car-card:hover { transform:translateY(-5px) scale(1.02); border-color:var(--accent); box-shadow:0 8px 30px var(--card-hover); }
+.car-card:active { transform:scale(0.98); }
+.car-img { width:100%; height:160px; object-fit:cover; display:block; background:var(--bg2); }
+.car-info { padding:14px; }
+.car-name { font-size:16px; font-weight:700; margin-bottom:6px; }
+.car-meta { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
+.tag {
+  font-size:11px; padding:3px 8px; border-radius:6px; font-weight:600;
+  background:rgba(207,10,44,0.12); color:var(--accent); border:1px solid rgba(207,10,44,0.2);
+}
+.tag.brand { background:rgba(74,144,217,0.12); color:#4a90d9; border-color:rgba(74,144,217,0.2); }
+.tag.year { background:rgba(212,168,67,0.12); color:var(--accent2); border-color:rgba(212,168,67,0.2); }
+.car-price { font-size:14px; font-weight:700; color:var(--accent2); }
+.car-type { font-size:12px; color:var(--text2); margin-top:4px; }
+.car-link-hint { font-size:11px; color:var(--text2); margin-top:8px; display:flex; align-items:center; gap:4px; opacity:0.7; }
+.footer { text-align:center; margin-top:40px; color:var(--text2); font-size:12px; }
+.footer a { color:var(--accent); text-decoration:none; }
+.hidden { display:none !important; }
+.car-card { animation:fadeInUp 0.5s ease both; }
+@keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+@media (max-width:600px) {
+  .car-grid { grid-template-columns:1fr; }
+  .car-img { height:180px; }
+}
+</style>
+</head>
+<body>
+<div class="bg-orbs">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+<canvas id="particleCanvas"></canvas>
+
+<div class="container">
+  <div class="topbar">
+    <h1>鸿蒙智慧座舱<span>车谱</span></h1>
+    <div class="topbar-actions">
+      <a href="index.html" class="btn" id="backBtn">← 返回语录</a>
+      <button class="btn" id="themeBtn">🔮 自动</button>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card"><div class="stat-num" id="totalCars">17</div><div class="stat-label">搭载车型</div></div>
+    <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">合作品牌</div></div>
+    <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">年份跨度</div></div>
+    <div class="stat-card"><div class="stat-num">2022</div><div class="stat-label">首发年份</div></div>
+  </div>
+
+  <div class="tab-bar">
+    <button class="tab active" data-mode="brand">按品牌</button>
+    <button class="tab" data-mode="year">按年份</button>
+  </div>
+
+  <div id="content"></div>
+
+  <div class="footer">
+    数据截至 2026年9月 · 点击卡片跳转懂车帝查看详情 · <a href="index.html">余承东名场面语录</a>
+  </div>
+</div>
+
+<script>
+const cars = [
+  {name:"问界 M9", brand:"问界 AITO", year:2023, yearStr:"2023/2026", price:"46.98-56.98万", type:"大型SUV", img:"https://aka.doubaocdn.com/s/QnOBkjwMYL", dcd:"问界M9"},
+  {name:"问界 M8", brand:"问界 AITO", year:2024, yearStr:"2024", price:"35.98-42.98万", type:"中大型SUV", img:"https://aka.doubaocdn.com/s/aGi7eQ5vqE", dcd:"问界M8"},
+  {name:"问界 M7", brand:"问界 AITO", year:2022, yearStr:"2022/2024", price:"24.98-32.98万", type:"中大型SUV", img:"https://aka.doubaocdn.com/s/HUZkaHGdr5", dcd:"问界M7"},
+  {name:"问界 M6", brand:"问界 AITO", year:2026, yearStr:"2026", price:"预计20-30万", type:"中型SUV", img:"https://aka.doubaocdn.com/s/Swb0ThBDCA", dcd:"问界M6"},
+  {name:"问界 M5", brand:"问界 AITO", year:2022, yearStr:"2022/2024", price:"24.98-27.98万", type:"中型SUV", img:"https://aka.doubaocdn.com/s/8xDf2zklvY", dcd:"问界M5"},
+  {name:"智界 R7", brand:"智界 LUXEED", year:2024, yearStr:"2024", price:"25.98-31.98万", type:"中型SUV", img:"https://aka.doubaocdn.com/s/hGB4VLmOj2", dcd:"智界R7"},
+  {name:"智界 S7", brand:"智界 LUXEED", year:2023, yearStr:"2023/2024", price:"22.98-31.98万", type:"中大型轿车", img:"https://aka.doubaocdn.com/s/CAoeYNqmij", dcd:"智界S7"},
+  {name:"智界 V9", brand:"智界 LUXEED", year:2026, yearStr:"2026", price:"预计35-45万", type:"大型MPV", img:"https://aka.doubaocdn.com/s/mdDaj6tfft", dcd:"智界V9"},
+  {name:"享界 S9", brand:"享界 STELATO", year:2024, yearStr:"2024", price:"31.98-41.98万", type:"中大型轿车", img:"https://aka.doubaocdn.com/s/iecAQGmTDA", dcd:"享界S9"},
+  {name:"享界 G9", brand:"享界 STELATO", year:2026, yearStr:"2026", price:"42.98万起", type:"硬派SUV", img:"https://aka.doubaocdn.com/s/a8h3s74JVX", dcd:"享界G9"},
+  {name:"尊界 S800", brand:"尊界 MAEXTRO", year:2025, yearStr:"2025", price:"99.98-149.98万", type:"大型轿车", img:"https://aka.doubaocdn.com/s/Viuk9vAiAV", dcd:"尊界S800"},
+  {name:"尚界 Z7", brand:"尚界 SAIC", year:2026, yearStr:"2026", price:"预计20-30万", type:"中型轿车", img:"https://aka.doubaocdn.com/s/IUpD9GoZ8j", dcd:"尚界Z7"},
+  {name:"阿维塔 12", brand:"阿维塔 AVATR", year:2023, yearStr:"2023/2025", price:"26.99-42.99万", type:"中大型轿车", img:"https://aka.doubaocdn.com/s/BJmWWxtQqn", dcd:"阿维塔12"},
+  {name:"阿维塔 07", brand:"阿维塔 AVATR", year:2024, yearStr:"2024", price:"21.99-31.99万", type:"中型SUV", img:"https://aka.doubaocdn.com/s/lxT5W8OrJG", dcd:"阿维塔07"},
+  {name:"阿维塔 11", brand:"阿维塔 AVATR", year:2022, yearStr:"2022", price:"30.00-60.00万", type:"中大型SUV", img:"https://aka.doubaocdn.com/s/g7kTA7BOMo", dcd:"阿维塔11"},
+  {name:"极狐 阿尔法S HI版", brand:"极狐 ARCFOX", year:2022, yearStr:"2022", price:"39.79-42.99万", type:"中大型轿车", img:"https://aka.doubaocdn.com/s/m1nFZzZyIs", dcd:"极狐阿尔法S"},
+  {name:"华境 S", brand:"华境 五菱×华为", year:2026, yearStr:"2026", price:"14.98万起", type:"中大型SUV", img:"https://aka.doubaocdn.com/s/e26zV5oDav", dcd:"华境S"},
+];
+
+const content = document.getElementById('content');
+function carCard(c) {
+  return `<a class="car-card" href="https://www.dongchedi.com/search?keyword=${encodeURIComponent(c.dcd)}" target="_blank" rel="noopener">
+    <img class="car-img" src="${c.img}" alt="${c.name}" loading="lazy" onerror="this.style.background='var(--bg2)';this.alt='${c.name}'">
+    <div class="car-info">
+      <div class="car-name">${c.name}</div>
+      <div class="car-meta">
+        <span class="tag brand">${c.brand}</span>
+        <span class="tag year">${c.yearStr}</span>
+      </div>
+      <div class="car-price">${c.price}</div>
+      <div class="car-type">${c.type}</div>
+      <div class="car-link-hint">🔗 懂车帝查看详情 →</div>
+    </div>
+  </a>`;
+}
+function render(mode) {
+  content.innerHTML = '';
+  if (mode === 'brand') {
+    const brands = {};
+    cars.forEach(c => { if(!brands[c.brand]) brands[c.brand]=[]; brands[c.brand].push(c); });
+    Object.keys(brands).sort((a,b)=>brands[b].length-brands[a].length).forEach(brand => {
+      const section = document.createElement('div');
+      section.className = 'group-section';
+      section.innerHTML = `<div class="group-title">${brand} <span class="count">${brands[brand].length}款</span></div>
+        <div class="car-grid">${brands[brand].map(carCard).join('')}</div>`;
+      content.appendChild(section);
+    });
+  } else {
+    const years = {};
+    cars.forEach(c => { if(!years[c.year]) years[c.year]=[]; years[c.year].push(c); });
+    Object.keys(years).sort((a,b)=>b-a).forEach(year => {
+      const section = document.createElement('div');
+      section.className = 'group-section';
+      section.innerHTML = `<div class="group-title">${year}年 <span class="count">${years[year].length}款</span></div>
+        <div class="car-grid">${years[year].map(carCard).join('')}</div>`;
+      content.appendChild(section);
+    });
+  }
+}
+render('brand');
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    render(tab.dataset.mode);
+  });
+});
+
+const themeBtn = document.getElementById('themeBtn');
+const themes = ['auto','dark','light'];
+const icons = {auto:'🔮 自动', dark:'🌙 深色', light:'☀️ 浅色'};
+let themeIdx = parseInt(localStorage.getItem('carThemeIdx')||'0');
+function applyTheme() {
+  const t = themes[themeIdx];
+  if (t === 'auto') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', t);
+  }
+  themeBtn.textContent = icons[t];
+  localStorage.setItem('carThemeIdx', themeIdx);
+}
+themeBtn.addEventListener('click', () => { themeIdx=(themeIdx+1)%3; applyTheme(); spawnParticles(themeBtn); });
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => { if(themes[themeIdx]==='auto') applyTheme(); });
+applyTheme();
+
+const canvas = document.getElementById('particleCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+const MAX_PARTICLES = 150;
+function resizeCanvas() { canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+function spawnParticles(el) {
+  const rect = el.getBoundingClientRect();
+  const cx = rect.left + rect.width/2;
+  const cy = rect.top + rect.height/2;
+  const colors = ['#cf0a2c','#d4a843','#ff6b6b','#ffd700','#e67e22','#4a90d9','#9b59b6','#ff8c42','#ff4757','#2ed573'];
+  const count = 18;
+  for (let i=0;i<count;i++) {
+    if (particles.length >= MAX_PARTICLES) particles.shift();
+    const angle = (Math.PI*2/count)*i + Math.random()*0.5;
+    const speed = 2+Math.random()*4;
+    particles.push({
+      x:cx, y:cy, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed-2,
+      size:4+Math.random()*8, color:colors[Math.floor(Math.random()*colors.length)],
+      alpha:1, rotation:Math.random()*Math.PI*2, rotSpeed:(Math.random()-0.5)*0.2,
+      gravity:0.08, friction:0.98
+    });
+  }
+}
+function animateParticles() {
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles = particles.filter(p => p.alpha > 0.02);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy; p.vy += p.gravity; p.vx *= p.friction; p.vy *= p.friction;
+    p.alpha -= 0.018; p.rotation += p.rotSpeed;
+    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rotation); ctx.globalAlpha = p.alpha;
+    ctx.shadowColor = p.color; ctx.shadowBlur = 8;
+    ctx.fillStyle = p.color; ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+    ctx.restore();
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+document.querySelectorAll('.btn, .tab').forEach(el => {
+  el.addEventListener('click', (e) => { if(!el.classList.contains('tab') || !el.classList.contains('active')) spawnParticles(el); });
+});
+</script>
+</body>
+</html>
