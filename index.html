@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>余承东名场面语录 · 100 条</title>
 <style>
-  /* ===== 主题变量 ===== */
   :root {
     --accent: #cf0a2c;
     --accent-glow: rgba(207, 10, 44, 0.35);
@@ -49,7 +48,6 @@
     --shadow: 0 6px 26px rgba(0,0,0,0.08);
     --rim: rgba(255,255,255,0.65);
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
@@ -66,8 +64,6 @@
     transition: background 0.4s ease, color 0.4s ease;
     overflow-x: hidden;
   }
-
-  /* ===== 统一毛玻璃 ===== */
   .glass {
     background: var(--glass);
     -webkit-backdrop-filter: blur(14px) saturate(180%);
@@ -91,8 +87,6 @@
       inset 0 1px 0 var(--rim);
   }
   .glass:active { transform: translateY(-1px) scale(1.005); }
-
-  /* ===== 顶部 Hero ===== */
   .hero { position: relative; text-align: center; padding: 90px 20px 50px; z-index: 1; }
   .hero h1 {
     font-size: clamp(2.2rem, 7vw, 4rem);
@@ -114,8 +108,6 @@
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
   .stat-label { font-size: 0.78rem; color: var(--text-dim); letter-spacing: 1px; margin-top: 2px; }
-
-  /* ===== 可信度说明 ===== */
   .legend {
     max-width: 820px; margin: 0 auto 50px; padding: 24px 32px;
     position: relative; z-index: 1;
@@ -127,8 +119,6 @@
   .tag-media { background: rgba(241,196,15,0.12); color: var(--yellow); border: 1px solid rgba(241,196,15,0.25); }
   .tag-rumor { background: rgba(230,126,34,0.12); color: var(--orange); border: 1px solid rgba(230,126,34,0.25); }
   .tag-meme { background: rgba(155,89,182,0.12); color: var(--purple); border: 1px solid rgba(155,89,182,0.25); }
-
-  /* ===== 主题切换按钮 ===== */
   .theme-toggle {
     position: fixed; top: 20px; right: 20px;
     width: 48px; height: 48px; border-radius: 50%;
@@ -142,8 +132,6 @@
     box-shadow: var(--shadow), inset 0 1px 0 var(--rim);
   }
   .theme-toggle:hover { transform: scale(1.12) rotate(15deg); border-color: var(--accent); box-shadow: 0 0 0 2px var(--border-hover), 0 8px 28px var(--accent-glow); }
-
-  /* ===== 方框菜单面板 ===== */
   .fab-panel {
     position: fixed; bottom: 104px; right: 28px; width: 340px;
     background: var(--glass-strong);
@@ -172,8 +160,6 @@
   .fab-grid-item:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-2px) scale(1.03); box-shadow: 0 4px 16px var(--accent-glow); }
   .fab-grid-item .emoji { font-size: 1rem; flex-shrink: 0; }
   .fab-grid-item.full { grid-column: 1 / -1; justify-content: center; }
-
-  /* ===== FAB 主按钮 ===== */
   .fab-main {
     position: fixed; bottom: 28px; right: 28px;
     width: 62px; height: 62px; border-radius: 50%;
@@ -188,8 +174,6 @@
   }
   .fab-main:hover { transform: scale(1.1); box-shadow: 0 0 0 3px rgba(207,10,44,0.3), 0 6px 32px var(--accent-glow); }
   .fab-main.open { transform: rotate(135deg); background: var(--accent); color: #fff; border-color: var(--accent); }
-
-  /* ===== 内容区 ===== */
   .container { max-width: 1100px; margin: 0 auto; padding: 20px 20px 100px; position: relative; z-index: 1; }
   .section { margin-bottom: 70px; scroll-margin-top: 30px; }
   .section-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 28px; display: flex; align-items: center; gap: 12px; }
@@ -234,23 +218,17 @@
   .meta-tag { font-size: 0.72rem; padding: 3px 10px; border-radius: 6px; background: var(--text-faint); color: var(--text-dim); }
   .quote-note { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; margin-top: 10px; padding-top: 12px; border-top: 1px dashed var(--border); }
   .quote-source { font-size: 0.78rem; color: var(--gold); margin-top: 6px; font-weight: 500; }
-
-  /* ===== 参考资料 ===== */
   .refs { padding: 32px; margin-top: 50px; }
   .refs h2 { font-size: 1.3rem; margin-bottom: 18px; color: var(--gold); }
   .refs ol { padding-left: 22px; color: var(--text-dim); font-size: 0.88rem; }
   .refs li { margin-bottom: 8px; }
   .refs li strong { color: var(--text); }
-
-  /* ===== 页脚 ===== */
   footer { text-align: center; padding: 50px 20px 100px; color: var(--text-dim); font-size: 0.85rem; position: relative; z-index: 1; }
   footer .yaoyao { color: var(--accent); font-weight: 700; cursor: pointer; transition: text-shadow 0.3s; }
   footer .yaoyao:hover { text-shadow: 0 0 20px var(--accent-glow); }
-
-  /* ===== 粒子 Canvas ===== */
+  footer .car-link { color: var(--gold); font-weight: 600; cursor: pointer; text-decoration: none; }
+  footer .car-link:hover { text-shadow: 0 0 16px rgba(212,168,67,0.5); }
   #monetCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
-
-  /* ===== 语录飘字 ===== */
   @keyframes float-up {
     0% { opacity: 1; transform: translateY(0) scale(0.75); }
     15% { opacity: 1; transform: translateY(-10px) scale(1.12); }
@@ -266,8 +244,6 @@
     text-shadow: 0 0 16px currentColor;
     letter-spacing: 1px;
   }
-
-  /* ===== 回到顶部 ===== */
   .back-top {
     position: fixed; bottom: 28px; left: 28px;
     width: 48px; height: 48px; border-radius: 50%;
@@ -283,7 +259,6 @@
   }
   .back-top.show { opacity: 1; pointer-events: auto; }
   .back-top:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px) scale(1.08); box-shadow: 0 0 0 2px var(--border-hover); }
-
   @media (max-width: 600px) {
     .quote-grid { grid-template-columns: 1fr; }
     .hero { padding: 70px 16px 40px; }
@@ -301,17 +276,9 @@
 </style>
 </head>
 <body data-theme="dark">
-
-<!-- 莫奈取色粒子 Canvas -->
 <canvas id="monetCanvas"></canvas>
-
-<!-- 主题切换 -->
 <button class="theme-toggle" id="themeToggle" title="切换主题">🌙</button>
-
-<!-- 回到顶部 -->
 <button class="back-top" id="backTop" title="回到顶部">↑</button>
-
-<!-- 方框菜单面板 -->
 <div class="fab-panel" id="fabPanel">
   <div class="fab-panel-header">分类导航</div>
   <div class="fab-panel-grid">
@@ -326,12 +293,10 @@
     <div class="fab-grid-item" data-target="sec8"><span class="emoji">🌐</span> 鸿蒙 / 生态</div>
     <div class="fab-grid-item" data-target="sec9"><span class="emoji">🧭</span> 管理 / 金句</div>
     <div class="fab-grid-item full" data-target="sec10"><span class="emoji">😂</span> 网络梗 / 二创</div>
+    <div class="fab-grid-item full" id="carNavBtn"><span class="emoji">🚙</span> 鸿蒙座驾车谱 →</div>
   </div>
 </div>
-
-<!-- FAB 主按钮 -->
 <button class="fab-main" id="fabMain">☰</button>
-
 <div class="hero" id="top">
   <h1>余承东<span class="highlight">名场面</span>语录</h1>
   <p class="subtitle">Yu Chengdong Quotes / Memes Collection — 非官方开源整理</p>
@@ -341,7 +306,6 @@
     <div class="stat-item glass"><div class="stat-num">4</div><div class="stat-label">可信度等级</div></div>
   </div>
 </div>
-
 <div class="legend glass">
   <h3>可信度说明</h3>
   <div class="legend-tags">
@@ -351,9 +315,7 @@
     <span class="legend-tag tag-meme">💡 梗/二创</span>
   </div>
 </div>
-
 <div class="container">
-
 <section class="section" id="sec1">
   <h2 class="section-title"><span class="emoji">📱</span>一、手机 / 华为篇</h2>
   <div class="quote-grid">
@@ -370,7 +332,6 @@
     <div class="quote-card glass"><div class="quote-num">11</div><button class="copy-btn" data-text="强得飞起。">📋</button><div class="quote-text">「强得飞起。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">华为终端新品相关活动</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-source">出处：华为 Mate X6 等相关报道</div><div class="quote-note">后来成为网友总结余承东发布会风格的高频词。</div></div>
   </div>
 </section>
-
 <section class="section" id="sec2">
   <h2 class="section-title"><span class="emoji">🚗</span>二、问界 / 汽车篇</h2>
   <div class="quote-grid">
@@ -390,7 +351,6 @@
     <div class="quote-card glass"><div class="quote-num">25</div><button class="copy-btn" data-text="其他车企的智驾一打瞌睡就撞上去。">📋</button><div class="quote-text">「其他车企的智驾一打瞌睡就撞上去。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">智驾相关公开演讲</span><span class="legend-tag tag-rumor">⚠️ 网络整理</span></div><div class="quote-note">建议以完整视频核对上下文。</div></div>
   </div>
 </section>
-
 <section class="section" id="sec3">
   <h2 class="section-title"><span class="emoji">🧠</span>三、智驾 / 鸿蒙智行篇</h2>
   <div class="quote-grid">
@@ -406,7 +366,6 @@
     <div class="quote-card glass"><div class="quote-num">35</div><button class="copy-btn" data-text="短短的一个月卖了8万台，我简直疯掉了。">📋</button><div class="quote-text">「短短的一个月卖了8万台，我简直疯掉了。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">鸿蒙智行公开演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">谈问界 M8 市场表现。</div></div>
   </div>
 </section>
-
 <section class="section" id="sec4">
   <h2 class="section-title"><span class="emoji">🏎️</span>四、豪华车 / 尊界篇</h2>
   <div class="quote-grid">
@@ -417,7 +376,6 @@
     <div class="quote-card glass"><div class="quote-num">40</div><button class="copy-btn" data-text="最高端的就是我们和江淮打造的尊界。">📋</button><div class="quote-text">「最高端的就是我们和江淮打造的尊界。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">尊界相关技术发布</span><span class="legend-tag tag-verified">✅ 原话报道</span></div></div>
   </div>
 </section>
-
 <section class="section" id="sec5">
   <h2 class="section-title"><span class="emoji">🗣️</span>五、余式发布会语言</h2>
   <div class="quote-grid">
@@ -428,7 +386,6 @@
     <div class="quote-card glass"><div class="quote-num">45</div><button class="copy-btn" data-text="方向的选择往往比勤奋更重要。">📋</button><div class="quote-text">「方向的选择往往比勤奋更重要。」</div><div class="quote-meta"><span class="meta-tag">2020年前后</span><span class="meta-tag">管理 / 战略相关公开表达</span><span class="legend-tag tag-rumor">🟡 网络传播 / 待核</span></div><div class="quote-note">常被归于余承东名言，但建议后续寻找原始演讲视频。</div></div>
   </div>
 </section>
-
 <section class="section" id="sec6">
   <h2 class="section-title"><span class="emoji">🔥</span>六、最容易产生争议的经典语录</h2>
   <div class="quote-grid">
@@ -439,7 +396,6 @@
     <div class="quote-card glass"><div class="quote-num">50</div><button class="copy-btn" data-text="我一直做客服，是个内心谦卑的人。">📋</button><div class="quote-text">「我一直做客服，是个内心谦卑的人。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">中国蓝皮书论坛</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">这句话与他一贯高调的发布会风格形成强烈反差，因此被网友广泛传播。</div></div>
   </div>
 </section>
-
 <section class="section" id="sec7">
   <h2 class="section-title"><span class="emoji">💾</span>七、芯片 / 技术突围篇</h2>
   <div class="quote-grid">
@@ -455,7 +411,6 @@
     <div class="quote-card glass"><div class="quote-num">60</div><button class="copy-btn" data-text="超光变 XMAGE 影像，手机摄影的天花板。">📋</button><div class="quote-text">「超光变 XMAGE 影像，手机摄影的天花板。」</div><div class="quote-meta"><span class="meta-tag">2022—2024</span><span class="meta-tag">Mate 系列 / P 系列发布会</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">华为与徕卡合作结束后推出自有影像品牌 XMAGE，余承东多次强调其超越徕卡时期的表现。</div></div>
   </div>
 </section>
-
 <section class="section" id="sec8">
   <h2 class="section-title"><span class="emoji">🌐</span>八、鸿蒙 / 全场景生态篇</h2>
   <div class="quote-grid">
@@ -471,7 +426,6 @@
     <div class="quote-card glass"><div class="quote-num">70</div><button class="copy-btn" data-text="鸿蒙的目标不是替代安卓，而是超越安卓。">📋</button><div class="quote-text">「鸿蒙的目标不是替代安卓，而是超越安卓。」</div><div class="quote-meta"><span class="meta-tag">2023—2024</span><span class="meta-tag">公开演讲 / 采访</span><span class="legend-tag tag-media">🟡 媒体转述</span></div><div class="quote-note">余承东多次强调鸿蒙的分布式架构和全场景能力是安卓不具备的。</div></div>
   </div>
 </section>
-
 <section class="section" id="sec9">
   <h2 class="section-title"><span class="emoji">🧭</span>九、管理 / 人生金句篇</h2>
   <div class="quote-grid">
@@ -487,7 +441,6 @@
     <div class="quote-card glass"><div class="quote-num">80</div><button class="copy-btn" data-text="这一生，我就干一件事，把华为终端做好。">📋</button><div class="quote-text">「这一生，我就干一件事，把华为终端做好。」</div><div class="quote-meta"><span class="meta-tag">2019</span><span class="meta-tag">公开采访</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-source">出处：《首席提问官吴婷"提问·余承东"》及其他采访</div><div class="quote-note">余承东多次表达对终端业务的专注和长期主义。</div></div>
   </div>
 </section>
-
 <section class="section" id="sec10">
   <h2 class="section-title"><span class="emoji">😂</span>十、网络梗 / 二创名场面</h2>
   <div class="section-desc">本板块收录已经脱离原始语境、成为独立网络迷因（meme）的表达。这些内容可能经过网友剪辑、拼接或夸张演绎，不应视为余承东逐字原话，但它们是"余式文化"不可分割的一部分。</div>
@@ -514,7 +467,6 @@
     <div class="quote-card glass"><div class="quote-num">100</div><button class="copy-btn" data-text="遥遥领先于同行（终极版）">📋</button><div class="quote-text">「遥遥领先于同行」（终极版）</div><div class="quote-meta"><span class="meta-tag">2020 至今</span><span class="meta-tag">全网</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">"遥遥领先"的终极形态。从一个产品宣传词，变成一个时代的符号。有人用它夸产品，有人用它反讽，有人用它表达对国产技术的期待。无论原意如何，"遥遥领先"已经超越了余承东和华为，成为中文互联网的文化印记。</div></div>
   </div>
 </section>
-
 <div class="refs glass">
   <h2>📚 参考资料</h2>
   <ol>
@@ -535,22 +487,18 @@
     <li><strong>中国蓝皮书论坛</strong> — 余承东演讲全文 2024-04</li>
   </ol>
 </div>
-
 </div>
-
 <footer>
   <p>非官方开源整理 · 内容按可信度分级 · 没有找到可靠原始出处 ≠ 一定没说过</p>
   <p style="margin-top:8px;">点击 <span class="yaoyao" id="yaoyaoBtn">遥遥领先</span> 有惊喜 · 点击任意卡片飘语录 · 📋 可复制</p>
   <p style="margin-top:6px;font-size:0.78rem;">右下角 ☰ 展开分类面板 · 右上角 🌙/☀️ 切换深浅色 · 点击按钮触发方形粒子</p>
+  <p style="margin-top:10px;"><a class="car-link" href="cars.html">🚙 鸿蒙智慧座驾车谱 →</a></p>
 </footer>
-
 <script>
-// ===== 主题切换 =====
 const themeToggle = document.getElementById('themeToggle');
 const themes = ['auto', 'dark', 'light'];
 const themeIcons = { auto: '🔮', dark: '🌙', light: '☀️' };
 let currentThemeIdx = 0;
-
 function applyTheme(theme) {
   if (theme === 'auto') {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -562,28 +510,22 @@ function applyTheme(theme) {
   themeToggle.title = theme === 'auto' ? '自动（跟随系统）' : theme === 'dark' ? '深色' : '浅色';
   try { localStorage.setItem('ycd-theme', theme); } catch(e) {}
 }
-
 let savedTheme = 'auto';
 try { savedTheme = localStorage.getItem('ycd-theme') || 'auto'; } catch(e) {}
 currentThemeIdx = themes.indexOf(savedTheme);
 if (currentThemeIdx < 0) currentThemeIdx = 0;
 applyTheme(themes[currentThemeIdx]);
-
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
   if (themes[currentThemeIdx] === 'auto') applyTheme('auto');
 });
-
 themeToggle.addEventListener('click', (e) => {
   currentThemeIdx = (currentThemeIdx + 1) % themes.length;
   applyTheme(themes[currentThemeIdx]);
   spawnMonet(e.clientX, e.clientY, e.currentTarget, 18);
 });
-
-// ===== 方框菜单面板 =====
 const fabMain = document.getElementById('fabMain');
 const fabPanel = document.getElementById('fabPanel');
 let menuOpen = false;
-
 fabMain.addEventListener('click', (e) => {
   e.stopPropagation();
   menuOpen = !menuOpen;
@@ -591,22 +533,18 @@ fabMain.addEventListener('click', (e) => {
   fabPanel.classList.toggle('open', menuOpen);
   spawnMonet(e.clientX, e.clientY, e.currentTarget, 16);
 });
-
 fabPanel.querySelectorAll('.fab-grid-item').forEach(item => {
   item.addEventListener('click', (e) => {
     spawnMonet(e.clientX, e.clientY, e.currentTarget, 14);
+    if (item.id === 'carNavBtn') { window.location.href = 'cars.html'; return; }
     const target = item.dataset.target;
-    if (target === 'top') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      document.getElementById(target).scrollIntoView({ behavior: 'smooth' });
-    }
+    if (target === 'top') { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    else { document.getElementById(target).scrollIntoView({ behavior: 'smooth' }); }
     menuOpen = false;
     fabMain.classList.remove('open');
     fabPanel.classList.remove('open');
   });
 });
-
 document.addEventListener('click', (e) => {
   if (menuOpen && !e.target.closest('.fab-panel') && !e.target.closest('.fab-main')) {
     menuOpen = false;
@@ -614,8 +552,6 @@ document.addEventListener('click', (e) => {
     fabPanel.classList.remove('open');
   }
 });
-
-// ===== 回到顶部 =====
 const backTop = document.getElementById('backTop');
 let scrollTicking = false;
 window.addEventListener('scroll', () => {
@@ -631,8 +567,6 @@ backTop.addEventListener('click', (e) => {
   spawnMonet(e.clientX, e.clientY, e.currentTarget, 14);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
-
-// ===== 复制按钮 =====
 document.querySelectorAll('.copy-btn').forEach(btn => {
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -645,9 +579,7 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
     };
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
-    } else {
-      fallbackCopy(text, done);
-    }
+    } else { fallbackCopy(text, done); }
   });
 });
 function fallbackCopy(text, cb) {
@@ -655,8 +587,6 @@ function fallbackCopy(text, cb) {
   ta.value = text; document.body.appendChild(ta); ta.select();
   document.execCommand('copy'); document.body.removeChild(ta); cb();
 }
-
-// ===== 语录飘字（卡片/遥遥领先专用，不与粒子共存） =====
 const floatPhrases = [
   '遥遥领先！', '强得飞起！', '捅破天的技术！', '1000万以内最好！',
   '科技车皇！', '第一名！', '内心谦卑！', '这个这个！',
@@ -671,7 +601,6 @@ const floatPhrases = [
   '余式英语！', '遥遥领先于同行！'
 ];
 const floatColors = ['#cf0a2c', '#d4a843', '#ff6b6b', '#ffd700', '#e67e22', '#ff8c42', '#ff4757'];
-
 function spawnFloatText(x, y, count) {
   for (let i = 0; i < count; i++) {
     setTimeout(() => {
@@ -687,14 +616,11 @@ function spawnFloatText(x, y, count) {
     }, i * 65);
   }
 }
-
-// ===== 莫奈取色方形粒子（按钮/控件专用） =====
 const canvas = document.getElementById('monetCanvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
 let animId = null;
 const dpr = Math.min(window.devicePixelRatio || 1, 2);
-
 function resizeCanvas() {
   canvas.width = window.innerWidth * dpr;
   canvas.height = window.innerHeight * dpr;
@@ -704,7 +630,6 @@ function resizeCanvas() {
 }
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
-
 function rgbToHsl(r, g, b) {
   r /= 255; g /= 255; b /= 255;
   const max = Math.max(r, g, b), min = Math.min(r, g, b);
@@ -743,7 +668,6 @@ function hslToRgb(h, s, l) {
   }
   return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
-
 function monetPalette(el) {
   const styles = window.getComputedStyle(el);
   const baseColors = [];
@@ -759,7 +683,6 @@ function monetPalette(el) {
   extract(styles.borderColor);
   extract(styles.color);
   if (baseColors.length === 0) baseColors.push([207, 10, 44], [212, 168, 67]);
-
   const palette = [];
   baseColors.forEach(([r, g, b]) => {
     const [h, s, l] = rgbToHsl(r, g, b);
@@ -772,7 +695,6 @@ function monetPalette(el) {
   palette.push([255, 210, 90], [255, 175, 70], [255, 140, 100]);
   return palette;
 }
-
 class MonetParticle {
   constructor(x, y, palette) {
     this.x = x + (Math.random() - 0.5) * 12;
@@ -813,17 +735,14 @@ class MonetParticle {
     ctx.save();
     ctx.translate(this.x, this.y);
     ctx.rotate(this.rotation);
-    // 方形光晕
     ctx.globalAlpha = alpha * 0.3;
     ctx.fillStyle = `rgb(${this.r},${this.g},${this.b})`;
     ctx.fillRect(-s * 1.6, -s * 1.6, s * 3.2, s * 3.2);
-    // 实心方块
     ctx.globalAlpha = alpha;
     ctx.fillRect(-s / 2, -s / 2, s, s);
     ctx.restore();
   }
 }
-
 function spawnMonet(x, y, el, count) {
   const palette = monetPalette(el);
   for (let i = 0; i < count; i++) {
@@ -832,7 +751,6 @@ function spawnMonet(x, y, el, count) {
   if (particles.length > 150) particles = particles.slice(-150);
   if (!animId) animate();
 }
-
 function animate() {
   ctx.clearRect(0, 0, canvas.width / dpr, canvas.height / dpr);
   particles = particles.filter(p => p.life > 0);
@@ -847,7 +765,6 @@ function animate() {
     animId = null;
   }
 }
-
 document.addEventListener('visibilitychange', () => {
   if (document.hidden && animId) {
     cancelAnimationFrame(animId);
@@ -856,20 +773,16 @@ document.addEventListener('visibilitychange', () => {
     animate();
   }
 });
-
-// ===== 点击事件：卡片→飘字，按钮→方形粒子（不共存） =====
 document.getElementById('yaoyaoBtn').addEventListener('click', (e) => {
   e.stopPropagation();
   spawnFloatText(e.clientX, e.clientY, 6);
 });
-
 document.querySelectorAll('.quote-card').forEach(card => {
   card.addEventListener('click', (e) => {
     if (e.target.classList.contains('copy-btn')) return;
     spawnFloatText(e.clientX, e.clientY, 3);
   });
 });
-
 document.querySelectorAll('.stat-item').forEach(item => {
   item.addEventListener('click', (e) => spawnMonet(e.clientX, e.clientY, item, 12));
 });
