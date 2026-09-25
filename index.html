@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>余承东名场面语录 · 50 条</title>
+<title>余承东名场面语录 · 100 条</title>
 <style>
   :root {
     --bg: #0a0a0f;
@@ -28,7 +28,6 @@
     line-height: 1.7;
     min-height: 100vh;
   }
-  /* Hero */
   .hero {
     position: relative;
     text-align: center;
@@ -67,9 +66,7 @@
     flex-wrap: wrap;
     position: relative;
   }
-  .stat-item {
-    text-align: center;
-  }
+  .stat-item { text-align: center; }
   .stat-num {
     font-size: 2.5rem;
     font-weight: 900;
@@ -81,7 +78,6 @@
     text-transform: uppercase;
     letter-spacing: 1px;
   }
-  /* Legend */
   .legend {
     max-width: 900px;
     margin: 0 auto 40px;
@@ -97,11 +93,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
   }
-  .legend-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
+  .legend-tags { display: flex; flex-wrap: wrap; gap: 10px; }
   .legend-tag {
     display: inline-flex;
     align-items: center;
@@ -115,7 +107,6 @@
   .tag-media { background: rgba(241,196,15,0.15); color: var(--yellow); border: 1px solid rgba(241,196,15,0.3); }
   .tag-rumor { background: rgba(230,126,34,0.15); color: var(--orange); border: 1px solid rgba(230,126,34,0.3); }
   .tag-meme { background: rgba(155,89,182,0.15); color: var(--purple); border: 1px solid rgba(155,89,182,0.3); }
-  /* Nav */
   .nav {
     position: sticky;
     top: 0;
@@ -152,7 +143,6 @@
     border-color: var(--accent);
     color: #fff;
   }
-  /* Container */
   .container {
     max-width: 1100px;
     margin: 0 auto;
@@ -173,7 +163,15 @@
     gap: 10px;
   }
   .section-title .emoji { font-size: 1.3rem; }
-  /* Quote Card */
+  .section-desc {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    background: rgba(155,89,182,0.08);
+    border-left: 3px solid var(--purple);
+    border-radius: 0 8px 8px 0;
+  }
   .quote-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -208,18 +206,46 @@
   .quote-num {
     position: absolute;
     top: 12px;
-    right: 16px;
+    right: 44px;
     font-size: 2rem;
     font-weight: 900;
     color: rgba(255,255,255,0.05);
     line-height: 1;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: var(--text-dim);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+    z-index: 2;
+  }
+  .copy-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .copy-btn.copied {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
   }
   .quote-text {
     font-size: 1.1rem;
     font-weight: 700;
     line-height: 1.6;
     margin-bottom: 14px;
-    padding-right: 40px;
+    padding-right: 50px;
     color: var(--text);
   }
   .quote-meta {
@@ -248,7 +274,6 @@
     color: var(--gold);
     margin-top: 6px;
   }
-  /* References */
   .refs {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -266,11 +291,8 @@
     color: var(--text-dim);
     font-size: 0.88rem;
   }
-  .refs li {
-    margin-bottom: 8px;
-  }
+  .refs li { margin-bottom: 8px; }
   .refs li strong { color: var(--text); }
-  /* Footer */
   footer {
     text-align: center;
     padding: 40px 20px;
@@ -288,7 +310,6 @@
   footer .yaoyao:hover {
     text-shadow: 0 0 20px var(--accent-glow);
   }
-  /* Floating effect */
   @keyframes float-up {
     0% { opacity: 1; transform: translateY(0) scale(1); }
     100% { opacity: 0; transform: translateY(-80px) scale(1.5); }
@@ -302,6 +323,7 @@
     animation: float-up 1.2s ease-out forwards;
     z-index: 9999;
     text-shadow: 0 0 20px var(--accent-glow);
+    white-space: nowrap;
   }
   @media (max-width: 600px) {
     .quote-grid { grid-template-columns: 1fr; }
@@ -316,8 +338,8 @@
   <h1>余承东<span class="highlight">名场面</span>语录</h1>
   <p class="subtitle">Yu Chengdong Quotes / Memes Collection — 非官方开源整理</p>
   <div class="stats">
-    <div class="stat-item"><div class="stat-num">50</div><div class="stat-label">经典语录</div></div>
-    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">主题分类</div></div>
+    <div class="stat-item"><div class="stat-num">100</div><div class="stat-label">经典语录</div></div>
+    <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">主题分类</div></div>
     <div class="stat-item"><div class="stat-num">4</div><div class="stat-label">可信度等级</div></div>
   </div>
 </div>
@@ -341,561 +363,176 @@
     <button class="nav-btn" data-target="sec4">🏎️ 豪华/尊界</button>
     <button class="nav-btn" data-target="sec5">🗣️ 余式语言</button>
     <button class="nav-btn" data-target="sec6">🔥 争议经典</button>
+    <button class="nav-btn" data-target="sec7">💾 芯片/突围</button>
+    <button class="nav-btn" data-target="sec8">🌐 鸿蒙/生态</button>
+    <button class="nav-btn" data-target="sec9">🧭 管理/金句</button>
+    <button class="nav-btn" data-target="sec10">😂 网络梗</button>
   </div>
 </nav>
 
 <div class="container">
 
-<!-- 一、手机 / 华为篇 -->
 <section class="section" id="sec1">
   <h2 class="section-title"><span class="emoji">📱</span>一、手机 / 华为篇</h2>
   <div class="quote-grid">
-    <div class="quote-card">
-      <div class="quote-num">01</div>
-      <div class="quote-text">「遥遥领先」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2020</span>
-        <span class="meta-tag">华为 Mate 40 系列发布会</span>
-        <span class="legend-tag tag-verified">✅ 原话可查</span>
-      </div>
-      <div class="quote-note">余承东在介绍 Mate 40 系列多项技术时反复使用这一表达。有媒体统计整场出现约 14 次，后来成为其最具代表性的个人标签之一。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">02</div>
-      <div class="quote-text">「我们要做世界第一。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2012</span>
-        <span class="meta-tag">华为终端业务时期</span>
-        <span class="legend-tag tag-media">🟡 媒体报道</span>
-      </div>
-      <div class="quote-source">出处：界面新闻关于余承东的报道</div>
-      <div class="quote-note">余承东接手终端业务后提出打造世界级手机品牌的目标。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">03</div>
-      <div class="quote-text">「三年做到全球第二，我用四到五年做到全球第一。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2016</span>
-        <span class="meta-tag">华为 P9 发布会相关采访</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-source">出处：第一财经，2016-04-08</div>
-      <div class="quote-note">当时华为手机全球份额已经位居前三，余承东公开提出超越苹果、三星的目标。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">04</div>
-      <div class="quote-text">「肯定超过1000万台。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2016</span>
-        <span class="meta-tag">华为 P9 发布会</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-source">出处：第一财经</div>
-      <div class="quote-note">余承东谈到 P9 销量预期时的表述。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">05</div>
-      <div class="quote-text">「只有我们始终追求第一，即使短期做不到，但是迟早要做到。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2019</span>
-        <span class="meta-tag">公开采访</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-source">出处：《首席提问官吴婷"提问·余承东"》</div>
-      <div class="quote-note">解释"第一"目标背后的管理理念。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">06</div>
-      <div class="quote-text">「我并没有说'干掉'谁，只是说我们要'超越'。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2019</span>
-        <span class="meta-tag">公开采访</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-source">出处：《首席提问官吴婷"提问·余承东"》</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">07</div>
-      <div class="quote-text">「华为成为全球第一是市场的必然。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2018</span>
-        <span class="meta-tag">华为终端业务相关公开表态</span>
-        <span class="legend-tag tag-media">🟡 媒体报道</span>
-      </div>
-      <div class="quote-source">出处：证券日报相关报道</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">08</div>
-      <div class="quote-text">「我们的目标是成为全球智能终端行业的领导者和王者。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2018</span>
-        <span class="meta-tag">华为终端业务公开表态</span>
-        <span class="legend-tag tag-media">🟡 媒体报道</span>
-      </div>
-      <div class="quote-source">出处：证券日报相关报道</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">09</div>
-      <div class="quote-text">「遥遥领先。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023</span>
-        <span class="meta-tag">华为 Mate 60 / 问界新 M7 等时期</span>
-        <span class="legend-tag tag-verified">✅ 原话可查</span>
-      </div>
-      <div class="quote-source">出处：2023 年华为新品发布会</div>
-      <div class="quote-note">2023 年重新成为全网热词。媒体统计问界新 M7 发布会中出现多次。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">10</div>
-      <div class="quote-text">「捅破天的技术。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2022</span>
-        <span class="meta-tag">华为 Mate 50 系列发布会</span>
-        <span class="legend-tag tag-verified">✅ 原话可查</span>
-      </div>
-      <div class="quote-source">出处：华为 Mate 50 系列发布会</div>
-      <div class="quote-note">用于描述卫星通信能力。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">11</div>
-      <div class="quote-text">「强得飞起。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024</span>
-        <span class="meta-tag">华为终端新品相关活动</span>
-        <span class="legend-tag tag-media">🟡 媒体报道</span>
-      </div>
-      <div class="quote-source">出处：华为 Mate X6 等相关报道</div>
-      <div class="quote-note">后来成为网友总结余承东发布会风格的高频词。</div>
-    </div>
+    <div class="quote-card"><div class="quote-num">01</div><button class="copy-btn" data-text="遥遥领先">📋</button><div class="quote-text">「遥遥领先」</div><div class="quote-meta"><span class="meta-tag">2020</span><span class="meta-tag">华为 Mate 40 系列发布会</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-note">余承东在介绍 Mate 40 系列多项技术时反复使用这一表达。有媒体统计整场出现约 14 次，后来成为其最具代表性的个人标签之一。</div></div>
+    <div class="quote-card"><div class="quote-num">02</div><button class="copy-btn" data-text="我们要做世界第一。">📋</button><div class="quote-text">「我们要做世界第一。」</div><div class="quote-meta"><span class="meta-tag">2012</span><span class="meta-tag">华为终端业务时期</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-source">出处：界面新闻关于余承东的报道</div><div class="quote-note">余承东接手终端业务后提出打造世界级手机品牌的目标。</div></div>
+    <div class="quote-card"><div class="quote-num">03</div><button class="copy-btn" data-text="三年做到全球第二，我用四到五年做到全球第一。">📋</button><div class="quote-text">「三年做到全球第二，我用四到五年做到全球第一。」</div><div class="quote-meta"><span class="meta-tag">2016</span><span class="meta-tag">华为 P9 发布会相关采访</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-source">出处：第一财经，2016-04-08</div><div class="quote-note">当时华为手机全球份额已经位居前三，余承东公开提出超越苹果、三星的目标。</div></div>
+    <div class="quote-card"><div class="quote-num">04</div><button class="copy-btn" data-text="肯定超过1000万台。">📋</button><div class="quote-text">「肯定超过1000万台。」</div><div class="quote-meta"><span class="meta-tag">2016</span><span class="meta-tag">华为 P9 发布会</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-source">出处：第一财经</div><div class="quote-note">余承东谈到 P9 销量预期时的表述。</div></div>
+    <div class="quote-card"><div class="quote-num">05</div><button class="copy-btn" data-text="只有我们始终追求第一，即使短期做不到，但是迟早要做到。">📋</button><div class="quote-text">「只有我们始终追求第一，即使短期做不到，但是迟早要做到。」</div><div class="quote-meta"><span class="meta-tag">2019</span><span class="meta-tag">公开采访</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-source">出处：《首席提问官吴婷"提问·余承东"》</div><div class="quote-note">解释"第一"目标背后的管理理念。</div></div>
+    <div class="quote-card"><div class="quote-num">06</div><button class="copy-btn" data-text="我并没有说'干掉'谁，只是说我们要'超越'。">📋</button><div class="quote-text">「我并没有说'干掉'谁，只是说我们要'超越'。」</div><div class="quote-meta"><span class="meta-tag">2019</span><span class="meta-tag">公开采访</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-source">出处：《首席提问官吴婷"提问·余承东"》</div></div>
+    <div class="quote-card"><div class="quote-num">07</div><button class="copy-btn" data-text="华为成为全球第一是市场的必然。">📋</button><div class="quote-text">「华为成为全球第一是市场的必然。」</div><div class="quote-meta"><span class="meta-tag">2018</span><span class="meta-tag">华为终端业务相关公开表态</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-source">出处：证券日报相关报道</div></div>
+    <div class="quote-card"><div class="quote-num">08</div><button class="copy-btn" data-text="我们的目标是成为全球智能终端行业的领导者和王者。">📋</button><div class="quote-text">「我们的目标是成为全球智能终端行业的领导者和王者。」</div><div class="quote-meta"><span class="meta-tag">2018</span><span class="meta-tag">华为终端业务公开表态</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-source">出处：证券日报相关报道</div></div>
+    <div class="quote-card"><div class="quote-num">09</div><button class="copy-btn" data-text="遥遥领先。">📋</button><div class="quote-text">「遥遥领先。」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">华为 Mate 60 / 问界新 M7 等时期</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：2023 年华为新品发布会</div><div class="quote-note">2023 年重新成为全网热词。媒体统计问界新 M7 发布会中出现多次。</div></div>
+    <div class="quote-card"><div class="quote-num">10</div><button class="copy-btn" data-text="捅破天的技术。">📋</button><div class="quote-text">「捅破天的技术。」</div><div class="quote-meta"><span class="meta-tag">2022</span><span class="meta-tag">华为 Mate 50 系列发布会</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：华为 Mate 50 系列发布会</div><div class="quote-note">用于描述卫星通信能力。</div></div>
+    <div class="quote-card"><div class="quote-num">11</div><button class="copy-btn" data-text="强得飞起。">📋</button><div class="quote-text">「强得飞起。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">华为终端新品相关活动</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-source">出处：华为 Mate X6 等相关报道</div><div class="quote-note">后来成为网友总结余承东发布会风格的高频词。</div></div>
   </div>
 </section>
 
-<!-- 二、问界 / 汽车篇 -->
 <section class="section" id="sec2">
   <h2 class="section-title"><span class="emoji">🚗</span>二、问界 / 汽车篇</h2>
   <div class="quote-grid">
-    <div class="quote-card">
-      <div class="quote-num">12</div>
-      <div class="quote-text">「1000万以内最好的SUV来了。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023</span>
-        <span class="meta-tag">问界 M9 发布会</span>
-        <span class="legend-tag tag-verified">✅ 原话可查</span>
-      </div>
-      <div class="quote-source">出处：新京报 / 21世纪经济报道 / 问界 M9 发布会</div>
-      <div class="quote-note">最经典的汽车名场面之一。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">13</div>
-      <div class="quote-text">「1000万以内最好的SUV。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023</span>
-        <span class="meta-tag">问界 M9</span>
-        <span class="legend-tag tag-verified">✅ 原话可查</span>
-      </div>
-      <div class="quote-source">出处：2023-12-26 问界 M9 发布会</div>
-      <div class="quote-note">与上一条属于同一名场面不同报道版本。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">14</div>
-      <div class="quote-text">「陆地上最强悍的SUV。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023</span>
-        <span class="meta-tag">问界 M9</span>
-        <span class="legend-tag tag-verified">✅ 媒体报道</span>
-      </div>
-      <div class="quote-source">出处：21世纪经济报道</div>
-      <div class="quote-note">与"1000万以内最好的SUV"一起出现。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">15</div>
-      <div class="quote-text">「科技车皇。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023</span>
-        <span class="meta-tag">问界 M9</span>
-        <span class="legend-tag tag-verified">✅ 媒体报道</span>
-      </div>
-      <div class="quote-source">出处：21世纪经济报道</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">16</div>
-      <div class="quote-text">「问界M9不仅是1000万以内最好的SUV，还是你在马路上能见到的最强大的SUV。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023</span>
-        <span class="meta-tag">华为秋季全场景新品发布会</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-source">出处：中新经纬，2023-09-25</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">17</div>
-      <div class="quote-text">「这个就是业界里面我们常说的'遥遥领先'。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023</span>
-        <span class="meta-tag">华为秋季全场景新品发布会</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-source">出处：中新经纬</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">18</div>
-      <div class="quote-text">「我们的车有一个很大的缺点，就是价格太便宜了。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024</span>
-        <span class="meta-tag">汽车业务公开活动</span>
-        <span class="legend-tag tag-rumor">⚠️ 网络流传</span>
-      </div>
-      <div class="quote-note">网络传播极广，但建议不要在仓库中直接标记为"100%原话"。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">19</div>
-      <div class="quote-text">「比亚迪低端卷价格，我们高端卷价值。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">汽车相关演讲</span>
-        <span class="legend-tag tag-media">🟡 媒体/演讲文字稿</span>
-      </div>
-      <div class="quote-source">出处：余承东相关公开演讲整理</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">20</div>
-      <div class="quote-text">「我们的地盘素质用料都是一百万级别的。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024—2025</span>
-        <span class="meta-tag">鸿蒙智行汽车相关活动</span>
-        <span class="legend-tag tag-rumor">⚠️ 网络流传 / 待核</span>
-      </div>
-      <div class="quote-note">网上存在多个不同版本。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">21</div>
-      <div class="quote-text">「我们的机械素质，包括底盘，远远超越了迈巴赫、劳斯莱斯等500万甚至1000万级别的车型。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024—2025</span>
-        <span class="meta-tag">鸿蒙智行汽车相关活动</span>
-        <span class="legend-tag tag-media">🟡 媒体转述</span>
-      </div>
-      <div class="quote-note">网络传播版本较多，应以完整视频为最终依据。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">22</div>
-      <div class="quote-text">「安全就是最大的豪华。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023—2024</span>
-        <span class="meta-tag">问界 / 鸿蒙智行安全相关发布</span>
-        <span class="legend-tag tag-media">🟡 公开演讲高频表达</span>
-      </div>
-      <div class="quote-note">后成为鸿蒙智行宣传体系中的代表性表达。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">23</div>
-      <div class="quote-text">「就算油门当刹车，想撞都难。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023—2024</span>
-        <span class="meta-tag">智驾 / 主动安全相关活动</span>
-        <span class="legend-tag tag-rumor">⚠️ 网络流传</span>
-      </div>
-      <div class="quote-note">建议后续补充完整视频出处。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">24</div>
-      <div class="quote-text">「1400km全程无接管。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023—2024</span>
-        <span class="meta-tag">智驾相关活动</span>
-        <span class="legend-tag tag-rumor">⚠️ 网络流传</span>
-      </div>
-      <div class="quote-note">原始语境可能涉及具体测试条件，不应脱离测试条件理解。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">25</div>
-      <div class="quote-text">「其他车企的智驾一打瞌睡就撞上去。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024</span>
-        <span class="meta-tag">智驾相关公开演讲</span>
-        <span class="legend-tag tag-rumor">⚠️ 网络整理</span>
-      </div>
-      <div class="quote-note">建议以完整视频核对上下文。</div>
-    </div>
+    <div class="quote-card"><div class="quote-num">12</div><button class="copy-btn" data-text="1000万以内最好的SUV来了。">📋</button><div class="quote-text">「1000万以内最好的SUV来了。」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">问界 M9 发布会</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：新京报 / 21世纪经济报道 / 问界 M9 发布会</div><div class="quote-note">最经典的汽车名场面之一。</div></div>
+    <div class="quote-card"><div class="quote-num">13</div><button class="copy-btn" data-text="1000万以内最好的SUV。">📋</button><div class="quote-text">「1000万以内最好的SUV。」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">问界 M9</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：2023-12-26 问界 M9 发布会</div><div class="quote-note">与上一条属于同一名场面不同报道版本。</div></div>
+    <div class="quote-card"><div class="quote-num">14</div><button class="copy-btn" data-text="陆地上最强悍的SUV。">📋</button><div class="quote-text">「陆地上最强悍的SUV。」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">问界 M9</span><span class="legend-tag tag-verified">✅ 媒体报道</span></div><div class="quote-source">出处：21世纪经济报道</div><div class="quote-note">与"1000万以内最好的SUV"一起出现。</div></div>
+    <div class="quote-card"><div class="quote-num">15</div><button class="copy-btn" data-text="科技车皇。">📋</button><div class="quote-text">「科技车皇。」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">问界 M9</span><span class="legend-tag tag-verified">✅ 媒体报道</span></div><div class="quote-source">出处：21世纪经济报道</div></div>
+    <div class="quote-card"><div class="quote-num">16</div><button class="copy-btn" data-text="问界M9不仅是1000万以内最好的SUV，还是你在马路上能见到的最强大的SUV。">📋</button><div class="quote-text">「问界M9不仅是1000万以内最好的SUV，还是你在马路上能见到的最强大的SUV。」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">华为秋季全场景新品发布会</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-source">出处：中新经纬，2023-09-25</div></div>
+    <div class="quote-card"><div class="quote-num">17</div><button class="copy-btn" data-text="这个就是业界里面我们常说的'遥遥领先'。">📋</button><div class="quote-text">「这个就是业界里面我们常说的'遥遥领先'。」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">华为秋季全场景新品发布会</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-source">出处：中新经纬</div></div>
+    <div class="quote-card"><div class="quote-num">18</div><button class="copy-btn" data-text="我们的车有一个很大的缺点，就是价格太便宜了。">📋</button><div class="quote-text">「我们的车有一个很大的缺点，就是价格太便宜了。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">汽车业务公开活动</span><span class="legend-tag tag-rumor">⚠️ 网络流传</span></div><div class="quote-note">网络传播极广，但建议不要在仓库中直接标记为"100%原话"。</div></div>
+    <div class="quote-card"><div class="quote-num">19</div><button class="copy-btn" data-text="比亚迪低端卷价格，我们高端卷价值。">📋</button><div class="quote-text">「比亚迪低端卷价格，我们高端卷价值。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">汽车相关演讲</span><span class="legend-tag tag-media">🟡 媒体/演讲文字稿</span></div><div class="quote-source">出处：余承东相关公开演讲整理</div></div>
+    <div class="quote-card"><div class="quote-num">20</div><button class="copy-btn" data-text="我们的地盘素质用料都是一百万级别的。">📋</button><div class="quote-text">「我们的地盘素质用料都是一百万级别的。」</div><div class="quote-meta"><span class="meta-tag">2024—2025</span><span class="meta-tag">鸿蒙智行汽车相关活动</span><span class="legend-tag tag-rumor">⚠️ 网络流传 / 待核</span></div><div class="quote-note">网上存在多个不同版本。</div></div>
+    <div class="quote-card"><div class="quote-num">21</div><button class="copy-btn" data-text="我们的机械素质，包括底盘，远远超越了迈巴赫、劳斯莱斯等500万甚至1000万级别的车型。">📋</button><div class="quote-text">「我们的机械素质，包括底盘，远远超越了迈巴赫、劳斯莱斯等500万甚至1000万级别的车型。」</div><div class="quote-meta"><span class="meta-tag">2024—2025</span><span class="meta-tag">鸿蒙智行汽车相关活动</span><span class="legend-tag tag-media">🟡 媒体转述</span></div><div class="quote-note">网络传播版本较多，应以完整视频为最终依据。</div></div>
+    <div class="quote-card"><div class="quote-num">22</div><button class="copy-btn" data-text="安全就是最大的豪华。">📋</button><div class="quote-text">「安全就是最大的豪华。」</div><div class="quote-meta"><span class="meta-tag">2023—2024</span><span class="meta-tag">问界 / 鸿蒙智行安全相关发布</span><span class="legend-tag tag-media">🟡 公开演讲高频表达</span></div><div class="quote-note">后成为鸿蒙智行宣传体系中的代表性表达。</div></div>
+    <div class="quote-card"><div class="quote-num">23</div><button class="copy-btn" data-text="就算油门当刹车，想撞都难。">📋</button><div class="quote-text">「就算油门当刹车，想撞都难。」</div><div class="quote-meta"><span class="meta-tag">2023—2024</span><span class="meta-tag">智驾 / 主动安全相关活动</span><span class="legend-tag tag-rumor">⚠️ 网络流传</span></div><div class="quote-note">建议后续补充完整视频出处。</div></div>
+    <div class="quote-card"><div class="quote-num">24</div><button class="copy-btn" data-text="1400km全程无接管。">📋</button><div class="quote-text">「1400km全程无接管。」</div><div class="quote-meta"><span class="meta-tag">2023—2024</span><span class="meta-tag">智驾相关活动</span><span class="legend-tag tag-rumor">⚠️ 网络流传</span></div><div class="quote-note">原始语境可能涉及具体测试条件，不应脱离测试条件理解。</div></div>
+    <div class="quote-card"><div class="quote-num">25</div><button class="copy-btn" data-text="其他车企的智驾一打瞌睡就撞上去。">📋</button><div class="quote-text">「其他车企的智驾一打瞌睡就撞上去。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">智驾相关公开演讲</span><span class="legend-tag tag-rumor">⚠️ 网络整理</span></div><div class="quote-note">建议以完整视频核对上下文。</div></div>
   </div>
 </section>
 
-<!-- 三、智驾 / 鸿蒙智行篇 -->
 <section class="section" id="sec3">
   <h2 class="section-title"><span class="emoji">🧠</span>三、智驾 / 鸿蒙智行篇</h2>
   <div class="quote-grid">
-    <div class="quote-card">
-      <div class="quote-num">26</div>
-      <div class="quote-text">「鸿蒙的智能驾驶不是第一阵营，我说话不是很谦虚，而是第一名。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">公开演讲</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-source">出处：余承东公开演讲文字稿</div>
-      <div class="quote-note">这是目前非常典型的"余式表达"。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">27</div>
-      <div class="quote-text">「我们有信心能持续保持，还能够继续扩大第一名的领先优势。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">鸿蒙智行相关演讲</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">28</div>
-      <div class="quote-text">「我们做的产品比他还好，质量好、体验好、性能好，各方面都好。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">公开演讲</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">谈及新品牌营销与产品竞争。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">29</div>
-      <div class="quote-text">「你还卖不过他的零头，是吧？」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">公开演讲</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">用于讨论产品力与品牌/流量之间的关系。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">30</div>
-      <div class="quote-text">「这就是今天这个时代，没办法。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">公开演讲</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">与上一条属于同一段演讲。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">31</div>
-      <div class="quote-text">「很多大的车厂都看不上我们，看不起我们。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">鸿蒙智行相关演讲</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">回顾华为与车企合作早期的经历。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">32</div>
-      <div class="quote-text">「我也感谢这个张兴海董事长。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">鸿蒙智行相关演讲</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">谈及赛力斯早期与华为合作。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">33</div>
-      <div class="quote-text">「现在中国真正的高端车的王者，目前看还是问界。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">公开演讲</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">34</div>
-      <div class="quote-text">「50万元的第一名是M9。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">公开演讲</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">指当时中国 50 万元以上汽车市场相关表现。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">35</div>
-      <div class="quote-text">「短短的一个月卖了8万台，我简直疯掉了。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">鸿蒙智行公开演讲</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">谈问界 M8 市场表现。</div>
-    </div>
+    <div class="quote-card"><div class="quote-num">26</div><button class="copy-btn" data-text="鸿蒙的智能驾驶不是第一阵营，我说话不是很谦虚，而是第一名。">📋</button><div class="quote-text">「鸿蒙的智能驾驶不是第一阵营，我说话不是很谦虚，而是第一名。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">公开演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-source">出处：余承东公开演讲文字稿</div><div class="quote-note">这是目前非常典型的"余式表达"。</div></div>
+    <div class="quote-card"><div class="quote-num">27</div><button class="copy-btn" data-text="我们有信心能持续保持，还能够继续扩大第一名的领先优势。">📋</button><div class="quote-text">「我们有信心能持续保持，还能够继续扩大第一名的领先优势。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">鸿蒙智行相关演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div></div>
+    <div class="quote-card"><div class="quote-num">28</div><button class="copy-btn" data-text="我们做的产品比他还好，质量好、体验好、性能好，各方面都好。">📋</button><div class="quote-text">「我们做的产品比他还好，质量好、体验好、性能好，各方面都好。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">公开演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">谈及新品牌营销与产品竞争。</div></div>
+    <div class="quote-card"><div class="quote-num">29</div><button class="copy-btn" data-text="你还卖不过他的零头，是吧？">📋</button><div class="quote-text">「你还卖不过他的零头，是吧？」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">公开演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">用于讨论产品力与品牌/流量之间的关系。</div></div>
+    <div class="quote-card"><div class="quote-num">30</div><button class="copy-btn" data-text="这就是今天这个时代，没办法。">📋</button><div class="quote-text">「这就是今天这个时代，没办法。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">公开演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">与上一条属于同一段演讲。</div></div>
+    <div class="quote-card"><div class="quote-num">31</div><button class="copy-btn" data-text="很多大的车厂都看不上我们，看不起我们。">📋</button><div class="quote-text">「很多大的车厂都看不上我们，看不起我们。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">鸿蒙智行相关演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">回顾华为与车企合作早期的经历。</div></div>
+    <div class="quote-card"><div class="quote-num">32</div><button class="copy-btn" data-text="我也感谢这个张兴海董事长。">📋</button><div class="quote-text">「我也感谢这个张兴海董事长。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">鸿蒙智行相关演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">谈及赛力斯早期与华为合作。</div></div>
+    <div class="quote-card"><div class="quote-num">33</div><button class="copy-btn" data-text="现在中国真正的高端车的王者，目前看还是问界。">📋</button><div class="quote-text">「现在中国真正的高端车的王者，目前看还是问界。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">公开演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div></div>
+    <div class="quote-card"><div class="quote-num">34</div><button class="copy-btn" data-text="50万元的第一名是M9。">📋</button><div class="quote-text">「50万元的第一名是M9。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">公开演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">指当时中国 50 万元以上汽车市场相关表现。</div></div>
+    <div class="quote-card"><div class="quote-num">35</div><button class="copy-btn" data-text="短短的一个月卖了8万台，我简直疯掉了。">📋</button><div class="quote-text">「短短的一个月卖了8万台，我简直疯掉了。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">鸿蒙智行公开演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">谈问界 M8 市场表现。</div></div>
   </div>
 </section>
 
-<!-- 四、豪华车 / 尊界篇 -->
 <section class="section" id="sec4">
   <h2 class="section-title"><span class="emoji">🏎️</span>四、豪华车 / 尊界篇</h2>
   <div class="quote-grid">
-    <div class="quote-card">
-      <div class="quote-num">36</div>
-      <div class="quote-text">「我坐迈巴赫根本没法睡觉。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024—2025</span>
-        <span class="meta-tag">享界 S9</span>
-        <span class="legend-tag tag-media">🟡 媒体报道</span>
-      </div>
-      <div class="quote-source">出处：汽车之家等媒体</div>
-      <div class="quote-note">余承东将迈巴赫与享界 S9 的后排舒适体验进行比较。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">37</div>
-      <div class="quote-text">「在享界S9上睡觉特别享受。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024—2025</span>
-        <span class="meta-tag">享界 S9</span>
-        <span class="legend-tag tag-media">🟡 媒体报道</span>
-      </div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">38</div>
-      <div class="quote-text">「我们的机械素质……远远超越迈巴赫、劳斯莱斯。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024—2025</span>
-        <span class="meta-tag">鸿蒙智行汽车相关活动</span>
-        <span class="legend-tag tag-media">🟡 媒体转述 / 网络传播</span>
-      </div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">39</div>
-      <div class="quote-text">「这不仅在中国的豪华高端车领域，在世界领域也是一个……」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">尊界 S800</span>
-        <span class="legend-tag tag-media">🟡 媒体报道</span>
-      </div>
-      <div class="quote-note">尊界高端市场定位相关表达。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">40</div>
-      <div class="quote-text">「最高端的就是我们和江淮打造的尊界。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">尊界相关技术发布</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-    </div>
+    <div class="quote-card"><div class="quote-num">36</div><button class="copy-btn" data-text="我坐迈巴赫根本没法睡觉。">📋</button><div class="quote-text">「我坐迈巴赫根本没法睡觉。」</div><div class="quote-meta"><span class="meta-tag">2024—2025</span><span class="meta-tag">享界 S9</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-source">出处：汽车之家等媒体</div><div class="quote-note">余承东将迈巴赫与享界 S9 的后排舒适体验进行比较。</div></div>
+    <div class="quote-card"><div class="quote-num">37</div><button class="copy-btn" data-text="在享界S9上睡觉特别享受。">📋</button><div class="quote-text">「在享界S9上睡觉特别享受。」</div><div class="quote-meta"><span class="meta-tag">2024—2025</span><span class="meta-tag">享界 S9</span><span class="legend-tag tag-media">🟡 媒体报道</span></div></div>
+    <div class="quote-card"><div class="quote-num">38</div><button class="copy-btn" data-text="我们的机械素质……远远超越迈巴赫、劳斯莱斯。">📋</button><div class="quote-text">「我们的机械素质……远远超越迈巴赫、劳斯莱斯。」</div><div class="quote-meta"><span class="meta-tag">2024—2025</span><span class="meta-tag">鸿蒙智行汽车相关活动</span><span class="legend-tag tag-media">🟡 媒体转述 / 网络传播</span></div></div>
+    <div class="quote-card"><div class="quote-num">39</div><button class="copy-btn" data-text="这不仅在中国的豪华高端车领域，在世界领域也是一个……">📋</button><div class="quote-text">「这不仅在中国的豪华高端车领域，在世界领域也是一个……」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">尊界 S800</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">尊界高端市场定位相关表达。</div></div>
+    <div class="quote-card"><div class="quote-num">40</div><button class="copy-btn" data-text="最高端的就是我们和江淮打造的尊界。">📋</button><div class="quote-text">「最高端的就是我们和江淮打造的尊界。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">尊界相关技术发布</span><span class="legend-tag tag-verified">✅ 原话报道</span></div></div>
   </div>
 </section>
 
-<!-- 五、余式发布会语言 -->
 <section class="section" id="sec5">
   <h2 class="section-title"><span class="emoji">🗣️</span>五、余式发布会语言</h2>
   <div class="quote-grid">
-    <div class="quote-card">
-      <div class="quote-num">41</div>
-      <div class="quote-text">「强得飞起。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024</span>
-        <span class="meta-tag">华为终端新品相关活动</span>
-        <span class="legend-tag tag-media">🟡 媒体报道</span>
-      </div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">42</div>
-      <div class="quote-text">「遥遥领先！」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2023</span>
-        <span class="meta-tag">华为新品发布会</span>
-        <span class="legend-tag tag-verified">✅ 原话</span>
-      </div>
-      <div class="quote-note">已经从产品宣传词演变成中文互联网超级流行语。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">43</div>
-      <div class="quote-text">「只有领先比较多的时候才会说。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">公开回应"遥遥领先"</span>
-        <span class="legend-tag tag-media">🟡 媒体报道</span>
-      </div>
-      <div class="quote-note">余承东曾解释自己为什么使用"遥遥领先"。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">44</div>
-      <div class="quote-text">「做到'遥遥领先'非常不容易。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2025</span>
-        <span class="meta-tag">关于"遥遥领先"的公开回应</span>
-        <span class="legend-tag tag-media">🟡 媒体报道</span>
-      </div>
-      <div class="quote-note">强调研发创新与技术投入。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">45</div>
-      <div class="quote-text">「方向的选择往往比勤奋更重要。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2020年前后</span>
-        <span class="meta-tag">管理 / 战略相关公开表达</span>
-        <span class="legend-tag tag-rumor">🟡 网络传播 / 待核</span>
-      </div>
-      <div class="quote-note">常被归于余承东名言，但建议后续寻找原始演讲视频。</div>
-    </div>
+    <div class="quote-card"><div class="quote-num">41</div><button class="copy-btn" data-text="强得飞起。">📋</button><div class="quote-text">「强得飞起。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">华为终端新品相关活动</span><span class="legend-tag tag-media">🟡 媒体报道</span></div></div>
+    <div class="quote-card"><div class="quote-num">42</div><button class="copy-btn" data-text="遥遥领先！">📋</button><div class="quote-text">「遥遥领先！」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">华为新品发布会</span><span class="legend-tag tag-verified">✅ 原话</span></div><div class="quote-note">已经从产品宣传词演变成中文互联网超级流行语。</div></div>
+    <div class="quote-card"><div class="quote-num">43</div><button class="copy-btn" data-text="只有领先比较多的时候才会说。">📋</button><div class="quote-text">「只有领先比较多的时候才会说。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">公开回应"遥遥领先"</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">余承东曾解释自己为什么使用"遥遥领先"。</div></div>
+    <div class="quote-card"><div class="quote-num">44</div><button class="copy-btn" data-text="做到'遥遥领先'非常不容易。">📋</button><div class="quote-text">「做到'遥遥领先'非常不容易。」</div><div class="quote-meta"><span class="meta-tag">2025</span><span class="meta-tag">关于"遥遥领先"的公开回应</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">强调研发创新与技术投入。</div></div>
+    <div class="quote-card"><div class="quote-num">45</div><button class="copy-btn" data-text="方向的选择往往比勤奋更重要。">📋</button><div class="quote-text">「方向的选择往往比勤奋更重要。」</div><div class="quote-meta"><span class="meta-tag">2020年前后</span><span class="meta-tag">管理 / 战略相关公开表达</span><span class="legend-tag tag-rumor">🟡 网络传播 / 待核</span></div><div class="quote-note">常被归于余承东名言，但建议后续寻找原始演讲视频。</div></div>
   </div>
 </section>
 
-<!-- 六、最容易产生争议的经典语录 -->
 <section class="section" id="sec6">
   <h2 class="section-title"><span class="emoji">🔥</span>六、最容易产生争议的经典语录</h2>
   <div class="quote-grid">
-    <div class="quote-card">
-      <div class="quote-num">46</div>
-      <div class="quote-text">「为什么很多人还用手机支架，我也搞不明白。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024</span>
-        <span class="meta-tag">鸿蒙智行汽车相关活动</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-source">出处：2024-04 相关公开活动</div>
-      <div class="quote-note">随后解释为部分车辆导航能力不足。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">47</div>
-      <div class="quote-text">「后来我明白了，是因为车导航性能不行。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024</span>
-        <span class="meta-tag">车载手机支架话题</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">这一句话后来与雷军关于车载手机支架的讨论一起形成互联网名场面。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">48</div>
-      <div class="quote-text">「没有资源，仅能承担四家。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024</span>
-        <span class="meta-tag">中国蓝皮书论坛</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">谈及鸿蒙智行合作车企数量。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">49</div>
-      <div class="quote-text">「不是不想卖，而是成本能力不足。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024</span>
-        <span class="meta-tag">中国蓝皮书论坛</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">解释鸿蒙智行为何没有推出更低价位车型。</div>
-    </div>
-    <div class="quote-card">
-      <div class="quote-num">50</div>
-      <div class="quote-text">「我一直做客服，是个内心谦卑的人。」</div>
-      <div class="quote-meta">
-        <span class="meta-tag">2024</span>
-        <span class="meta-tag">中国蓝皮书论坛</span>
-        <span class="legend-tag tag-verified">✅ 原话报道</span>
-      </div>
-      <div class="quote-note">这句话与他一贯高调的发布会风格形成强烈反差，因此被网友广泛传播。</div>
-    </div>
+    <div class="quote-card"><div class="quote-num">46</div><button class="copy-btn" data-text="为什么很多人还用手机支架，我也搞不明白。">📋</button><div class="quote-text">「为什么很多人还用手机支架，我也搞不明白。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">鸿蒙智行汽车相关活动</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-source">出处：2024-04 相关公开活动</div><div class="quote-note">随后解释为部分车辆导航能力不足。</div></div>
+    <div class="quote-card"><div class="quote-num">47</div><button class="copy-btn" data-text="后来我明白了，是因为车导航性能不行。">📋</button><div class="quote-text">「后来我明白了，是因为车导航性能不行。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">车载手机支架话题</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">这一句话后来与雷军关于车载手机支架的讨论一起形成互联网名场面。</div></div>
+    <div class="quote-card"><div class="quote-num">48</div><button class="copy-btn" data-text="没有资源，仅能承担四家。">📋</button><div class="quote-text">「没有资源，仅能承担四家。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">中国蓝皮书论坛</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">谈及鸿蒙智行合作车企数量。</div></div>
+    <div class="quote-card"><div class="quote-num">49</div><button class="copy-btn" data-text="不是不想卖，而是成本能力不足。">📋</button><div class="quote-text">「不是不想卖，而是成本能力不足。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">中国蓝皮书论坛</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">解释鸿蒙智行为何没有推出更低价位车型。</div></div>
+    <div class="quote-card"><div class="quote-num">50</div><button class="copy-btn" data-text="我一直做客服，是个内心谦卑的人。">📋</button><div class="quote-text">「我一直做客服，是个内心谦卑的人。」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">中国蓝皮书论坛</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">这句话与他一贯高调的发布会风格形成强烈反差，因此被网友广泛传播。</div></div>
   </div>
 </section>
 
-<!-- 参考资料 -->
+<section class="section" id="sec7">
+  <h2 class="section-title"><span class="emoji">💾</span>七、芯片 / 技术突围篇</h2>
+  <div class="quote-grid">
+    <div class="quote-card"><div class="quote-num">51</div><button class="copy-btn" data-text="没有伤痕累累，哪来皮糙肉厚，英雄自古多磨难。">📋</button><div class="quote-text">「没有伤痕累累，哪来皮糙肉厚，英雄自古多磨难。」</div><div class="quote-meta"><span class="meta-tag">2019</span><span class="meta-tag">华为被列入实体清单后内部讲话</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：华为内部邮件 / 多家媒体报道</div><div class="quote-note">被视为华为应对制裁的标志性表态，后来广泛传播。</div></div>
+    <div class="quote-card"><div class="quote-num">52</div><button class="copy-btn" data-text="除了胜利，我们已经无路可走。">📋</button><div class="quote-text">「除了胜利，我们已经无路可走。」</div><div class="quote-meta"><span class="meta-tag">2019</span><span class="meta-tag">华为应对制裁时期</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：华为内部讲话 / 媒体广泛报道</div><div class="quote-note">与上一条同期，成为华为"备胎转正"时期的精神符号。</div></div>
+    <div class="quote-card"><div class="quote-num">53</div><button class="copy-btn" data-text="向上捅破天，向下扎到根。">📋</button><div class="quote-text">「向上捅破天，向下扎到根。」</div><div class="quote-meta"><span class="meta-tag">2022</span><span class="meta-tag">华为内部 / 公开演讲</span><span class="legend-tag tag-media">🟡 媒体转述</span></div><div class="quote-note">描述华为技术战略——既做前沿探索，也做基础研究。</div></div>
+    <div class="quote-card"><div class="quote-num">54</div><button class="copy-btn" data-text="我们的5G是假的吗？">📋</button><div class="quote-text">「我们的5G是假的吗？」</div><div class="quote-meta"><span class="meta-tag">2021</span><span class="meta-tag">华为 P50 系列发布会后相关采访</span><span class="legend-tag tag-rumor">⚠️ 网络流传 / 待核</span></div><div class="quote-note">P50 系列因制裁只能支持 4G，网传余承东以此回应质疑，但完整语境待核实。</div></div>
+    <div class="quote-card"><div class="quote-num">55</div><button class="copy-btn" data-text="备胎芯片一夜转正。">📋</button><div class="quote-text">「备胎芯片一夜转正。」</div><div class="quote-meta"><span class="meta-tag">2019</span><span class="meta-tag">华为被列入实体清单后</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-source">出处：华为海思总裁何庭波内部信，余承东在公开场合多次引用</div><div class="quote-note">严格来说原话出自何庭波，但余承东多次在采访中重申这一概念。</div></div>
+    <div class="quote-card"><div class="quote-num">56</div><button class="copy-btn" data-text="麒麟芯片是我们自研的，性能业界领先。">📋</button><div class="quote-text">「麒麟芯片是我们自研的，性能业界领先。」</div><div class="quote-meta"><span class="meta-tag">2023—2024</span><span class="meta-tag">Mate 60 系列 / Mate X6 相关活动</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">Mate 60 Pro 搭载麒麟 9000S 回归，被网友称为"遥遥领先于制裁"。</div></div>
+    <div class="quote-card"><div class="quote-num">57</div><button class="copy-btn" data-text="卡脖子的问题，我们一定要解决，也一定能解决。">📋</button><div class="quote-text">「卡脖子的问题，我们一定要解决，也一定能解决。」</div><div class="quote-meta"><span class="meta-tag">2020—2023</span><span class="meta-tag">多次公开演讲 / 采访</span><span class="legend-tag tag-media">🟡 媒体转述</span></div><div class="quote-note">余承东在多个场合表达对自研芯片和基础技术的决心。</div></div>
+    <div class="quote-card"><div class="quote-num">58</div><button class="copy-btn" data-text="昆仑玻璃，业界最坚固的玻璃，比竞品坚固十倍。">📋</button><div class="quote-text">「昆仑玻璃，业界最坚固的玻璃，比竞品坚固十倍。」</div><div class="quote-meta"><span class="meta-tag">2022</span><span class="meta-tag">华为 Mate 50 系列发布会</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：华为 Mate 50 系列发布会</div><div class="quote-note">昆仑玻璃成为华为高端机型的标志性卖点之一。</div></div>
+    <div class="quote-card"><div class="quote-num">59</div><button class="copy-btn" data-text="玄武架构，钢铁之躯，钢筋铁骨。">📋</button><div class="quote-text">「玄武架构，钢铁之躯，钢筋铁骨。」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">华为 Mate 60 系列发布会</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：华为 Mate 60 系列发布会</div><div class="quote-note">与昆仑玻璃搭配，构成华为"抗摔"宣传体系。</div></div>
+    <div class="quote-card"><div class="quote-num">60</div><button class="copy-btn" data-text="超光变 XMAGE 影像，手机摄影的天花板。">📋</button><div class="quote-text">「超光变 XMAGE 影像，手机摄影的天花板。」</div><div class="quote-meta"><span class="meta-tag">2022—2024</span><span class="meta-tag">Mate 系列 / P 系列发布会</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">华为与徕卡合作结束后推出自有影像品牌 XMAGE，余承东多次强调其超越徕卡时期的表现。</div></div>
+  </div>
+</section>
+
+<section class="section" id="sec8">
+  <h2 class="section-title"><span class="emoji">🌐</span>八、鸿蒙 / 全场景生态篇</h2>
+  <div class="quote-grid">
+    <div class="quote-card"><div class="quote-num">61</div><button class="copy-btn" data-text="鸿蒙不是安卓套壳，是面向未来的分布式操作系统。">📋</button><div class="quote-text">「鸿蒙不是安卓套壳，是面向未来的分布式操作系统。」</div><div class="quote-meta"><span class="meta-tag">2021</span><span class="meta-tag">鸿蒙操作系统发布会 / 后续采访</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-source">出处：华为鸿蒙发布会及多家媒体采访</div><div class="quote-note">这一表态在技术圈引发长期争议，"鸿蒙是不是安卓套壳"成为年度话题。</div></div>
+    <div class="quote-card"><div class="quote-num">62</div><button class="copy-btn" data-text="一生万物，万物归一。">📋</button><div class="quote-text">「一生万物，万物归一。」</div><div class="quote-meta"><span class="meta-tag">2021</span><span class="meta-tag">鸿蒙操作系统发布会</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：华为鸿蒙操作系统发布会</div><div class="quote-note">鸿蒙发布时的核心 Slogan，描述分布式架构"一个系统适配所有设备"的理念。</div></div>
+    <div class="quote-card"><div class="quote-num">63</div><button class="copy-btn" data-text="万物互联，鸿蒙开启。">📋</button><div class="quote-text">「万物互联，鸿蒙开启。」</div><div class="quote-meta"><span class="meta-tag">2021</span><span class="meta-tag">鸿蒙操作系统发布会</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：华为鸿蒙操作系统发布会</div></div>
+    <div class="quote-card"><div class="quote-num">64</div><button class="copy-btn" data-text="纯血鸿蒙，告别安卓，我们要做自己的生态。">📋</button><div class="quote-text">「纯血鸿蒙，告别安卓，我们要做自己的生态。」</div><div class="quote-meta"><span class="meta-tag">2024—2025</span><span class="meta-tag">鸿蒙 NEXT 相关发布 / 演讲</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">鸿蒙 NEXT 不再兼容安卓应用，被网友称为"纯血鸿蒙"，余承东多次强调生态独立的重要性。</div></div>
+    <div class="quote-card"><div class="quote-num">65</div><button class="copy-btn" data-text="华为不造车，我们帮车企造好车。">📋</button><div class="quote-text">「华为不造车，我们帮车企造好车。」</div><div class="quote-meta"><span class="meta-tag">2021</span><span class="meta-tag">华为智能汽车解决方案发布会</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：华为智能汽车解决方案 BU 发布会</div><div class="quote-note">后来华为与赛力斯、奇瑞、北汽、江淮合作推出"四界"，"不造车"的边界成为持续讨论话题。</div></div>
+    <div class="quote-card"><div class="quote-num">66</div><button class="copy-btn" data-text="鸿蒙智行，四界齐发，问界、智界、享界、尊界。">📋</button><div class="quote-text">「鸿蒙智行，四界齐发，问界、智界、享界、尊界。」</div><div class="quote-meta"><span class="meta-tag">2024—2025</span><span class="meta-tag">鸿蒙智行相关发布 / 演讲</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">华为汽车业务从"华为智选"升级为"鸿蒙智行"，形成四个合作品牌矩阵。</div></div>
+    <div class="quote-card"><div class="quote-num">67</div><button class="copy-btn" data-text="星闪技术（NearLink），比蓝牙更快、更低时延。">📋</button><div class="quote-text">「星闪技术（NearLink），比蓝牙更快、更低时延。」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">华为 Mate 60 系列 / 星闪技术发布</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-source">出处：华为星闪技术发布会</div><div class="quote-note">星闪是华为主导的短距离通信标准，被视为蓝牙/Wi-Fi 的替代方案。</div></div>
+    <div class="quote-card"><div class="quote-num">68</div><button class="copy-btn" data-text="卫星通话，向上捅破天，别人没有的我们有。">📋</button><div class="quote-text">「卫星通话，向上捅破天，别人没有的我们有。」</div><div class="quote-meta"><span class="meta-tag">2022—2023</span><span class="meta-tag">Mate 50 / Mate 60 系列发布会</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：华为 Mate 50 / Mate 60 系列发布会</div><div class="quote-note">Mate 50 支持北斗卫星消息，Mate 60 Pro 支持天通卫星通话，均为全球首发。</div></div>
+    <div class="quote-card"><div class="quote-num">69</div><button class="copy-btn" data-text="华为全屋智能，把家变成超级终端。">📋</button><div class="quote-text">「华为全屋智能，把家变成超级终端。」</div><div class="quote-meta"><span class="meta-tag">2021—2024</span><span class="meta-tag">华为全屋智能发布会</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">鸿蒙全场景战略的重要组成部分，涵盖智能家居、办公、出行等场景。</div></div>
+    <div class="quote-card"><div class="quote-num">70</div><button class="copy-btn" data-text="鸿蒙的目标不是替代安卓，而是超越安卓。">📋</button><div class="quote-text">「鸿蒙的目标不是替代安卓，而是超越安卓。」</div><div class="quote-meta"><span class="meta-tag">2023—2024</span><span class="meta-tag">公开演讲 / 采访</span><span class="legend-tag tag-media">🟡 媒体转述</span></div><div class="quote-note">余承东多次强调鸿蒙的分布式架构和全场景能力是安卓不具备的。</div></div>
+  </div>
+</section>
+
+<section class="section" id="sec9">
+  <h2 class="section-title"><span class="emoji">🧭</span>九、管理 / 人生金句篇</h2>
+  <div class="quote-grid">
+    <div class="quote-card"><div class="quote-num">71</div><button class="copy-btn" data-text="稳了。">📋</button><div class="quote-text">「稳了。」</div><div class="quote-meta"><span class="meta-tag">2018</span><span class="meta-tag">华为 P20 系列发布会后</span><span class="legend-tag tag-verified">✅ 原话可查</span></div><div class="quote-source">出处：余承东在 P20 发布会后接受采访时的表态</div><div class="quote-note">P20 系列首次在拍照上超越苹果三星，余承东一句"稳了"成为经典。后来每次华为发新品，网友都会刷"稳了"。</div></div>
+    <div class="quote-card"><div class="quote-num">72</div><button class="copy-btn" data-text="我们不做低端产品，华为品牌要做高端。">📋</button><div class="quote-text">「我们不做低端产品，华为品牌要做高端。」</div><div class="quote-meta"><span class="meta-tag">2012—2016</span><span class="meta-tag">华为终端业务转型期多次表态</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">余承东接手终端后砍掉大量低端机型，聚焦高端，这一策略当时引发内部争议。</div></div>
+    <div class="quote-card"><div class="quote-num">73</div><button class="copy-btn" data-text="iPhone 现在是我们的学生。">📋</button><div class="quote-text">「iPhone 现在是我们的学生。」</div><div class="quote-meta"><span class="meta-tag">2020</span><span class="meta-tag">华为 Mate 40 系列发布会后采访</span><span class="legend-tag tag-rumor">⚠️ 网络流传 / 待核</span></div><div class="quote-note">网传余承东在采访中表示苹果在影像、信号等方面开始跟随华为，但完整原话待核实。</div></div>
+    <div class="quote-card"><div class="quote-num">74</div><button class="copy-btn" data-text="流畅度超越 iOS，我们做到了。">📋</button><div class="quote-text">「流畅度超越 iOS，我们做到了。」</div><div class="quote-meta"><span class="meta-tag">2021</span><span class="meta-tag">鸿蒙操作系统发布会 / 后续采访</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">余承东宣称鸿蒙系统的流畅度已经超越 iOS，这一说法在数码圈引发广泛对比测试。</div></div>
+    <div class="quote-card"><div class="quote-num">75</div><button class="copy-btn" data-text="DXO Mark 第一，我们拿了很多次，已经习惯了。">📋</button><div class="quote-text">「DXO Mark 第一，我们拿了很多次，已经习惯了。」</div><div class="quote-meta"><span class="meta-tag">2018—2020</span><span class="meta-tag">P20 / P30 / Mate 系列发布会</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">华为手机多次登顶 DXO Mark 拍照排行榜，余承东在发布会上经常引用这一成绩。</div></div>
+    <div class="quote-card"><div class="quote-num">76</div><button class="copy-btn" data-text="保时捷设计，业界最高端的设计，没有之一。">📋</button><div class="quote-text">「保时捷设计，业界最高端的设计，没有之一。」</div><div class="quote-meta"><span class="meta-tag">2016—2020</span><span class="meta-tag">Mate 系列保时捷设计版发布会</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-note">华为与保时捷设计合作推出高端定制版手机，定价过万，成为国产高端机的代表。</div></div>
+    <div class="quote-card"><div class="quote-num">77</div><button class="copy-btn" data-text="折叠屏，华为是业界最好的，没有之一。">📋</button><div class="quote-text">「折叠屏，华为是业界最好的，没有之一。」</div><div class="quote-meta"><span class="meta-tag">2019—2024</span><span class="meta-tag">Mate X 系列发布会</span><span class="legend-tag tag-verified">✅ 原话报道</span></div><div class="quote-note">华为 Mate X 系列多次迭代，余承东每次都强调其在折叠屏领域的领先地位。</div></div>
+    <div class="quote-card"><div class="quote-num">78</div><button class="copy-btn" data-text="别人做的都是跟随，我们做的是引领。">📋</button><div class="quote-text">「别人做的都是跟随，我们做的是引领。」</div><div class="quote-meta"><span class="meta-tag">2020—2023</span><span class="meta-tag">多次发布会 / 采访</span><span class="legend-tag tag-media">🟡 媒体转述</span></div><div class="quote-note">余承东常用"引领"而非"跟随"来定义华为的产品策略。</div></div>
+    <div class="quote-card"><div class="quote-num">79</div><button class="copy-btn" data-text="华为的品牌溢价，是靠技术一点点堆出来的。">📋</button><div class="quote-text">「华为的品牌溢价，是靠技术一点点堆出来的。」</div><div class="quote-meta"><span class="meta-tag">2020—2024</span><span class="meta-tag">公开采访 / 演讲</span><span class="legend-tag tag-media">🟡 媒体转述</span></div><div class="quote-note">回应外界对华为"高价"的质疑，强调研发投入与品牌价值的关系。</div></div>
+    <div class="quote-card"><div class="quote-num">80</div><button class="copy-btn" data-text="这一生，我就干一件事，把华为终端做好。">📋</button><div class="quote-text">「这一生，我就干一件事，把华为终端做好。」</div><div class="quote-meta"><span class="meta-tag">2019</span><span class="meta-tag">公开采访</span><span class="legend-tag tag-media">🟡 媒体报道</span></div><div class="quote-source">出处：《首席提问官吴婷"提问·余承东"》及其他采访</div><div class="quote-note">余承东多次表达对终端业务的专注和长期主义。</div></div>
+  </div>
+</section>
+
+<section class="section" id="sec10">
+  <h2 class="section-title"><span class="emoji">😂</span>十、网络梗 / 二创名场面</h2>
+  <div class="section-desc">本板块收录已经脱离原始语境、成为独立网络迷因（meme）的表达。这些内容可能经过网友剪辑、拼接或夸张演绎，不应视为余承东逐字原话，但它们是"余式文化"不可分割的一部分。</div>
+  <div class="quote-grid">
+    <div class="quote-card"><div class="quote-num">81</div><button class="copy-btn" data-text="这个这个……">📋</button><div class="quote-text">「这个这个……」</div><div class="quote-meta"><span class="meta-tag">2023—2025</span><span class="meta-tag">多次发布会 / 演讲中的口头禅</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">余承东在思考或过渡时高频使用"这个这个"，被网友剪辑成鬼畜素材，成为其标志性口癖。</div></div>
+    <div class="quote-card"><div class="quote-num">82</div><button class="copy-btn" data-text="啊啊啊啊！">📋</button><div class="quote-text">「啊啊啊啊！」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">问界新 M7 发布会</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">发布会现场观众多次高喊"遥遥领先"，余承东被打断后发出的感叹声被网友做成表情包和音效。</div></div>
+    <div class="quote-card"><div class="quote-num">83</div><button class="copy-btn" data-text="余大嘴">📋</button><div class="quote-text">「余大嘴」</div><div class="quote-meta"><span class="meta-tag">2012 至今</span><span class="meta-tag">网友对余承东的昵称</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">因余承东经常发表"超越苹果""全球第一"等激进言论，网友赐名"余大嘴"。后来很多"大嘴预言"成真，这个称呼从贬义逐渐变成爱称。</div></div>
+    <div class="quote-card"><div class="quote-num">84</div><button class="copy-btn" data-text="华为圣经">📋</button><div class="quote-text">「华为圣经」</div><div class="quote-meta"><span class="meta-tag">2023 至今</span><span class="meta-tag">网友对余承东发布会语录的尊称</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">网友将余承东的经典言论整理成"华为圣经"，在数码圈广泛传播，每次发布会后都会更新"新约"。</div></div>
+    <div class="quote-card"><div class="quote-num">85</div><button class="copy-btn" data-text="遥遥领先表情包">📋</button><div class="quote-text">「遥遥领先表情包」</div><div class="quote-meta"><span class="meta-tag">2020 至今</span><span class="meta-tag">全网</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">"遥遥领先"四个字被做成各种表情包、鬼畜视频、T恤和手机壳，成为中文互联网最成功的企业宣传梗之一。</div></div>
+    <div class="quote-card"><div class="quote-num">86</div><button class="copy-btn" data-text="1000万以内最好的SUV（梗化使用）">📋</button><div class="quote-text">「1000万以内最好的SUV」（梗化使用）</div><div class="quote-meta"><span class="meta-tag">2023 至今</span><span class="meta-tag">全网玩梗</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">网友将这句话泛化到一切场景——"1000万以内最好的奶茶""1000万以内最好的共享单车"，成为夸东西的万能句式。</div></div>
+    <div class="quote-card"><div class="quote-num">87</div><button class="copy-btn" data-text="手机支架名场面">📋</button><div class="quote-text">「手机支架名场面」</div><div class="quote-meta"><span class="meta-tag">2024</span><span class="meta-tag">余承东 vs 雷军 跨时空对话</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">余承东说"不明白为什么有人用车载手机支架"，雷军在小米发布会上回应"手机支架是刚需"，网友将两人的话剪成"对线"视频，播放量破亿。</div></div>
+    <div class="quote-card"><div class="quote-num">88</div><button class="copy-btn" data-text="我坐迈巴赫根本没法睡觉（梗化使用）">📋</button><div class="quote-text">「我坐迈巴赫根本没法睡觉」（梗化使用）</div><div class="quote-meta"><span class="meta-tag">2024 至今</span><span class="meta-tag">全网玩梗</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">网友用这句话花式凡尔赛——"我坐经济舱根本没法睡觉""我骑共享单车根本没法睡觉"，成为炫穷/炫富的万能模板。</div></div>
+    <div class="quote-card"><div class="quote-num">89</div><button class="copy-btn" data-text="价格太便宜了">📋</button><div class="quote-text">「价格太便宜了」</div><div class="quote-meta"><span class="meta-tag">2024 至今</span><span class="meta-tag">全网玩梗</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">网传余承东说"我们的车最大缺点是价格太便宜"，网友将其改编为"我们的最大缺点就是太便宜了"，用于调侃一切高价产品。</div></div>
+    <div class="quote-card"><div class="quote-num">90</div><button class="copy-btn" data-text="内心谦卑的人">📋</button><div class="quote-text">「内心谦卑的人」</div><div class="quote-meta"><span class="meta-tag">2024 至今</span><span class="meta-tag">全网玩梗</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">余承东自称"内心谦卑"，与他发布会的高调风格形成强烈反差。网友制作"谦卑.jpg"表情包，成为反讽文学的经典素材。</div></div>
+    <div class="quote-card"><div class="quote-num">91</div><button class="copy-btn" data-text="强得飞起">📋</button><div class="quote-text">「强得飞起」</div><div class="quote-meta"><span class="meta-tag">2024 至今</span><span class="meta-tag">全网玩梗</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">"强得飞起"成为网友夸东西的新口头禅，从手机夸到饭菜夸到天气，适用范围无限扩大。</div></div>
+    <div class="quote-card"><div class="quote-num">92</div><button class="copy-btn" data-text="捅破天的技术">📋</button><div class="quote-text">「捅破天的技术」</div><div class="quote-meta"><span class="meta-tag">2022 至今</span><span class="meta-tag">全网玩梗</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">网友用"捅破天"形容一切厉害的东西——"这碗泡面捅破天了""这个闹钟捅破天了"，成为夸张修辞的代名词。</div></div>
+    <div class="quote-card"><div class="quote-num">93</div><button class="copy-btn" data-text="华为不造车（反转梗）">📋</button><div class="quote-text">「华为不造车」（反转梗）</div><div class="quote-meta"><span class="meta-tag">2021 至今</span><span class="meta-tag">全网玩梗</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">余承东说"华为不造车"，但问界、智界、享界、尊界四界齐发，网友调侃"华为不造车，造的是车界的华为"。每次华为发新车，评论区必刷"不造车"。</div></div>
+    <div class="quote-card"><div class="quote-num">94</div><button class="copy-btn" data-text="鸿蒙不是安卓（争议梗）">📋</button><div class="quote-text">「鸿蒙不是安卓」（争议梗）</div><div class="quote-meta"><span class="meta-tag">2021 至今</span><span class="meta-tag">数码圈长期争论</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">"鸿蒙是不是安卓套壳"成为数码圈月经贴。网友制作"鸿蒙=安卓+PPT"等梗图，也有花粉制作"鸿蒙分布式架构图"反击，双方论战持续多年。</div></div>
+    <div class="quote-card"><div class="quote-num">95</div><button class="copy-btn" data-text="余式英语：Amazing! Incredible! Fantastic!">📋</button><div class="quote-text">「余式英语：Amazing! Incredible! Fantastic!」</div><div class="quote-meta"><span class="meta-tag">2016—2020</span><span class="meta-tag">华为海外发布会</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">余承东在海外发布会上用带有安徽口音的英语反复说"Amazing!""Incredible!"，被网友剪辑成鬼畜，称为"余式英语"。</div></div>
+    <div class="quote-card"><div class="quote-num">96</div><button class="copy-btn" data-text="业界首发，全球首创，没有之一">📋</button><div class="quote-text">「业界首发，全球首创，没有之一」</div><div class="quote-meta"><span class="meta-tag">2016 至今</span><span class="meta-tag">网友对余承东发布会话术的总结</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">网友总结余承东发布会三大高频词："业界首发""全球首创""没有之一"，并制作成"余式发布会话术生成器"。</div></div>
+    <div class="quote-card"><div class="quote-num">97</div><button class="copy-btn" data-text="史上最强，宇宙第一">📋</button><div class="quote-text">「史上最强，宇宙第一」</div><div class="quote-meta"><span class="meta-tag">2018 至今</span><span class="meta-tag">网友对华为宣传语的夸张化演绎</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">网友将华为的"业界领先"进一步夸张为"宇宙第一""史上最强""银河系唯一"，形成"华为体"文案风格。</div></div>
+    <div class="quote-card"><div class="quote-num">98</div><button class="copy-btn" data-text="吊打苹果，秒杀三星">📋</button><div class="quote-text">「吊打苹果，秒杀三星」</div><div class="quote-meta"><span class="meta-tag">2016 至今</span><span class="meta-tag">网友对华为对比宣传的概括</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">华为发布会经常与苹果、三星做对比，网友将其概括为"吊打苹果，秒杀三星，脚踩小米"，成为数码圈玩梗的固定句式。</div></div>
+    <div class="quote-card"><div class="quote-num">99</div><button class="copy-btn" data-text="先锋计划，突然上架">📋</button><div class="quote-text">「先锋计划，突然上架」</div><div class="quote-meta"><span class="meta-tag">2023</span><span class="meta-tag">华为 Mate 60 Pro 发售</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">Mate 60 Pro 没有开发布会直接上架销售，被称为"先锋计划"。网友调侃"这才是真正的遥遥领先——连发布会都不需要了"。当时正值美国商务部长雷蒙多访华，被网友称为"最好的礼物"。</div></div>
+    <div class="quote-card"><div class="quote-num">100</div><button class="copy-btn" data-text="遥遥领先于同行（终极版）">📋</button><div class="quote-text">「遥遥领先于同行」（终极版）</div><div class="quote-meta"><span class="meta-tag">2020 至今</span><span class="meta-tag">全网</span><span class="legend-tag tag-meme">💡 梗/二创</span></div><div class="quote-note">"遥遥领先"的终极形态。从一个产品宣传词，变成一个时代的符号。有人用它夸产品，有人用它反讽，有人用它表达对国产技术的期待。无论原意如何，"遥遥领先"已经超越了余承东和华为，成为中文互联网的文化印记。</div></div>
+  </div>
+</section>
+
 <div class="refs">
   <h2>📚 参考资料</h2>
   <ol>
@@ -908,7 +545,12 @@
     <li><strong>21世纪经济报道</strong> — 《不提"遥遥领先"，但余承东的野心藏不住》2024-06-17</li>
     <li><strong>观察者网</strong> — 《余承东说开车还用手机支架，是因为车导航性能不行》2024-04-12</li>
     <li><strong>新浪财经</strong> — 《余承东演讲原文：鸿蒙智驾不是第一阵营，而是第一名！》2025-05-31</li>
-    <li><strong>华为官方 / 华为消费者业务资料</strong> — 鸿蒙智行、Mate 系列、Mate 50 系列等官方发布资料</li>
+    <li><strong>华为官方资料</strong> — 鸿蒙智行、Mate 系列、Mate 50 系列等官方发布资料</li>
+    <li><strong>华为内部邮件</strong> — 《没有伤痕累累，哪来皮糙肉厚》2019-05</li>
+    <li><strong>华为海思内部信</strong> — 《备胎芯片一夜转正》2019-05</li>
+    <li><strong>华为鸿蒙操作系统发布会</strong> — 2021-06-02</li>
+    <li><strong>华为 Mate 60 系列发布会</strong> — 2023-09-25</li>
+    <li><strong>中国蓝皮书论坛</strong> — 余承东演讲全文 2024-04</li>
   </ol>
 </div>
 
@@ -916,7 +558,7 @@
 
 <footer>
   <p>非官方开源整理 · 内容按可信度分级 · 没有找到可靠原始出处 ≠ 一定没说过</p>
-  <p style="margin-top:8px;">点击 <span class="yaoyao" id="yaoyaoBtn">遥遥领先</span> 有惊喜</p>
+  <p style="margin-top:8px;">点击 <span class="yaoyao" id="yaoyaoBtn">遥遥领先</span> 有惊喜 · 点击任意卡片或右上角 📋 可复制语录</p>
 </footer>
 
 <script>
@@ -939,34 +581,87 @@
     });
   });
 
-  // 遥遥领先彩蛋
-  const yaoyaoBtn = document.getElementById('yaoyaoBtn');
-  const phrases = ['遥遥领先！', '强得飞起！', '捅破天的技术！', '1000万以内最好！', '科技车皇！', '第一名！', '内心谦卑！'];
-  yaoyaoBtn.addEventListener('click', (e) => {
-    for (let i = 0; i < 5; i++) {
+  // 复制按钮
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const text = btn.dataset.text;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = '📋';
+          btn.classList.remove('copied');
+        }, 1500);
+      }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        btn.textContent = '✓';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = '📋';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    });
+  });
+
+  // 粒子特效词汇库
+  const phrases = [
+    '遥遥领先！', '强得飞起！', '捅破天的技术！', '1000万以内最好！',
+    '科技车皇！', '第一名！', '内心谦卑！', '这个这个！',
+    '啊啊啊啊！', '余大嘴！', '稳了！', '业界首发！',
+    '全球首创！', '没有之一！', '史上最强！', '宇宙第一！',
+    '吊打苹果！', '秒杀三星！', '华为圣经！', '纯血鸿蒙！',
+    '不造车！', '价格太便宜了！', '我坐迈巴赫没法睡觉！',
+    '手机支架！', '备胎转正！', '昆仑玻璃！', '玄武架构！',
+    '一生万物！', '万物归一！', '四界齐发！', '先锋计划！',
+    '卡脖子！', '除了胜利无路可走！', '英雄自古多磨难！',
+    'Amazing!', 'Incredible!', 'Fantastic!', 'Beautiful!',
+    '余式英语！', '谦卑.jpg', '遥遥领先于同行！'
+  ];
+
+  function spawnFloat(x, y, count) {
+    for (let i = 0; i < count; i++) {
       setTimeout(() => {
         const el = document.createElement('div');
         el.className = 'float-text';
         el.textContent = phrases[Math.floor(Math.random() * phrases.length)];
-        el.style.left = (e.clientX + (Math.random() - 0.5) * 200) + 'px';
-        el.style.top = (e.clientY - 20) + 'px';
+        el.style.left = (x + (Math.random() - 0.5) * 300) + 'px';
+        el.style.top = (y - 20 + (Math.random() - 0.5) * 40) + 'px';
+        el.style.fontSize = (1 + Math.random() * 0.8) + 'rem';
+        el.style.color = Math.random() > 0.5 ? 'var(--accent)' : 'var(--gold)';
         document.body.appendChild(el);
         setTimeout(() => el.remove(), 1200);
-      }, i * 100);
+      }, i * 80);
     }
+  }
+
+  // 底部按钮触发
+  const yaoyaoBtn = document.getElementById('yaoyaoBtn');
+  yaoyaoBtn.addEventListener('click', (e) => {
+    spawnFloat(e.clientX, e.clientY, 8);
   });
 
-  // 点击任意语录卡片也触发
+  // 点击任意语录卡片触发
   document.querySelectorAll('.quote-card').forEach(card => {
     card.addEventListener('click', (e) => {
-      const el = document.createElement('div');
-      el.className = 'float-text';
-      el.textContent = '遥遥领先！';
-      el.style.left = e.clientX + 'px';
-      el.style.top = e.clientY + 'px';
-      document.body.appendChild(el);
-      setTimeout(() => el.remove(), 1200);
+      if (e.target.classList.contains('copy-btn')) return;
+      spawnFloat(e.clientX, e.clientY, 3);
     });
+  });
+
+  // 点击页面空白处也有小概率触发
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.quote-card') || e.target.closest('.nav') || e.target.closest('.copy-btn') || e.target.closest('.yaoyao')) return;
+    if (Math.random() > 0.7) {
+      spawnFloat(e.clientX, e.clientY, 1);
+    }
   });
 </script>
 </body>
