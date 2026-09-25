@@ -8,7 +8,7 @@
   /* ===== 主题变量 ===== */
   :root {
     --accent: #cf0a2c;
-    --accent-glow: rgba(207, 10, 44, 0.35);
+    --accent-glow: rgba(207, 10, 44, 0.4);
     --gold: #d4a843;
     --green: #2ecc71;
     --yellow: #f1c40f;
@@ -16,52 +16,55 @@
     --purple: #9b59b6;
     --radius: 22px;
     --radius-sm: 14px;
-    --blur: 20px;
-    --sheen: rgba(255,255,255,0.32);
+    --blur: 18px;
   }
   [data-theme="dark"] {
-    --bg: #07070c;
-    --bg-grad-1: rgba(207,10,44,0.16);
-    --bg-grad-2: rgba(120,60,220,0.10);
-    --bg-grad-3: rgba(212,168,67,0.07);
-    --bg-grad-4: rgba(30,90,200,0.08);
-    --glass: rgba(255,255,255,0.035);
-    --glass-hover: rgba(255,255,255,0.065);
-    --glass-strong: rgba(14,14,24,0.72);
-    --border: rgba(255,255,255,0.07);
-    --border-hover: rgba(207,10,44,0.4);
-    --text: #e8e8f0;
-    --text-dim: #8888a0;
+    --bg: #06060b;
+    --bg-grad-1: rgba(207,10,44,0.18);
+    --bg-grad-2: rgba(120,60,220,0.12);
+    --bg-grad-3: rgba(212,168,67,0.09);
+    --bg-grad-4: rgba(30,90,200,0.10);
+    --bg-grad-5: rgba(200,50,120,0.07);
+    --glass: rgba(255,255,255,0.025);
+    --glass-hover: rgba(255,255,255,0.05);
+    --glass-strong: rgba(12,12,22,0.65);
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(207,10,44,0.45);
+    --text: #ececf4;
+    --text-dim: #8a8aa4;
     --text-faint: rgba(255,255,255,0.05);
-    --shadow: 0 8px 32px rgba(0,0,0,0.45);
-    --fab-bg: rgba(207,10,44,0.12);
-    --fab-border: rgba(207,10,44,0.3);
-    --rim-top: rgba(255,255,255,0.42);
-    --rim-side: rgba(255,255,255,0.10);
-    --rim-bottom: rgba(255,255,255,0.06);
-    --sheen: rgba(255,255,255,0.30);
+    --shadow: 0 8px 36px rgba(0,0,0,0.5);
+    --fab-bg: rgba(207,10,44,0.10);
+    --fab-border: rgba(207,10,44,0.35);
+    --rim-top: rgba(255,255,255,0.45);
+    --rim-side: rgba(255,255,255,0.12);
+    --rim-bottom: rgba(255,255,255,0.07);
+    --sheen: rgba(255,255,255,0.28);
+    --panel-bg: rgba(15,15,28,0.72);
   }
   [data-theme="light"] {
-    --bg: #e4e9f0;
-    --bg-grad-1: rgba(207,10,44,0.07);
-    --bg-grad-2: rgba(100,80,220,0.05);
-    --bg-grad-3: rgba(212,168,67,0.05);
-    --bg-grad-4: rgba(30,90,200,0.045);
-    --glass: rgba(255,255,255,0.48);
-    --glass-hover: rgba(255,255,255,0.72);
-    --glass-strong: rgba(255,255,255,0.80);
-    --border: rgba(0,0,0,0.06);
-    --border-hover: rgba(207,10,44,0.22);
-    --text: #1a1a2e;
-    --text-dim: #666680;
-    --text-faint: rgba(0,0,0,0.045);
-    --shadow: 0 8px 32px rgba(0,0,0,0.08);
-    --fab-bg: rgba(207,10,44,0.08);
-    --fab-border: rgba(207,10,44,0.18);
-    --rim-top: rgba(255,255,255,0.80);
-    --rim-side: rgba(255,255,255,0.40);
+    --bg: #e2e7ef;
+    --bg-grad-1: rgba(207,10,44,0.08);
+    --bg-grad-2: rgba(100,80,220,0.06);
+    --bg-grad-3: rgba(212,168,67,0.06);
+    --bg-grad-4: rgba(30,90,200,0.05);
+    --bg-grad-5: rgba(200,50,120,0.04);
+    --glass: rgba(255,255,255,0.32);
+    --glass-hover: rgba(255,255,255,0.55);
+    --glass-strong: rgba(255,255,255,0.72);
+    --border: rgba(0,0,0,0.07);
+    --border-hover: rgba(207,10,44,0.25);
+    --text: #181828;
+    --text-dim: #606078;
+    --text-faint: rgba(0,0,0,0.04);
+    --shadow: 0 8px 32px rgba(0,0,0,0.09);
+    --fab-bg: rgba(207,10,44,0.07);
+    --fab-border: rgba(207,10,44,0.2);
+    --rim-top: rgba(255,255,255,0.85);
+    --rim-side: rgba(255,255,255,0.45);
     --rim-bottom: rgba(0,0,0,0.03);
-    --sheen: rgba(255,255,255,0.55);
+    --sheen: rgba(255,255,255,0.50);
+    --panel-bg: rgba(255,255,255,0.75);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -69,10 +72,11 @@
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     background:
-      radial-gradient(ellipse 700px 550px at 12% 8%, var(--bg-grad-1), transparent 60%),
-      radial-gradient(ellipse 600px 650px at 88% 15%, var(--bg-grad-3), transparent 55%),
-      radial-gradient(ellipse 800px 600px at 50% 85%, var(--bg-grad-2), transparent 60%),
-      radial-gradient(ellipse 500px 500px at 92% 92%, var(--bg-grad-4), transparent 55%),
+      radial-gradient(ellipse 650px 520px at 10% 6%, var(--bg-grad-1), transparent 60%),
+      radial-gradient(ellipse 550px 600px at 90% 12%, var(--bg-grad-3), transparent 55%),
+      radial-gradient(ellipse 750px 550px at 45% 82%, var(--bg-grad-2), transparent 60%),
+      radial-gradient(ellipse 450px 450px at 95% 90%, var(--bg-grad-4), transparent 55%),
+      radial-gradient(ellipse 400px 400px at 5% 90%, var(--bg-grad-5), transparent 55%),
       var(--bg);
     background-attachment: fixed;
     color: var(--text);
@@ -81,43 +85,58 @@
     transition: background 0.4s ease, color 0.4s ease;
     overflow-x: hidden;
   }
-  /* 动态漂浮光斑 */
   body::before, body::after {
     content: '';
     position: fixed;
     border-radius: 50%;
-    filter: blur(110px);
+    filter: blur(120px);
     pointer-events: none;
     z-index: 0;
     transition: background 0.4s ease;
   }
   body::before {
-    width: 560px; height: 560px;
+    width: 600px; height: 600px;
     background: radial-gradient(circle, var(--bg-grad-1), transparent 70%);
-    top: -180px; left: -120px;
-    animation: float1 22s ease-in-out infinite;
+    top: -200px; left: -140px;
+    animation: float1 24s ease-in-out infinite;
   }
   body::after {
-    width: 480px; height: 480px;
+    width: 520px; height: 520px;
     background: radial-gradient(circle, var(--bg-grad-2), transparent 70%);
-    bottom: -120px; right: -100px;
-    animation: float2 28s ease-in-out infinite;
+    bottom: -140px; right: -120px;
+    animation: float2 30s ease-in-out infinite;
   }
-  @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(100px,70px) scale(1.15)} }
-  @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-80px,-50px) scale(1.1)} }
+  @keyframes float1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(120px,80px) scale(1.2)} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-90px,-60px) scale(1.15)} }
 
-  /* ===== 液态玻璃通用：表面光泽 sheen ===== */
+  /* ===== 液态玻璃通用 ===== */
+  /* 边缘折射层（::before）：中心通透，边缘强折射，模拟真实玻璃 rim */
+  .stat-item::before, .legend::before, .quote-card::before, .refs::before,
+  .section-title .emoji::before, .section-desc::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    backdrop-filter: url(#edge-refract);
+    -webkit-backdrop-filter: url(#edge-refract);
+    -webkit-mask: radial-gradient(ellipse 82% 76% at 50% 50%, transparent 0%, transparent 48%, black 70%, black 100%);
+    mask: radial-gradient(ellipse 82% 76% at 50% 50%, transparent 0%, transparent 48%, black 70%, black 100%);
+    pointer-events: none;
+    z-index: -2;
+  }
+  /* 表面光泽 sheen（::after） */
   .stat-item::after, .legend::after, .theme-toggle::after,
-  .fab-main::after, .fab-item::after, .section-title .emoji::after,
-  .section-desc::after, .quote-card::after, .refs::after, .back-top::after {
+  .fab-main::after, .fab-grid-item::after, .section-title .emoji::after,
+  .section-desc::after, .quote-card::after, .refs::after, .back-top::after,
+  .fab-panel::after {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
     background: linear-gradient(135deg,
       var(--sheen) 0%,
-      rgba(255,255,255,0.08) 26%,
-      rgba(255,255,255,0.02) 48%,
+      rgba(255,255,255,0.10) 24%,
+      rgba(255,255,255,0.02) 46%,
       transparent 65%);
     mix-blend-mode: screen;
     pointer-events: none;
@@ -158,13 +177,13 @@
   }
   .stat-item {
     text-align: center;
-    padding: 18px 30px;
+    padding: 20px 32px;
     background: var(--glass);
-    backdrop-filter: blur(var(--blur)) saturate(170%) brightness(1.08);
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(170%) brightness(1.08);
+    backdrop-filter: blur(10px) saturate(200%) brightness(1.18);
+    -webkit-backdrop-filter: blur(10px) saturate(200%) brightness(1.18);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    min-width: 115px;
+    min-width: 120px;
     position: relative;
     isolation: isolate;
     box-shadow:
@@ -172,12 +191,13 @@
       inset 0 1px 1px var(--rim-top),
       inset 0 -1px 1px var(--rim-bottom),
       inset 1px 0 1px var(--rim-side),
-      inset -1px 0 1px var(--rim-side);
+      inset -1px 0 1px var(--rim-side),
+      inset 0 0 0 1px rgba(255,255,255,0.03);
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   .stat-item:hover { transform: translateY(-4px); border-color: var(--border-hover); }
   .stat-num {
-    font-size: 2.2rem;
+    font-size: 2.3rem;
     font-weight: 900;
     background: linear-gradient(135deg, var(--gold), #ffd700);
     -webkit-background-clip: text;
@@ -197,12 +217,12 @@
 
   /* ===== 可信度说明 ===== */
   .legend {
-    max-width: 800px;
+    max-width: 820px;
     margin: 0 auto 50px;
-    padding: 22px 30px;
+    padding: 24px 32px;
     background: var(--glass);
-    backdrop-filter: blur(var(--blur)) saturate(170%) brightness(1.08);
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(170%) brightness(1.08);
+    backdrop-filter: blur(10px) saturate(200%) brightness(1.18);
+    -webkit-backdrop-filter: blur(10px) saturate(200%) brightness(1.18);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     position: relative;
@@ -242,8 +262,8 @@
     width: 48px; height: 48px;
     border-radius: 50%;
     background: var(--glass-strong);
-    backdrop-filter: blur(var(--blur)) saturate(180%) brightness(1.1);
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(180%) brightness(1.1);
+    backdrop-filter: blur(12px) saturate(200%) brightness(1.2) url(#strong-refract);
+    -webkit-backdrop-filter: blur(12px) saturate(200%) brightness(1.2);
     border: 1px solid var(--border);
     color: var(--text);
     font-size: 1.2rem;
@@ -262,28 +282,99 @@
   }
   .theme-toggle:hover { border-color: var(--accent); transform: scale(1.1) rotate(15deg); }
 
-  /* ===== 浮动圆钮菜单 ===== */
-  .fab-container {
+  /* ===== 方框菜单面板 ===== */
+  .fab-panel {
+    position: fixed;
+    bottom: 104px;
+    right: 28px;
+    width: 340px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(14px) saturate(200%) brightness(1.2) url(#strong-refract);
+    -webkit-backdrop-filter: blur(14px) saturate(200%) brightness(1.2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 18px;
+    z-index: 149;
+    opacity: 0;
+    transform: translateY(16px) scale(0.94);
+    transform-origin: bottom right;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    isolation: isolate;
+    box-shadow:
+      0 12px 48px rgba(0,0,0,0.35),
+      inset 0 1px 1px var(--rim-top),
+      inset 0 -1px 1px var(--rim-bottom),
+      inset 1px 0 1px var(--rim-side),
+      inset -1px 0 1px var(--rim-side);
+  }
+  .fab-panel.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+  .fab-panel-header {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-left: 4px;
+    position: relative;
+    z-index: 1;
+  }
+  .fab-panel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+  }
+  .fab-grid-item {
+    padding: 12px 14px;
+    background: var(--glass);
+    backdrop-filter: blur(8px) saturate(180%);
+    -webkit-backdrop-filter: blur(8px) saturate(180%);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    color: var(--text);
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s;
+    display: flex; align-items: center; gap: 8px;
+    position: relative;
+    isolation: isolate;
+    box-shadow:
+      inset 0 1px 1px var(--rim-top),
+      inset 0 -1px 1px var(--rim-bottom);
+  }
+  .fab-grid-item:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px var(--accent-glow);
+  }
+  .fab-grid-item .emoji { font-size: 1rem; flex-shrink: 0; }
+  .fab-grid-item.full { grid-column: 1 / -1; justify-content: center; }
+
+  /* ===== FAB 主按钮 ===== */
+  .fab-main {
     position: fixed;
     bottom: 28px; right: 28px;
-    z-index: 150;
-    display: flex;
-    flex-direction: column-reverse;
-    align-items: flex-end;
-    gap: 0;
-  }
-  .fab-main {
     width: 62px; height: 62px;
     border-radius: 50%;
     background: var(--fab-bg);
-    backdrop-filter: blur(var(--blur)) saturate(180%) brightness(1.1);
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(180%) brightness(1.1);
+    backdrop-filter: blur(14px) saturate(200%) brightness(1.2) url(#chroma-refract);
+    -webkit-backdrop-filter: blur(14px) saturate(200%) brightness(1.2);
     border: 2px solid var(--fab-border);
     color: var(--accent);
     font-size: 1.5rem;
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    position: relative;
+    z-index: 151;
     isolation: isolate;
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     box-shadow:
@@ -292,75 +383,9 @@
       inset 0 -1px 1px var(--rim-bottom),
       inset 1px 0 1px var(--rim-side),
       inset -1px 0 1px var(--rim-side);
-    z-index: 151;
   }
   .fab-main:hover { transform: scale(1.1); }
   .fab-main.open { transform: rotate(135deg); background: var(--accent); color: #fff; border-color: var(--accent); }
-  .fab-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 12px;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.3s ease;
-  }
-  .fab-menu.open {
-    max-height: 70vh;
-    opacity: 1;
-    overflow-y: auto;
-    scrollbar-width: none;
-    padding-bottom: 4px;
-  }
-  .fab-menu::-webkit-scrollbar { display: none; }
-  .fab-item {
-    padding: 10px 22px;
-    background: var(--glass-strong);
-    backdrop-filter: blur(var(--blur)) saturate(180%) brightness(1.1);
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(180%) brightness(1.1);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    color: var(--text);
-    font-size: 0.88rem;
-    font-weight: 600;
-    cursor: pointer;
-    white-space: nowrap;
-    position: relative;
-    isolation: isolate;
-    transition: all 0.25s;
-    display: flex; align-items: center; gap: 8px;
-    box-shadow:
-      var(--shadow),
-      inset 0 1px 1px var(--rim-top),
-      inset 0 -1px 1px var(--rim-bottom),
-      inset 1px 0 1px var(--rim-side),
-      inset -1px 0 1px var(--rim-side);
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  .fab-menu.open .fab-item {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  .fab-menu.open .fab-item:nth-child(1) { transition: opacity 0.3s 0.05s, transform 0.3s 0.05s, background 0.25s, border-color 0.25s; }
-  .fab-menu.open .fab-item:nth-child(2) { transition: opacity 0.3s 0.08s, transform 0.3s 0.08s, background 0.25s, border-color 0.25s; }
-  .fab-menu.open .fab-item:nth-child(3) { transition: opacity 0.3s 0.11s, transform 0.3s 0.11s, background 0.25s, border-color 0.25s; }
-  .fab-menu.open .fab-item:nth-child(4) { transition: opacity 0.3s 0.14s, transform 0.3s 0.14s, background 0.25s, border-color 0.25s; }
-  .fab-menu.open .fab-item:nth-child(5) { transition: opacity 0.3s 0.17s, transform 0.3s 0.17s, background 0.25s, border-color 0.25s; }
-  .fab-menu.open .fab-item:nth-child(6) { transition: opacity 0.3s 0.20s, transform 0.3s 0.20s, background 0.25s, border-color 0.25s; }
-  .fab-menu.open .fab-item:nth-child(7) { transition: opacity 0.3s 0.23s, transform 0.3s 0.23s, background 0.25s, border-color 0.25s; }
-  .fab-menu.open .fab-item:nth-child(8) { transition: opacity 0.3s 0.26s, transform 0.3s 0.26s, background 0.25s, border-color 0.25s; }
-  .fab-menu.open .fab-item:nth-child(9) { transition: opacity 0.3s 0.29s, transform 0.3s 0.29s, background 0.25s, border-color 0.25s; }
-  .fab-menu.open .fab-item:nth-child(10) { transition: opacity 0.3s 0.32s, transform 0.3s 0.32s, background 0.25s, border-color 0.25s; }
-  .fab-menu.open .fab-item:nth-child(11) { transition: opacity 0.3s 0.35s, transform 0.3s 0.35s, background 0.25s, border-color 0.25s; }
-  .fab-item:hover {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #fff;
-    transform: translateX(-4px) !important;
-  }
-  .fab-item .emoji { font-size: 1rem; }
 
   /* ===== 内容区 ===== */
   .container {
@@ -387,8 +412,8 @@
     width: 46px; height: 46px;
     display: flex; align-items: center; justify-content: center;
     background: var(--glass);
-    backdrop-filter: blur(var(--blur)) saturate(170%);
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(170%);
+    backdrop-filter: blur(10px) saturate(190%);
+    -webkit-backdrop-filter: blur(10px) saturate(190%);
     border: 1px solid var(--border);
     border-radius: 15px;
     position: relative;
@@ -405,8 +430,8 @@
     margin-bottom: 24px;
     padding: 16px 22px;
     background: var(--glass);
-    backdrop-filter: blur(var(--blur)) saturate(170%);
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(170%);
+    backdrop-filter: blur(10px) saturate(190%);
+    -webkit-backdrop-filter: blur(10px) saturate(190%);
     border: 1px solid var(--border);
     border-left: 3px solid var(--purple);
     border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
@@ -423,8 +448,8 @@
   }
   .quote-card {
     background: var(--glass);
-    backdrop-filter: blur(16px) saturate(160%) brightness(1.06);
-    -webkit-backdrop-filter: blur(16px) saturate(160%) brightness(1.06);
+    backdrop-filter: blur(8px) saturate(200%) brightness(1.2);
+    -webkit-backdrop-filter: blur(8px) saturate(200%) brightness(1.2);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 22px;
@@ -432,7 +457,7 @@
     overflow: hidden;
     isolation: isolate;
     box-shadow:
-      0 4px 24px rgba(0,0,0,0.12),
+      0 4px 20px rgba(0,0,0,0.10),
       inset 0 1px 1px var(--rim-top),
       inset 0 -1px 1px var(--rim-bottom),
       inset 1px 0 1px var(--rim-side),
@@ -466,7 +491,7 @@
     border-radius: 8px;
     border: 1px solid var(--border);
     background: var(--glass);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(6px);
     color: var(--text-dim);
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
@@ -516,8 +541,8 @@
   /* ===== 参考资料 ===== */
   .refs {
     background: var(--glass);
-    backdrop-filter: blur(var(--blur)) saturate(170%);
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(170%);
+    backdrop-filter: blur(10px) saturate(190%) brightness(1.15);
+    -webkit-backdrop-filter: blur(10px) saturate(190%) brightness(1.15);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 32px;
@@ -574,8 +599,8 @@
     width: 48px; height: 48px;
     border-radius: 50%;
     background: var(--glass-strong);
-    backdrop-filter: blur(var(--blur)) saturate(180%) brightness(1.1);
-    -webkit-backdrop-filter: blur(var(--blur)) saturate(180%) brightness(1.1);
+    backdrop-filter: blur(12px) saturate(200%) brightness(1.2) url(#strong-refract);
+    -webkit-backdrop-filter: blur(12px) saturate(200%) brightness(1.2);
     border: 1px solid var(--border);
     color: var(--text);
     font-size: 1.1rem;
@@ -597,81 +622,58 @@
   .back-top.show { opacity: 1; pointer-events: auto; }
   .back-top:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
 
-  /* ===== Chromium 真正光线折射 ===== */
-  @supports (backdrop-filter: url(#liquid-refract)) {
-    .quote-card {
-      backdrop-filter: blur(3px) saturate(160%) url(#liquid-refract);
-    }
-    .stat-item, .legend, .section-title .emoji, .section-desc, .refs {
-      backdrop-filter: blur(3px) saturate(175%) url(#liquid-refract);
-    }
-    .theme-toggle, .fab-item, .back-top {
-      backdrop-filter: blur(3px) saturate(185%) url(#liquid-strong);
-    }
-    .fab-main {
-      backdrop-filter: blur(3px) saturate(185%) url(#liquid-chroma);
-    }
-    .copy-btn {
-      backdrop-filter: blur(2px) url(#liquid-refract);
-    }
-  }
-
   @media (max-width: 600px) {
     .quote-grid { grid-template-columns: 1fr; }
     .hero { padding: 70px 16px 40px; }
     .stats { gap: 16px; }
     .stat-item { min-width: 90px; padding: 14px 20px; }
-    .fab-container { bottom: 20px; right: 20px; }
-    .fab-main { width: 56px; height: 56px; }
+    .fab-main { bottom: 20px; right: 20px; width: 56px; height: 56px; }
+    .fab-panel { bottom: 92px; right: 16px; width: calc(100vw - 32px); }
     .theme-toggle { top: 14px; right: 14px; width: 42px; height: 42px; }
     .back-top { bottom: 20px; left: 20px; width: 42px; height: 42px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     body::before, body::after { animation: none; }
-    .quote-card, .stat-item, .fab-main, .theme-toggle { transition: background 0.3s, border-color 0.3s; }
+    .quote-card, .stat-item, .fab-main, .theme-toggle, .fab-panel { transition: background 0.3s, border-color 0.3s, opacity 0.3s; }
   }
 </style>
 </head>
 <body data-theme="dark">
 
-<!-- 液态玻璃 SVG 滤镜定义 -->
+<!-- 液态玻璃 SVG 滤镜 -->
 <svg id="liquid-glass-svg" width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
-    <!-- 轻折射：语录卡片用 — 噪声→平滑→位移 -->
-    <filter id="liquid-refract" x="-5%" y="-5%" width="110%" height="110%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.009 0.009" numOctaves="2" seed="7" result="noise">
-        <animate attributeName="baseFrequency" values="0.009 0.009;0.011 0.007;0.008 0.012;0.009 0.009" dur="14s" repeatCount="indefinite"/>
-      </feTurbulence>
-      <feGaussianBlur in="noise" stdDeviation="2.5" result="blurred"/>
-      <feDisplacementMap in="SourceGraphic" in2="blurred" scale="20" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-
-    <!-- 强折射：浮动按钮用 -->
-    <filter id="liquid-strong" x="-5%" y="-5%" width="110%" height="110%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.007 0.007" numOctaves="3" seed="42" result="noise">
-        <animate attributeName="baseFrequency" values="0.007 0.007;0.009 0.005;0.006 0.010;0.007 0.007" dur="11s" repeatCount="indefinite"/>
-      </feTurbulence>
-      <feGaussianBlur in="noise" stdDeviation="3" result="blurred"/>
-      <feDisplacementMap in="SourceGraphic" in2="blurred" scale="42" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-
-    <!-- 色散折射：FAB主按钮用 — R/G/B三通道不同位移量合并，产生棱镜色散边缘 -->
-    <filter id="liquid-chroma" x="-8%" y="-8%" width="116%" height="116%">
-      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="13" result="noise">
+    <!-- 边缘折射：噪声→平滑→位移（scale=32，用于卡片边缘层） -->
+    <filter id="edge-refract" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="2" seed="7" result="noise">
         <animate attributeName="baseFrequency" values="0.008 0.008;0.010 0.006;0.007 0.011;0.008 0.008" dur="16s" repeatCount="indefinite"/>
       </feTurbulence>
+      <feGaussianBlur in="noise" stdDeviation="2.5" result="blurred"/>
+      <feDisplacementMap in="SourceGraphic" in2="blurred" scale="32" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- 强折射：浮动面板/按钮用（scale=48） -->
+    <filter id="strong-refract" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.006 0.006" numOctaves="3" seed="42" result="noise">
+        <animate attributeName="baseFrequency" values="0.006 0.006;0.008 0.004;0.005 0.009;0.006 0.006" dur="13s" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feGaussianBlur in="noise" stdDeviation="3" result="blurred"/>
+      <feDisplacementMap in="SourceGraphic" in2="blurred" scale="48" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+
+    <!-- 色散折射：FAB主按钮用 — R/G/B三通道沿径向不同位移，棱镜色散边缘 -->
+    <filter id="chroma-refract" x="-8%" y="-8%" width="116%" height="116%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.007 0.007" numOctaves="2" seed="13" result="noise">
+        <animate attributeName="baseFrequency" values="0.007 0.007;0.009 0.005;0.006 0.010;0.007 0.007" dur="18s" repeatCount="indefinite"/>
+      </feTurbulence>
       <feGaussianBlur in="noise" stdDeviation="2" result="blurred"/>
-      <!-- R 通道（位移最大） -->
-      <feDisplacementMap in="SourceGraphic" in2="blurred" scale="52" xChannelSelector="R" yChannelSelector="G" result="r-disp"/>
+      <feDisplacementMap in="SourceGraphic" in2="blurred" scale="56" xChannelSelector="R" yChannelSelector="G" result="r-disp"/>
       <feColorMatrix in="r-disp" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r-only"/>
-      <!-- G 通道 -->
-      <feDisplacementMap in="SourceGraphic" in2="blurred" scale="44" xChannelSelector="R" yChannelSelector="G" result="g-disp"/>
+      <feDisplacementMap in="SourceGraphic" in2="blurred" scale="46" xChannelSelector="R" yChannelSelector="G" result="g-disp"/>
       <feColorMatrix in="g-disp" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g-only"/>
-      <!-- B 通道（位移最小） -->
       <feDisplacementMap in="SourceGraphic" in2="blurred" scale="36" xChannelSelector="R" yChannelSelector="G" result="b-disp"/>
       <feColorMatrix in="b-disp" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b-only"/>
-      <!-- 三通道 screen 合并 -->
       <feBlend in="r-only" in2="g-only" mode="screen" result="rg"/>
       <feBlend in="rg" in2="b-only" mode="screen"/>
     </filter>
@@ -684,23 +686,26 @@
 <!-- 回到顶部 -->
 <button class="back-top" id="backTop" title="回到顶部">↑</button>
 
-<!-- 浮动圆钮菜单 -->
-<div class="fab-container">
-  <button class="fab-main" id="fabMain">☰</button>
-  <div class="fab-menu" id="fabMenu">
-    <div class="fab-item" data-target="top"><span class="emoji">🏠</span> 全部语录</div>
-    <div class="fab-item" data-target="sec1"><span class="emoji">📱</span> 手机 / 华为</div>
-    <div class="fab-item" data-target="sec2"><span class="emoji">🚗</span> 问界 / 汽车</div>
-    <div class="fab-item" data-target="sec3"><span class="emoji">🧠</span> 智驾 / 鸿蒙</div>
-    <div class="fab-item" data-target="sec4"><span class="emoji">🏎️</span> 豪华 / 尊界</div>
-    <div class="fab-item" data-target="sec5"><span class="emoji">🗣️</span> 余式语言</div>
-    <div class="fab-item" data-target="sec6"><span class="emoji">🔥</span> 争议经典</div>
-    <div class="fab-item" data-target="sec7"><span class="emoji">💾</span> 芯片 / 突围</div>
-    <div class="fab-item" data-target="sec8"><span class="emoji">🌐</span> 鸿蒙 / 生态</div>
-    <div class="fab-item" data-target="sec9"><span class="emoji">🧭</span> 管理 / 金句</div>
-    <div class="fab-item" data-target="sec10"><span class="emoji">😂</span> 网络梗 / 二创</div>
+<!-- 方框菜单面板 -->
+<div class="fab-panel" id="fabPanel">
+  <div class="fab-panel-header">分类导航</div>
+  <div class="fab-panel-grid">
+    <div class="fab-grid-item full" data-target="top"><span class="emoji">🏠</span> 全部语录</div>
+    <div class="fab-grid-item" data-target="sec1"><span class="emoji">📱</span> 手机 / 华为</div>
+    <div class="fab-grid-item" data-target="sec2"><span class="emoji">🚗</span> 问界 / 汽车</div>
+    <div class="fab-grid-item" data-target="sec3"><span class="emoji">🧠</span> 智驾 / 鸿蒙</div>
+    <div class="fab-grid-item" data-target="sec4"><span class="emoji">🏎️</span> 豪华 / 尊界</div>
+    <div class="fab-grid-item" data-target="sec5"><span class="emoji">🗣️</span> 余式语言</div>
+    <div class="fab-grid-item" data-target="sec6"><span class="emoji">🔥</span> 争议经典</div>
+    <div class="fab-grid-item" data-target="sec7"><span class="emoji">💾</span> 芯片 / 突围</div>
+    <div class="fab-grid-item" data-target="sec8"><span class="emoji">🌐</span> 鸿蒙 / 生态</div>
+    <div class="fab-grid-item" data-target="sec9"><span class="emoji">🧭</span> 管理 / 金句</div>
+    <div class="fab-grid-item full" data-target="sec10"><span class="emoji">😂</span> 网络梗 / 二创</div>
   </div>
 </div>
+
+<!-- FAB 主按钮 -->
+<button class="fab-main" id="fabMain">☰</button>
 
 <div class="hero" id="top">
   <h1>余承东<span class="highlight">名场面</span>语录</h1>
@@ -910,8 +915,8 @@
 
 <footer>
   <p>非官方开源整理 · 内容按可信度分级 · 没有找到可靠原始出处 ≠ 一定没说过</p>
-  <p style="margin-top:8px;">点击 <span class="yaoyao" id="yaoyaoBtn">遥遥领先</span> 有惊喜 · 点击任意卡片或右上角 📋 可复制语录</p>
-  <p style="margin-top:6px;font-size:0.78rem;">右下角 ☰ 展开分类菜单 · 右上角 🌙/☀️ 切换深浅色 · 液态玻璃折射需 Chrome/Edge 浏览器</p>
+  <p style="margin-top:8px;">点击 <span class="yaoyao" id="yaoyaoBtn">遥遥领先</span> 有惊喜 · 点击任意卡片或 📋 可复制语录</p>
+  <p style="margin-top:6px;font-size:0.78rem;">右下角 ☰ 展开分类面板 · 右上角 🌙/☀️ 切换深浅色 · 液态玻璃折射需 Chrome/Edge</p>
 </footer>
 
 <script>
@@ -948,19 +953,19 @@
     applyTheme(themes[currentThemeIdx]);
   });
 
-  // ===== 浮动圆钮菜单 =====
+  // ===== 方框菜单面板 =====
   const fabMain = document.getElementById('fabMain');
-  const fabMenu = document.getElementById('fabMenu');
+  const fabPanel = document.getElementById('fabPanel');
   let menuOpen = false;
 
   fabMain.addEventListener('click', (e) => {
     e.stopPropagation();
     menuOpen = !menuOpen;
     fabMain.classList.toggle('open', menuOpen);
-    fabMenu.classList.toggle('open', menuOpen);
+    fabPanel.classList.toggle('open', menuOpen);
   });
 
-  fabMenu.querySelectorAll('.fab-item').forEach(item => {
+  fabPanel.querySelectorAll('.fab-grid-item').forEach(item => {
     item.addEventListener('click', () => {
       const target = item.dataset.target;
       if (target === 'top') {
@@ -970,15 +975,15 @@
       }
       menuOpen = false;
       fabMain.classList.remove('open');
-      fabMenu.classList.remove('open');
+      fabPanel.classList.remove('open');
     });
   });
 
   document.addEventListener('click', (e) => {
-    if (menuOpen && !e.target.closest('.fab-container')) {
+    if (menuOpen && !e.target.closest('.fab-panel') && !e.target.closest('.fab-main')) {
       menuOpen = false;
       fabMain.classList.remove('open');
-      fabMenu.classList.remove('open');
+      fabPanel.classList.remove('open');
     }
   });
 
@@ -1057,7 +1062,7 @@
   });
 
   document.addEventListener('click', (e) => {
-    if (e.target.closest('.quote-card') || e.target.closest('.fab-container') ||
+    if (e.target.closest('.quote-card') || e.target.closest('.fab-panel') || e.target.closest('.fab-main') ||
         e.target.closest('.copy-btn') || e.target.closest('.yaoyao') ||
         e.target.closest('.theme-toggle') || e.target.closest('.back-top')) return;
     if (Math.random() > 0.7) spawnFloat(e.clientX, e.clientY, 1);
@@ -1069,7 +1074,6 @@
     if (svg && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       svg.pauseAnimations();
     }
-    // 页面隐藏时暂停，节省性能
     document.addEventListener('visibilitychange', () => {
       if (!svg) return;
       if (document.hidden) svg.pauseAnimations();
