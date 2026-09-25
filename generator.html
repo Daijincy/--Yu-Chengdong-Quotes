@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>余式语录生成器 · 余承东风格文案一键生成</title>
+<style>
+  :root {
+    --accent: #cf0a2c;
+    --accent-glow: rgba(207, 10, 44, 0.35);
+    --gold: #d4a843;
+    --green: #2ecc71;
+    --purple: #9b59b6;
+    --radius: 20px;
+  }
+  [data-theme="dark"] {
+    --bg: #0a0a12;
+    --bg-grad-1: rgba(207,10,44,0.14);
+    --bg-grad-2: rgba(100,70,210,0.10);
+    --bg-grad-3: rgba(212,168,67,0.07);
+    --glass: rgba(255,255,255,0.045);
+    --glass-hover: rgba(255,255,255,0.075);
+    --glass-strong: rgba(14,14,24,0.72);
+    --border: rgba(255,255,255,0.09);
+    --border-hover: rgba(207,10,44,0.55);
+    --text: #ececf4;
+    --text-dim: #8a8aa4;
+    --text-faint: rgba(255,255,255,0.06);
+    --shadow: 0 6px 28px rgba(0,0,0,0.4);
+    --rim: rgba(255,255,255,0.12);
+    --input-bg: rgba(255,255,255,0.06);
+  }
+  [data-theme="light"] {
+    --bg: #e8ecf2;
+    --bg-grad-1: rgba(207,10,44,0.07);
+    --bg-grad-2: rgba(90,80,200,0.05);
+    --bg-grad-3: rgba(212,168,67,0.05);
+    --glass: rgba(255,255,255,0.5);
+    --glass-hover: rgba(255,255,255,0.7);
+    --glass-strong: rgba(255,255,255,0.78);
+    --border: rgba(0,0,0,0.08);
+    --border-hover: rgba(207,10,44,0.35);
+    --text: #181828;
+    --text-dim: #606078;
+    --text-faint: rgba(0,0,0,0.05);
+    --shadow: 0 6px 26px rgba(0,0,0,0.08);
+    --rim: rgba(255,255,255,0.65);
+    --input-bg: rgba(255,255,255,0.6);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background:
+      radial-gradient(ellipse 600px 480px at 12% 8%, var(--bg-grad-1), transparent 60%),
+      radial-gradient(ellipse 520px 560px at 88% 15%, var(--bg-grad-3), transparent 55%),
+      radial-gradient(ellipse 680px 500px at 50% 85%, var(--bg-grad-2), transparent 60%),
+      var(--bg);
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+    transition: background 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+  }
+  .glass {
+    background: var(--glass);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow), inset 0 1px 0 var(--rim);
+    transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.28s, box-shadow 0.28s, background 0.28s;
+  }
+  .glass:hover {
+    transform: translateY(-3px) scale(1.01);
+    border-color: var(--border-hover);
+    box-shadow: 0 0 0 2px var(--border-hover), 0 14px 42px var(--accent-glow), inset 0 1px 0 var(--rim);
+  }
+  .hero { text-align: center; padding: 70px 20px 30px; }
+  .hero h1 { font-size: clamp(1.8rem, 6vw, 3.2rem); font-weight: 900; letter-spacing: 2px; margin-bottom: 10px; }
+  .hero h1 .highlight { background: linear-gradient(135deg, var(--accent), #ff6b6b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero .subtitle { font-size: 0.95rem; color: var(--text-dim); margin-bottom: 24px; }
+  .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--gold); text-decoration: none; font-size: 0.85rem; font-weight: 600; margin-bottom: 20px; transition: text-shadow 0.3s; }
+  .back-link:hover { text-shadow: 0 0 16px rgba(212,168,67,0.5); }
+  .theme-toggle {
+    position: fixed; top: 20px; right: 20px; width: 48px; height: 48px; border-radius: 50%;
+    background: var(--glass-strong); -webkit-backdrop-filter: blur(14px) saturate(180%); backdrop-filter: blur(14px) saturate(180%);
+    border: 1px solid var(--border); color: var(--text); font-size: 1.2rem; cursor: pointer; z-index: 200;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.28s, box-shadow 0.28s;
+    box-shadow: var(--shadow), inset 0 1px 0 var(--rim);
+  }
+  .theme-toggle:hover { transform: scale(1.12) rotate(15deg); border-color: var(--accent); box-shadow: 0 0 0 2px var(--border-hover), 0 8px 28px var(--accent-glow); }
+  .container { max-width: 800px; margin: 0 auto; padding: 10px 20px 80px; }
+  .panel { padding: 28px; margin-bottom: 24px; }
+  .panel-title { font-size: 1rem; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+  .input-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .input-group { flex: 1; min-width: 200px; }
+  .input-group label { display: block; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 6px; font-weight: 600; }
+  .input-group input, .input-group select {
+    width: 100%; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border);
+    background: var(--input-bg); color: var(--text); font-size: 0.9rem; outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  }
+  .input-group input:focus, .input-group select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .input-group select option { background: var(--bg); color: var(--text); }
+  .template-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .template-card {
+    padding: 14px 16px; border-radius: 14px; border: 1px solid var(--border);
+    background: var(--glass); cursor: pointer; font-size: 0.85rem; font-weight: 600;
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    color: var(--text); line-height: 1.5;
+  }
+  .template-card:hover { transform: translateY(-2px) scale(1.02); border-color: var(--accent); }
+  .template-card.active { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 4px 18px var(--accent-glow); }
+  .template-card .tpl-num { font-size: 0.7rem; opacity: 0.6; margin-bottom: 4px; }
+  .action-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+  .btn {
+    padding: 12px 28px; border-radius: 14px; border: 1px solid var(--border);
+    background: var(--glass); color: var(--text); font-size: 0.92rem; font-weight: 700;
+    cursor: pointer; transition: all 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn:hover { transform: translateY(-2px) scale(1.03); }
+  .btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn-primary:hover { box-shadow: 0 6px 24px var(--accent-glow); }
+  .btn-gold { background: var(--gold); border-color: var(--gold); color: #1a1a2e; }
+  .btn-gold:hover { box-shadow: 0 6px 24px rgba(212,168,67,0.4); }
+  .btn:active { transform: translateY(0) scale(0.98); }
+  .result-panel { padding: 32px; text-align: center; min-height: 160px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .result-text {
+    font-size: clamp(1.3rem, 4vw, 2rem); font-weight: 900; line-height: 1.6;
+    margin-bottom: 20px; color: var(--text);
+    background: linear-gradient(135deg, var(--accent), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .result-placeholder { font-size: 1.1rem; color: var(--text-dim); opacity: 0.6; }
+  .result-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .history-panel { padding: 24px; }
+  .history-list { display: flex; flex-direction: column; gap: 8px; }
+  .history-item {
+    padding: 12px 16px; border-radius: 12px; border: 1px solid var(--border);
+    background: var(--glass); font-size: 0.88rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    transition: all 0.2s;
+  }
+  .history-item:hover { border-color: var(--accent); transform: translateX(4px); }
+  .history-item .h-text { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .history-item .h-copy { font-size: 0.75rem; color: var(--text-dim); flex-shrink: 0; }
+  .empty-history { text-align: center; color: var(--text-dim); font-size: 0.85rem; padding: 20px; opacity: 0.6; }
+  #monetCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
+  @keyframes float-up {
+    0% { opacity: 1; transform: translateY(0) scale(0.75); }
+    15% { opacity: 1; transform: translateY(-10px) scale(1.12); }
+    100% { opacity: 0; transform: translateY(-120px) scale(1.35); }
+  }
+  .float-text {
+    position: fixed; font-weight: 900; pointer-events: none;
+    animation: float-up 1.25s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    z-index: 9998; white-space: nowrap; text-shadow: 0 0 16px currentColor; letter-spacing: 1px;
+  }
+  footer { text-align: center; padding: 30px 20px 60px; color: var(--text-dim); font-size: 0.82rem; }
+  footer a { color: var(--gold); text-decoration: none; font-weight: 600; }
+  @media (max-width: 600px) {
+    .hero { padding: 50px 16px 20px; }
+    .panel { padding: 20px; }
+    .template-grid { grid-template-columns: 1fr 1fr; }
+    .theme-toggle { top: 14px; right: 14px; width: 42px; height: 42px; }
+  }
+</style>
+</head>
+<body data-theme="dark">
+<canvas id="monetCanvas"></canvas>
+<button class="theme-toggle" id="themeToggle" title="切换主题">🌙</button>
+<div class="hero">
+  <a href="index.html" class="back-link">← 返回语录主页</a>
+  <h1>🤖 余式<span class="highlight">语录生成器</span></h1>
+  <p class="subtitle">输入关键词，一键生成余承东发布会风格金句 · 纯整活</p>
+</div>
+<div class="container">
+  <div class="panel glass">
+    <div class="panel-title">📝 输入关键词</div>
+    <div class="input-row">
+      <div class="input-group">
+        <label>关键词（如：折叠屏、智驾、昆仑玻璃）</label>
+        <input type="text" id="keywordInput" placeholder="输入一个牛逼的关键词…" autocomplete="off">
+      </div>
+    </div>
+  </div>
+  <div class="panel glass">
+    <div class="panel-title">📋 选择模板</div>
+    <div class="template-grid" id="templateGrid"></div>
+  </div>
+  <div class="action-row">
+    <button class="btn btn-primary" id="generateBtn">✨ 生成金句</button>
+    <button class="btn btn-gold" id="randomBtn">🎲 随机生成</button>
+    <button class="btn" id="clearBtn">🔄 清空</button>
+  </div>
+  <div class="panel glass result-panel" style="margin-top:24px;">
+    <div class="result-placeholder" id="resultPlaceholder">↑ 输入关键词，选个模板，点生成试试</div>
+    <div class="result-text" id="resultText" style="display:none;"></div>
+    <div class="result-actions" id="resultActions" style="display:none;">
+      <button class="btn btn-primary" id="copyResult">📋 复制</button>
+      <button class="btn" id="speakResult">🔊 朗读</button>
+      <button class="btn" id="againBtn">🔄 再来一条</button>
+    </div>
+  </div>
+  <div class="panel glass history-panel" style="margin-top:24px;">
+    <div class="panel-title">📜 生成历史 <span style="font-size:0.75rem;color:var(--text-dim);font-weight:400;">（点击可复制）</span></div>
+    <div class="history-list" id="historyList">
+      <div class="empty-history">还没有生成记录，快去生成第一条吧！</div>
+    </div>
+  </div>
+</div>
+<footer>
+  <p>纯整活工具 · 生成内容仅供娱乐 · <a href="index.html">返回语录主页</a> · <a href="soundboard.html">去音效板 →</a></p>
+</footer>
+<script>
+const TEMPLATES = [
+  { id:1, text:"{kw}，业界第一，没有之一。", cat:"经典" },
+  { id:2, text:"{kw}，遥遥领先于同行。", cat:"经典" },
+  { id:3, text:"我们的{kw}，比竞品强十倍。", cat:"对比" },
+  { id:4, text:"{kw}，捅破天的技术。", cat:"技术" },
+  { id:5, text:"1000万以内最好的{kw}。", cat:"汽车" },
+  { id:6, text:"{kw}，强得飞起。", cat:"经典" },
+  { id:7, text:"这个这个……{kw}，确实厉害。", cat:"口癖" },
+  { id:8, text:"{kw}，史上最强，宇宙第一。", cat:"夸张" },
+  { id:9, text:"我们的{kw}，吊打苹果，秒杀三星。", cat:"对比" },
+  { id:10, text:"{kw}，一生万物，万物归一。", cat:"鸿蒙" },
+  { id:11, text:"{kw}，安全就是最大的豪华。", cat:"汽车" },
+  { id:12, text:"别人做的{kw}都是跟随，我们做的是引领。", cat:"对比" },
+  { id:13, text:"{kw}，向上捅破天，向下扎到根。", cat:"技术" },
+  { id:14, text:"我们的{kw}有一个很大的缺点，就是价格太便宜了。", cat:"汽车" },
+  { id:15, text:"{kw}，除了胜利我们已经无路可走。", cat:"励志" },
+  { id:16, text:"Amazing! Incredible! {kw} is fantastic!", cat:"英语" },
+  { id:17, text:"{kw}，业界首发，全球首创，没有之一。", cat:"经典" },
+  { id:18, text:"我坐迈巴赫都没法享受{kw}带来的体验。", cat:"汽车" },
+  { id:19, text:"{kw}，没有伤痕累累哪来皮糙肉厚。", cat:"励志" },
+  { id:20, text:"纯血{kw}，告别安卓，我们要做自己的生态。", cat:"鸿蒙" },
+  { id:21, text:"{kw}，短短的一个月卖了8万台，我简直疯掉了。", cat:"汽车" },
+  { id:22, text:"{kw}，现在中国真正的高端王者。", cat:"汽车" },
+  { id:23, text:"{kw}，我一直做客服，是个内心谦卑的人。", cat:"口癖" },
+  { id:24, text:"{kw}，稳了。", cat:"经典" }
+];
+const FALLBACK_KW = ["折叠屏","智驾","昆仑玻璃","卫星通信","鸿蒙座舱","麒麟芯片","星闪技术","玄武架构","XMAGE影像","超级终端","问界M9","享界S9","尊界S800","纯血鸿蒙","先锋计划"];
+let activeTemplate = 1;
+let history = [];
+const grid = document.getElementById('templateGrid');
+function renderTemplates() {
+  grid.innerHTML = TEMPLATES.map(t => `
+    <div class="template-card${t.id === activeTemplate ? ' active' : ''}" data-id="${t.id}">
+      <div class="tpl-num">#${String(t.id).padStart(2,'0')} · ${t.cat}</div>
+      ${t.text.replace(/{kw}/g, '____')}
+    </div>
+  `).join('');
+  grid.querySelectorAll('.template-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      activeTemplate = parseInt(card.dataset.id);
+      renderTemplates();
+      spawnMonet(e.clientX, e.clientY, card, 10);
+    });
+  });
+}
+renderTemplates();
+function generate() {
+  let kw = document.getElementById('keywordInput').value.trim();
+  if (!kw) kw = FALLBACK_KW[Math.floor(Math.random() * FALLBACK_KW.length)];
+  const tpl = TEMPLATES.find(t => t.id === activeTemplate) || TEMPLATES[0];
+  const result = tpl.text.replace(/{kw}/g, kw);
+  showResult(result);
+  addHistory(result);
+}
+function showResult(text) {
+  document.getElementById('resultPlaceholder').style.display = 'none';
+  const el = document.getElementById('resultText');
+  el.textContent = '「' + text + '」';
+  el.style.display = 'block';
+  document.getElementById('resultActions').style.display = 'flex';
+  spawnFloatText(window.innerWidth / 2, window.innerHeight / 2, 3);
+}
+function addHistory(text) {
+  history.unshift(text);
+  if (history.length > 20) history.pop();
+  renderHistory();
+}
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  if (history.length === 0) {
+    list.innerHTML = '<div class="empty-history">还没有生成记录，快去生成第一条吧！</div>';
+    return;
+  }
+  list.innerHTML = history.map((h, i) => `
+    <div class="history-item" data-text="${h.replace(/"/g,'&quot;')}">
+      <span class="h-text">${h}</span>
+      <span class="h-copy">📋 复制</span>
+    </div>
+  `).join('');
+  list.querySelectorAll('.history-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      const text = item.dataset.text;
+      spawnMonet(e.clientX, e.clientY, item, 8);
+      if (navigator.clipboard) navigator.clipboard.writeText(text);
+      const copyEl = item.querySelector('.h-copy');
+      copyEl.textContent = '✓ 已复制';
+      setTimeout(() => copyEl.textContent = '📋 复制', 1500);
+    });
+  });
+}
+document.getElementById('generateBtn').addEventListener('click', (e) => {
+  spawnMonet(e.clientX, e.clientY, e.currentTarget, 16);
+  generate();
+});
+document.getElementById('randomBtn').addEventListener('click', (e) => {
+  spawnMonet(e.clientX, e.clientY, e.currentTarget, 20);
+  activeTemplate = TEMPLATES[Math.floor(Math.random() * TEMPLATES.length)].id;
+  renderTemplates();
+  document.getElementById('keywordInput').value = FALLBACK_KW[Math.floor(Math.random() * FALLBACK_KW.length)];
+  generate();
+});
+document.getElementById('clearBtn').addEventListener('click', (e) => {
+  spawnMonet(e.clientX, e.clientY, e.currentTarget, 10);
+  document.getElementById('keywordInput').value = '';
+  document.getElementById('resultPlaceholder').style.display = 'block';
+  document.getElementById('resultText').style.display = 'none';
+  document.getElementById('resultActions').style.display = 'none';
+});
+document.getElementById('copyResult').addEventListener('click', (e) => {
+  const text = document.getElementById('resultText').textContent.replace(/「|」/g, '');
+  spawnMonet(e.clientX, e.clientY, e.currentTarget, 12);
+  if (navigator.clipboard) navigator.clipboard.writeText(text);
+  e.target.textContent = '✓ 已复制';
+  setTimeout(() => e.target.textContent = '📋 复制', 1500);
+});
+document.getElementById('speakResult').addEventListener('click', (e) => {
+  const text = document.getElementById('resultText').textContent.replace(/「|」/g, '');
+  spawnMonet(e.clientX, e.clientY, e.currentTarget, 12);
+  if ('speechSynthesis' in window) {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'zh-CN';
+    u.rate = 0.9;
+    u.pitch = 0.8;
+    speechSynthesis.speak(u);
+  }
+});
+document.getElementById('againBtn').addEventListener('click', (e) => {
+  spawnMonet(e.clientX, e.clientY, e.currentTarget, 14);
+  generate();
+});
+document.getElementById('keywordInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') generate();
+});
+const themeToggle = document.getElementById('themeToggle');
+const themes = ['auto', 'dark', 'light'];
+const themeIcons = { auto: '🔮', dark: '🌙', light: '☀️' };
+let currentThemeIdx = 0;
+function applyTheme(theme) {
+  if (theme === 'auto') {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.body.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+  } else {
+    document.body.setAttribute('data-theme', theme);
+  }
+  themeToggle.textContent = themeIcons[theme];
+  try { localStorage.setItem('ycd-theme', theme); } catch(e) {}
+}
+let savedTheme = 'auto';
+try { savedTheme = localStorage.getItem('ycd-theme') || 'auto'; } catch(e) {}
+currentThemeIdx = themes.indexOf(savedTheme);
+if (currentThemeIdx < 0) currentThemeIdx = 0;
+applyTheme(themes[currentThemeIdx]);
+themeToggle.addEventListener('click', (e) => {
+  currentThemeIdx = (currentThemeIdx + 1) % themes.length;
+  applyTheme(themes[currentThemeIdx]);
+  spawnMonet(e.clientX, e.clientY, e.currentTarget, 18);
+});
+const floatPhrases = ['遥遥领先！','强得飞起！','捅破天！','业界第一！','没有之一！','稳了！','Amazing!','Incredible!','这个这个！','啊啊啊啊！','内心谦卑！','价格太便宜了！'];
+const floatColors = ['#cf0a2c','#d4a843','#ff6b6b','#ffd700','#e67e22','#ff8c42','#ff4757'];
+function spawnFloatText(x, y, count) {
+  for (let i = 0; i < count; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'float-text';
+      el.textContent = floatPhrases[Math.floor(Math.random() * floatPhrases.length)];
+      el.style.left = (x + (Math.random() - 0.5) * 200) + 'px';
+      el.style.top = (y - 10 + (Math.random() - 0.5) * 30) + 'px';
+      el.style.fontSize = (0.8 + Math.random() * 0.5) + 'rem';
+      el.style.color = floatColors[Math.floor(Math.random() * floatColors.length)];
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1300);
+    }, i * 60);
+  }
+}
+const canvas = document.getElementById('monetCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let animId = null;
+const dpr = Math.min(window.devicePixelRatio || 1, 2);
+function resizeCanvas() { canvas.width = window.innerWidth * dpr; canvas.height = window.innerHeight * dpr; canvas.style.width = window.innerWidth + 'px'; canvas.style.height = window.innerHeight + 'px'; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+function rgbToHsl(r,g,b){r/=255;g/=255;b/=255;const max=Math.max(r,g,b),min=Math.min(r,g,b);let h,s,l=(max+min)/2;if(max===min){h=s=0;}else{const d=max-min;s=l>0.5?d/(2-max-min):d/(max+min);switch(max){case r:h=(g-b)/d+(g<b?6:0);break;case g:h=(b-r)/d+2;break;case b:h=(r-g)/d+4;break;}h/=6;}return[h*360,s,l];}
+function hslToRgb(h,s,l){h/=360;let r,g,b;if(s===0){r=g=b=l;}else{const hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;};const q=l<0.5?l*(1+s):l+s-l*s;const p=2*l-q;r=hue2rgb(p,q,h+1/3);g=hue2rgb(p,q,h);b=hue2rgb(p,q,h-1/3);}return[Math.round(r*255),Math.round(g*255),Math.round(b*255)];}
+function monetPalette(el){const styles=window.getComputedStyle(el);const baseColors=[];const extract=(str)=>{if(!str||str==='transparent'||str==='rgba(0, 0, 0, 0)')return;const m=str.match(/\d+(\.\d+)?/g);if(m&&m.length>=3){const r=parseInt(m[0]),g=parseInt(m[1]),b=parseInt(m[2]);if(r+g+b>30)baseColors.push([r,g,b]);}};extract(styles.backgroundColor);extract(styles.borderColor);extract(styles.color);if(baseColors.length===0)baseColors.push([207,10,44],[212,168,67]);const palette=[];baseColors.forEach(([r,g,b])=>{const[h,s,l]=rgbToHsl(r,g,b);palette.push(hslToRgb(h,Math.min(s+0.15,1),Math.min(l+0.12,0.9)));palette.push(hslToRgb((h+28)%360,s,Math.min(l+0.18,0.92)));palette.push(hslToRgb((h+332)%360,s,Math.min(l+0.12,0.88)));palette.push(hslToRgb((h+180)%360,Math.max(s-0.15,0.25),Math.min(l+0.25,0.85)));palette.push(hslToRgb(h,s*0.4,Math.min(l+0.35,0.96)));});palette.push([255,210,90],[255,175,70],[255,140,100]);return palette;}
+class MonetParticle{constructor(x,y,palette){this.x=x+(Math.random()-0.5)*12;this.y=y+(Math.random()-0.5)*12;const angle=Math.random()*Math.PI*2;const speed=1.5+Math.random()*5;this.vx=Math.cos(angle)*speed;this.vy=Math.sin(angle)*speed-1.5;this.life=1;this.decay=0.012+Math.random()*0.018;this.size=2+Math.random()*4;this.rotation=Math.random()*Math.PI*2;this.rotSpeed=(Math.random()-0.5)*0.12;const c=palette[Math.floor(Math.random()*palette.length)];const[h,s,l]=rgbToHsl(c[0],c[1],c[2]);const final=hslToRgb((h+(Math.random()-0.5)*24+360)%360,Math.min(Math.max(s+(Math.random()-0.5)*0.25,0.25),1),Math.min(Math.max(l+(Math.random()-0.5)*0.18,0.25),0.95));this.r=final[0];this.g=final[1];this.b=final[2];this.gravity=0.06;this.friction=0.965;}
+update(){this.vx*=this.friction;this.vy*=this.friction;this.vy+=this.gravity;this.x+=this.vx;this.y+=this.vy;this.life-=this.decay;this.size*=0.985;this.rotation+=this.rotSpeed;}
+draw(ctx){const alpha=Math.max(this.life,0);const s=Math.max(this.size,0.6);ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.rotation);ctx.globalAlpha=alpha*0.3;ctx.fillStyle='rgb('+this.r+','+this.g+','+this.b+')';ctx.fillRect(-s*1.6,-s*1.6,s*3.2,s*3.2);ctx.globalAlpha=alpha;ctx.fillRect(-s/2,-s/2,s,s);ctx.restore();}}
+function spawnMonet(x,y,el,count){const palette=monetPalette(el);for(let i=0;i<count;i++){particles.push(new MonetParticle(x,y,palette));}if(particles.length>150)particles=particles.slice(-150);if(!animId)animate();}
+function animate(){ctx.clearRect(0,0,canvas.width/dpr,canvas.height/dpr);particles=particles.filter(p=>p.life>0);for(let i=0;i<particles.length;i++){particles[i].update();particles[i].draw(ctx);}ctx.globalAlpha=1;if(particles.length>0){animId=requestAnimationFrame(animate);}else{animId=null;}}
+</script>
+</body>
+</html>
